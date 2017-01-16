@@ -18,7 +18,7 @@ wxcast
      :alt: Updates
 
 
-An SDK and command line utilities to collect weather information from the NWS.
+An SDK and command line utilities to collect weather information.
 
 
 * Free software: MIT license

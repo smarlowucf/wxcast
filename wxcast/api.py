@@ -1,11 +1,20 @@
 # -*- coding: utf-8 -*-
+
+import configparser
+import os
 import pandas
 import requests
 
 from bs4 import BeautifulSoup
 from metar import Metar
+from wxcast.constants import FEET_PER_METER
 
-FEET_PER_METER = 3.28084
+try:
+    config_file = os.path.expanduser("~") + "/.wxcast"
+    config = configparser.ConfigParser()
+    config.read(config_file)
+except FileNotFoundError:
+    pass
 
 
 def retrieve_nws_product(wfo, product):
@@ -23,8 +32,8 @@ def retrieve_nws_product(wfo, product):
     return soup.find(class_="glossaryProduct").get_text()
 
 
-def get_current_wx(lat, lon):
-    data = get_forecast(lat, lon)['currentobservation']
+def get_current_wx():
+    data = get_forecast()['currentobservation']
 
     info = ["Name: {value}".format(value=data['name']),
             "Elevation: {value} ft".format(value=data['elev']),
@@ -44,7 +53,13 @@ def get_current_wx(lat, lon):
     return '\n'.join(info)
 
 
-def get_forecast(lat, lon):
+def get_forecast():
+    try:
+        lat = config.get('wx', 'lat')
+        lon = config.get('wx', 'lon')
+    except KeyError:
+        raise Exception('Config file not found.')
+
     site = "http://forecast.weather.gov/MapClick.php?" \
            "lat={lat}" \
            "&lon={lon}" \
@@ -56,11 +71,11 @@ def get_forecast(lat, lon):
 
 
 def get_forecast_discussion(wfo):
-    retrieve_nws_product(wfo, 'AFD')
+    return retrieve_nws_product(wfo, 'AFD')
 
 
 def get_hazardous_wx_outlook(wfo):
-    retrieve_nws_product(wfo, 'HWO')
+    return retrieve_nws_product(wfo, 'HWO')
 
 
 def get_metar(icao, decoded=False):
@@ -84,8 +99,8 @@ def get_metar(icao, decoded=False):
     return data['Raw-Report']
 
 
-def get_seven_day_forecast(lat, lon):
-    data = get_forecast(lat, lon)
+def get_seven_day_forecast():
+    data = get_forecast()
 
     periods = data['time']['startPeriodName']
     short_descs = data['data']['weather']
@@ -104,8 +119,8 @@ def get_seven_day_forecast(lat, lon):
 
 
 def get_zone_forecast(wfo):
-    retrieve_nws_product(wfo, 'ZFP')
+    return retrieve_nws_product(wfo, 'ZFP')
 
 
 if __name__ == "__main__":
-    print(get_seven_day_forecast("40.2769", "-111.6817"))
+    print(get_forecast_discussion('SLC'))

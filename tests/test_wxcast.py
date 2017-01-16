@@ -14,7 +14,7 @@ import unittest
 from contextlib import contextmanager
 from click.testing import CliRunner
 
-from wxcast import wxcast
+from wxcast import api
 from wxcast import cli
 
 
