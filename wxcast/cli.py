@@ -14,25 +14,48 @@ def main():
 @click.argument('icao')
 @click.option('-d', '--decoded', is_flag=True, help='Decode raw metar to string format.')
 def metar(icao, decoded):
-    response = api.get_metar(icao, decoded)
-    click.secho(response, fg='white')
+    try:
+        response = api.get_metar(icao, decoded)
+    except Exception as e:
+        click.secho(str(e), fg='red')
+    else:
+        if decoded:
+            click.echo_via_pager(response)
+        else:
+            click.secho(response, fg='white')
 
 
 @click.command()
 @click.argument('wfo')
-@click.argument('product')
-def text(wfo, product):
-    if product == 'ZFP':
-        response = api.get_zone_forecast(wfo)
-    elif product == 'HWO':
-        response = api.get_hazardous_wx_outlook(wfo)
-    elif product == 'AFD':
+def afd(wfo):
+    try:
         response = api.get_forecast_discussion(wfo)
+    except Exception as e:
+        click.secho(str(e), fg='red')
     else:
-        click.secho('%s is not supported. :(' % product, fg='red')
-        return 1
+        click.echo_via_pager(response)
 
-    click.echo_via_pager(response)
+
+@click.command()
+@click.argument('wfo')
+def hwo(wfo):
+    try:
+        response = api.get_hazardous_wx_outlook(wfo)
+    except Exception as e:
+        click.secho(str(e), fg='red')
+    else:
+        click.echo_via_pager(response)
+
+
+@click.command()
+@click.argument('wfo')
+def zfp(wfo):
+    try:
+        response = api.get_zone_forecast(wfo)
+    except Exception as e:
+        click.secho(str(e), fg='red')
+    else:
+        click.echo_via_pager(response)
 
 
 @click.command()
@@ -47,7 +70,9 @@ def wx(seven_day):
 
 
 main.add_command(metar)
-main.add_command(text)
+main.add_command(afd)
+main.add_command(hwo)
+main.add_command(zfp)
 main.add_command(wx)
 
 

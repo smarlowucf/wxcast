@@ -11,7 +11,6 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     'Click>=6.0',
-    'metar',
     'pandas',
     'requests',
     'beautifulsoup4',

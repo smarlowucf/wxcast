@@ -5,9 +5,8 @@ import os
 import pandas
 import requests
 
-from bs4 import BeautifulSoup
-from metar import Metar
 from wxcast.constants import FEET_PER_METER
+from wxcast.exceptions import WxcastException
 
 try:
     config_file = os.path.expanduser("~") + "/.wxcast"
@@ -18,18 +17,24 @@ except FileNotFoundError:
 
 
 def retrieve_nws_product(wfo, product):
-    site = "http://forecast.weather.gov/product.php?" \
-           "site=NWS" \
-           "&issuedby={wfo}" \
-           "&product={product}" \
-           "&format=TXT" \
-           "&version=1" \
-           "&glossary=0".format(wfo=wfo,
-                                product=product)
-    page = requests.get(site)
-    soup = BeautifulSoup(page.content, 'html.parser')
+    # TODO: Change to forecast.weather.gov after march 7th 2017
+    site = "https://forecast-v3.weather.gov/products/locations" \
+           "/{wfo}" \
+           "/{product}" \
+           "/1?format=text".format(wfo=wfo.upper(), product=product)
 
-    return soup.find(class_="glossaryProduct").get_text()
+    try:
+        response = requests.get(site)
+
+        if response.status_code == 404:
+            raise Exception('A 404 error occurred retrieving %s issued by %s.' % (product, wfo))
+
+    except requests.exceptions.ConnectionError:
+        raise WxcastException('Connection could not be established with the NWS website.')
+    except Exception as e:
+        raise WxcastException(str(e))
+
+    return response.text
 
 
 def get_current_wx():
@@ -60,6 +65,7 @@ def get_forecast():
     except KeyError:
         raise Exception('Config file not found.')
 
+    # New API information
     site = "http://forecast.weather.gov/MapClick.php?" \
            "lat={lat}" \
            "&lon={lon}" \
@@ -78,24 +84,47 @@ def get_hazardous_wx_outlook(wfo):
     return retrieve_nws_product(wfo, 'HWO')
 
 
-def get_metar(icao, decoded=False):
-    site = "http://avwx.rest/api/metar/{icao}?options=info".format(icao=icao)
-    data = requests.get(site).json()
+def get_metar(icao, decoded=False, json=False):
+    try:
+        site = "http://avwx.rest/api/metar/{icao}?options=info,translate".format(icao=icao)
+        data = requests.get(site).json()
+    except requests.exceptions.ConnectionError:
+        raise WxcastException('Connection could not be established with the avwx rest api.')
+    except Exception as e:
+        raise WxcastException('An error has occurred: %s' % str(e))
+
+    if 'Error' in data:
+        raise WxcastException(data['Error'])
+
+    if json:
+        return data
 
     if decoded:
-        output = Metar.Metar(data['Raw-Report']).string()
+        output = ["Altimeter: {}".format(data['Translations']['Altimeter']),
+                  "Clouds: {}".format(data['Translations']['Clouds']),
+                  "Dewpoint: {}".format(data['Translations']['Dewpoint']),
+                  "Other: {}".format(data['Translations']['Other']),
+                  "Temperature: {}".format(data['Translations']['Temperature']),
+                  "Visibility: {}".format(data['Translations']['Visibility']),
+                  "Wind: {}".format(data['Translations']['Wind'])]
 
         elevation = int(float(data['Info']['Elevation']) * FEET_PER_METER)
-        info = ["Name: {value}".format(value=data['Info']['Name']),
-                "City: {value}".format(value=data['Info']['State']),
-                "Country: {value}".format(value=data['Info']['Country']),
-                "Elevation: {value} ft".format(value=elevation),
-                "Latitude: {value}".format(value=data['Info']['Latitude']),
-                "Longitude: {value}".format(value=data['Info']['Longitude'])]
+        info = ["Name: {}".format(data['Info']['Name']),
+                "City: {}".format(data['Info']['State']),
+                "Country: {}".format(data['Info']['Country']),
+                "Elevation: {} ft".format(elevation),
+                "Latitude: {}".format(data['Info']['Latitude']),
+                "Longitude: {}".format(data['Info']['Longitude'])]
 
         info = '\n'.join(info)
-        return output + '\n\n' + info
+        output = '\n'.join(output)
+        header = "{raw}\n\nAt {time} the conditions at {icao} are {fr}.".format(raw=data['Raw-Report'],
+                                                                                time=data['Time'],
+                                                                                icao=data['Station'],
+                                                                                fr=data['Flight-Rules'])
+        return header + '\n\n' + output + '\n\n' + info
 
+    # else return raw metar
     return data['Raw-Report']
 
 
