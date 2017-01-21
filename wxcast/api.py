@@ -5,7 +5,7 @@ import os
 import pandas
 import requests
 
-from wxcast.constants import FEET_PER_METER
+from wxcast.constants import FEET_PER_METER, HEADERS, NWS_API
 from wxcast.exceptions import WxcastException
 
 try:
@@ -17,24 +17,24 @@ except FileNotFoundError:
 
 
 def retrieve_nws_product(wfo, product):
-    # TODO: Change to forecast.weather.gov after march 7th 2017
-    site = "https://forecast-v3.weather.gov/products/locations" \
-           "/{wfo}" \
-           "/{product}" \
-           "/1?format=text".format(wfo=wfo.upper(), product=product)
+    site = "{api}/products" \
+           "/types/{product}" \
+           "/locations/{wfo}".format(api=NWS_API, wfo=wfo.upper(), product=product)
 
     try:
-        response = requests.get(site)
+        response = requests.get(site, headers=HEADERS, verify='nws.pem').json()
 
-        if response.status_code == 404:
-            raise Exception('A 404 error occurred retrieving %s issued by %s.' % (product, wfo))
+        if '@graph' not in response:
+            raise Exception('No wx data found attempting to retrieve %s issued by %s.' % (product, wfo))
+
+        response = requests.get(response['@graph'][0]['@id'], headers=HEADERS, verify='nws.pem').json()
 
     except requests.exceptions.ConnectionError:
         raise WxcastException('Connection could not be established with the NWS website.')
     except Exception as e:
         raise WxcastException(str(e))
 
-    return response.text
+    return response['productText']
 
 
 def get_current_wx():
