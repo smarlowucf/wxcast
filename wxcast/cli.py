@@ -27,9 +27,10 @@ def metar(icao, decoded):
 
 @click.command()
 @click.argument('wfo')
-def afd(wfo):
+@click.argument('product')
+def text(wfo, product):
     try:
-        response = api.get_forecast_discussion(wfo)
+        response = api.retrieve_nws_product(wfo, product)
     except Exception as e:
         click.secho(str(e), fg='red')
     else:
@@ -38,20 +39,9 @@ def afd(wfo):
 
 @click.command()
 @click.argument('wfo')
-def hwo(wfo):
+def products(wfo):
     try:
-        response = api.get_hazardous_wx_outlook(wfo)
-    except Exception as e:
-        click.secho(str(e), fg='red')
-    else:
-        click.echo_via_pager(response)
-
-
-@click.command()
-@click.argument('wfo')
-def zfp(wfo):
-    try:
-        response = api.get_zone_forecast(wfo)
+        response = api.get_wfo_products(wfo)
     except Exception as e:
         click.secho(str(e), fg='red')
     else:
@@ -70,9 +60,8 @@ def wx(seven_day):
 
 
 main.add_command(metar)
-main.add_command(afd)
-main.add_command(hwo)
-main.add_command(zfp)
+main.add_command(text)
+main.add_command(products)
 main.add_command(wx)
 
 

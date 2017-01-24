@@ -19,7 +19,7 @@ except FileNotFoundError:
 def retrieve_nws_product(wfo, product):
     site = "{api}/products" \
            "/types/{product}" \
-           "/locations/{wfo}".format(api=NWS_API, wfo=wfo.upper(), product=product)
+           "/locations/{wfo}".format(api=NWS_API, wfo=wfo.upper(), product=product.upper())
 
     try:
         response = requests.get(site, headers=HEADERS, verify='nws.pem').json()
@@ -37,51 +37,21 @@ def retrieve_nws_product(wfo, product):
     return response['productText']
 
 
-def get_current_wx():
-    data = get_forecast()['currentobservation']
-
-    info = ["Name: {value}".format(value=data['name']),
-            "Elevation: {value} ft".format(value=data['elev']),
-            "Latitude: {value}".format(value=data['latitude']),
-            "Longitude: {value}".format(value=data['longitude']),
-            "Date: {value}".format(value=data['Date']),
-            "Temperature: {value} F".format(value=data['Temp']),
-            "Windchill: {value} F".format(value=data['WindChill']),
-            "Dew Point: {value} F".format(value=data['Dewp']),
-            "Relative Humidity: {value} %%".format(value=data['Relh']),
-            "Winds: {value} mph".format(value=data['Winds']),
-            "Wind Direction: {value}".format(value=data['Windd']),
-            "Weather: {value}".format(value=data['Weather']),
-            "Visibility: {value} mi.".format(value=data['Visibility']),
-            "Sea-level Pressure: {value} Hg".format(value=data['SLP'])]
-
-    return '\n'.join(info)
-
-
-def get_forecast():
+def get_wfo_products(wfo, json=False):
     try:
-        lat = config.get('wx', 'lat')
-        lon = config.get('wx', 'lon')
-    except KeyError:
-        raise Exception('Config file not found.')
+        site = "{api}/products/locations/{wfo}/types".format(api=NWS_API, wfo=wfo.upper())
+        data = requests.get(site, headers=HEADERS, verify='nws.pem').json()
+    except requests.exceptions.ConnectionError:
+        raise WxcastException('Connection could not be established with the avwx rest api.')
+    except Exception as e:
+        raise WxcastException('An error has occurred: %s' % str(e))
 
-    # New API information
-    site = "http://forecast.weather.gov/MapClick.php?" \
-           "lat={lat}" \
-           "&lon={lon}" \
-           "&unit=0" \
-           "&lg=english" \
-           "&FcstType=json".format(lat=lat, lon=lon)
+    if json:
+        return data['@graph']
 
-    return requests.get(site).json()
+    response = ['{}: {}'.format(d['productCode'], d['productName']) for d in data['@graph']]
 
-
-def get_forecast_discussion(wfo):
-    return retrieve_nws_product(wfo, 'AFD')
-
-
-def get_hazardous_wx_outlook(wfo):
-    return retrieve_nws_product(wfo, 'HWO')
+    return '\n'.join(response)
 
 
 def get_metar(icao, decoded=False, json=False):
@@ -128,6 +98,45 @@ def get_metar(icao, decoded=False, json=False):
     return data['Raw-Report']
 
 
+def get_forecast():
+    try:
+        lat = config.get('wx', 'lat')
+        lon = config.get('wx', 'lon')
+    except KeyError:
+        raise Exception('Config file not found.')
+
+    # New API information
+    site = "http://forecast.weather.gov/MapClick.php?" \
+           "lat={lat}" \
+           "&lon={lon}" \
+           "&unit=0" \
+           "&lg=english" \
+           "&FcstType=json".format(lat=lat, lon=lon)
+
+    return requests.get(site).json()
+
+
+def get_current_wx():
+    data = get_forecast()['currentobservation']
+
+    info = ["Name: {value}".format(value=data['name']),
+            "Elevation: {value} ft".format(value=data['elev']),
+            "Latitude: {value}".format(value=data['latitude']),
+            "Longitude: {value}".format(value=data['longitude']),
+            "Date: {value}".format(value=data['Date']),
+            "Temperature: {value} F".format(value=data['Temp']),
+            "Windchill: {value} F".format(value=data['WindChill']),
+            "Dew Point: {value} F".format(value=data['Dewp']),
+            "Relative Humidity: {value} %%".format(value=data['Relh']),
+            "Winds: {value} mph".format(value=data['Winds']),
+            "Wind Direction: {value}".format(value=data['Windd']),
+            "Weather: {value}".format(value=data['Weather']),
+            "Visibility: {value} mi.".format(value=data['Visibility']),
+            "Sea-level Pressure: {value} Hg".format(value=data['SLP'])]
+
+    return '\n'.join(info)
+
+
 def get_seven_day_forecast():
     data = get_forecast()
 
@@ -145,10 +154,6 @@ def get_seven_day_forecast():
 
     location = 'Location: %s \n\n' % data['location']['areaDescription']
     return location + weather.to_string(header=False, index=False)
-
-
-def get_zone_forecast(wfo):
-    return retrieve_nws_product(wfo, 'ZFP')
 
 
 if __name__ == "__main__":
