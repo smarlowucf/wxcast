@@ -19,18 +19,27 @@ except FileNotFoundError:
 def retrieve_nws_product(wfo, product):
     site = "{api}/products" \
            "/types/{product}" \
-           "/locations/{wfo}".format(api=NWS_API, wfo=wfo.upper(), product=product.upper())
+           "/locations/{wfo}".format(api=NWS_API, wfo=wfo.upper(),
+                                     product=product.upper())
 
     try:
-        response = requests.get(site, headers=HEADERS, verify='nws.pem').json()
+        response = requests.get(site,
+                                headers=HEADERS,
+                                verify='nws.pem').json()
 
         if '@graph' not in response:
-            raise Exception('No wx data found attempting to retrieve %s issued by %s.' % (product, wfo))
+            raise Exception(
+                'No wx data found attempting to retrieve %s issued by %s.'
+                % (product, wfo)
+            )
 
-        response = requests.get(response['@graph'][0]['@id'], headers=HEADERS, verify='nws.pem').json()
+        response = requests.get(response['@graph'][0]['@id'],
+                                headers=HEADERS,
+                                verify='nws.pem').json()
 
     except requests.exceptions.ConnectionError:
-        raise WxcastException('Connection could not be established with the NWS website.')
+        raise WxcastException(
+            'Connection could not be established with the NWS website.')
     except Exception as e:
         raise WxcastException(str(e))
 
@@ -39,28 +48,37 @@ def retrieve_nws_product(wfo, product):
 
 def get_wfo_products(wfo, json=False):
     try:
-        site = "{api}/products/locations/{wfo}/types".format(api=NWS_API, wfo=wfo.upper())
-        data = requests.get(site, headers=HEADERS, verify='nws.pem').json()
+        site = "{api}/products/locations/{wfo}/types".format(api=NWS_API,
+                                                             wfo=wfo.upper())
+        data = requests.get(site,
+                            headers=HEADERS,
+                            verify='nws.pem').json()
+
     except requests.exceptions.ConnectionError:
-        raise WxcastException('Connection could not be established with the avwx rest api.')
+        raise WxcastException(
+            'Connection could not be established with the avwx rest api.')
     except Exception as e:
         raise WxcastException('An error has occurred: %s' % str(e))
 
     if json:
         return data['@graph']
 
-    response = ['{}: {}'.format(d['productCode'], d['productName']) for d in data['@graph']]
+    response = ['{}: {}'.format(d['productCode'],
+                                d['productName']) for d in data['@graph']]
 
     return '\n'.join(response)
 
 
 def get_metar(icao, decoded=False, json=False):
     try:
-        site = "http://avwx.rest/api/metar/{icao}?options=info,translate".format(icao=icao)
+        site = "http://avwx.rest/api/metar/" \
+               "{icao}?options=info,translate".format(icao=icao)
         data = requests.get(site).json()
+
     except requests.exceptions.ConnectionError:
-        raise WxcastException('Connection could not be established with the avwx rest api.')
-    except Exception as e:
+        raise WxcastException(
+            'Connection could not be established with the avwx rest api.')
+    except Exception as e: 
         raise WxcastException('An error has occurred: %s' % str(e))
 
     if 'Error' in data:
@@ -74,7 +92,8 @@ def get_metar(icao, decoded=False, json=False):
                   "Clouds: {}".format(data['Translations']['Clouds']),
                   "Dewpoint: {}".format(data['Translations']['Dewpoint']),
                   "Other: {}".format(data['Translations']['Other']),
-                  "Temperature: {}".format(data['Translations']['Temperature']),
+                  "Temperature: {}".format(
+                      data['Translations']['Temperature']),
                   "Visibility: {}".format(data['Translations']['Visibility']),
                   "Wind: {}".format(data['Translations']['Wind'])]
 
@@ -88,10 +107,12 @@ def get_metar(icao, decoded=False, json=False):
 
         info = '\n'.join(info)
         output = '\n'.join(output)
-        header = "{raw}\n\nAt {time} the conditions at {icao} are {fr}.".format(raw=data['Raw-Report'],
-                                                                                time=data['Time'],
-                                                                                icao=data['Station'],
-                                                                                fr=data['Flight-Rules'])
+        header = "{raw}\n\nAt {time} the conditions " \
+                 "at {icao} are {fr}.".format(raw=data['Raw-Report'],
+                                              time=data['Time'],
+                                              icao=data['Station'],
+                                              fr=data['Flight-Rules'])
+
         return header + '\n\n' + output + '\n\n' + info
 
     # else return raw metar
@@ -154,7 +175,3 @@ def get_seven_day_forecast():
 
     location = 'Location: %s \n\n' % data['location']['areaDescription']
     return location + weather.to_string(header=False, index=False)
-
-
-if __name__ == "__main__":
-    print(get_forecast_discussion('SLC'))
