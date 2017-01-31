@@ -2,7 +2,6 @@
 
 import configparser
 import os
-import pandas
 import requests
 
 from wxcast.constants import FEET_PER_METER, HEADERS, NWS_API
@@ -158,20 +157,30 @@ def get_current_wx():
     return '\n'.join(info)
 
 
-def get_seven_day_forecast():
-    data = get_forecast()
+def get_seven_day_forecast(lat=None, lon=None, location='default', json=False):
+    if not lat or not lon:
+        try:
+            lat = config.get(location, 'lat')
+            lon = config.get(location, 'lon')
+        except KeyError:
+            raise WxcastException('Config file not found.')
 
-    periods = data['time']['startPeriodName']
-    short_descs = data['data']['weather']
-    temps = data['data']['temperature']
-    descs = data['data']['text']
+    site = "{api}/points" \
+           "/{lat},{lon}" \
+           "/forecast".format(api=NWS_API, lat=lat, lon=lon)
 
-    weather = pandas.DataFrame({
-        "period": periods,
-        "short_desc": short_descs,
-        "temp": temps,
-        "desc": descs
-    })
+    try:
+        data = requests.get(site, headers=HEADERS, verify='nws.pem').json()
 
-    location = 'Location: %s \n\n' % data['location']['areaDescription']
-    return location + weather.to_string(header=False, index=False)
+    except requests.exceptions.ConnectionError:
+        raise WxcastException(
+            'Connection could not be established with the nws rest api.')
+    except Exception as e:
+        raise WxcastException('An error has occurred: %s' % str(e))
+
+    if json:
+        return data['properties']['periods']
+
+    periods = ['%s:\n%s' % (d['name'], d['detailedForecast'])
+               for d in data['properties']['periods']]
+    return '\n\n'.join(periods)
