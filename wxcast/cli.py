@@ -67,28 +67,21 @@ def products(wfo):
 
 
 @click.command()
-@click.option('-s', '--seven-day',
-              is_flag=True,
-              help='Display seven day forecast.')
 @click.option('-L', '--location', default='default',
               help='Location from config file to use for forecast.')
-def wx(seven_day, location):
+def forecast(location):
     """Retreive current weather conditions and 7 day forecast.
 
     Example: wxcast wx
     """
-    if seven_day:
-        response = api.get_seven_day_forecast(location=location)
-        click.echo_via_pager(response)
-    else:
-        response = api.get_current_wx()
-        click.secho(response, fg='white')
+    response = api.get_seven_day_forecast(location=location)
+    click.echo_via_pager(response)
 
 
 main.add_command(metar)
 main.add_command(text)
 main.add_command(products)
-main.add_command(wx)
+main.add_command(forecast)
 
 
 if __name__ == "__main__":

@@ -22,17 +22,22 @@ def retrieve_nws_product(wfo, product):
                                      product=product.upper())
 
     try:
-        response = requests.get(site,
-                                headers=HEADERS,
-                                verify='nws.pem').json()
+        response = requests.get(site, headers=HEADERS, verify='nws.pem')
 
-        if '@graph' not in response:
+        if response.status_code == 404:
             raise Exception(
                 'No wx data found attempting to retrieve %s issued by %s.'
                 % (product, wfo)
             )
 
-        response = requests.get(response['@graph'][0]['@id'],
+        response = response.json()
+        if not response.get('features', None):
+            raise Exception(
+                'No wx data found attempting to retrieve %s issued by %s.'
+                % (product, wfo)
+            )
+
+        response = requests.get(response['features'][0]['@id'],
                                 headers=HEADERS,
                                 verify='nws.pem').json()
 
@@ -60,10 +65,10 @@ def get_wfo_products(wfo, json=False):
         raise WxcastException('An error has occurred: %s' % str(e))
 
     if json:
-        return data['@graph']
+        return data['features']
 
     response = ['{}: {}'.format(d['productCode'],
-                                d['productName']) for d in data['@graph']]
+                                d['productName']) for d in data['features']]
 
     return '\n'.join(response)
 
@@ -118,43 +123,28 @@ def get_metar(icao, decoded=False, json=False):
     return data['Raw-Report']
 
 
-def get_forecast():
+def get_hourly_forecast(lat=None, lon=None, location='default'):
+    if not lat or not lon:
+        try:
+            lat = config.get(location, 'lat')
+            lon = config.get(location, 'lon')
+        except KeyError:
+            raise WxcastException('Config file not found.')
+
+    site = "{api}/points" \
+           "/{lat},{lon}" \
+           "/forecast/hourly".format(api=NWS_API, lat=lat, lon=lon)
+
     try:
-        lat = config.get('wx', 'lat')
-        lon = config.get('wx', 'lon')
-    except KeyError:
-        raise Exception('Config file not found.')
+        data = requests.get(site, headers=HEADERS, verify='nws.pem').json()
 
-    # New API information
-    site = "http://forecast.weather.gov/MapClick.php?" \
-           "lat={lat}" \
-           "&lon={lon}" \
-           "&unit=0" \
-           "&lg=english" \
-           "&FcstType=json".format(lat=lat, lon=lon)
+    except requests.exceptions.ConnectionError:
+        raise WxcastException(
+            'Connection could not be established with the nws rest api.')
+    except Exception as e:
+        raise WxcastException('An error has occurred: %s' % str(e))
 
-    return requests.get(site).json()
-
-
-def get_current_wx():
-    data = get_forecast()['currentobservation']
-
-    info = ["Name: {value}".format(value=data['name']),
-            "Elevation: {value} ft".format(value=data['elev']),
-            "Latitude: {value}".format(value=data['latitude']),
-            "Longitude: {value}".format(value=data['longitude']),
-            "Date: {value}".format(value=data['Date']),
-            "Temperature: {value} F".format(value=data['Temp']),
-            "Windchill: {value} F".format(value=data['WindChill']),
-            "Dew Point: {value} F".format(value=data['Dewp']),
-            "Relative Humidity: {value} %%".format(value=data['Relh']),
-            "Winds: {value} mph".format(value=data['Winds']),
-            "Wind Direction: {value}".format(value=data['Windd']),
-            "Weather: {value}".format(value=data['Weather']),
-            "Visibility: {value} mi.".format(value=data['Visibility']),
-            "Sea-level Pressure: {value} Hg".format(value=data['SLP'])]
-
-    return '\n'.join(info)
+    return data['properties']['periods']
 
 
 def get_seven_day_forecast(lat=None, lon=None, location='default', json=False):
