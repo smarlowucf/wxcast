@@ -73,7 +73,7 @@ def get_wfo_products(wfo, json=False):
     return '\n'.join(response)
 
 
-def get_metar(icao, decoded=False, json=False):
+def get_metar(icao, decoded=False):
     try:
         site = "http://avwx.rest/api/metar/" \
                "{icao}?options=info,translate".format(icao=icao)
@@ -88,36 +88,17 @@ def get_metar(icao, decoded=False, json=False):
     if 'Error' in data:
         raise WxcastException(data['Error'])
 
-    if json:
-        return data
-
     if decoded:
-        output = ["Altimeter: {}".format(data['Translations']['Altimeter']),
-                  "Clouds: {}".format(data['Translations']['Clouds']),
-                  "Dewpoint: {}".format(data['Translations']['Dewpoint']),
-                  "Other: {}".format(data['Translations']['Other']),
-                  "Temperature: {}".format(
-                      data['Translations']['Temperature']),
-                  "Visibility: {}".format(data['Translations']['Visibility']),
-                  "Wind: {}".format(data['Translations']['Wind'])]
+        header = {
+            'time': data['Time'],
+            'icao': data['Station'],
+            'fr': data['Flight-Rules']
+        }
+        output = {'data': data['Translations'],
+                  'header': header,
+                  'location': data['Info']}
 
-        elevation = int(float(data['Info']['Elevation']) * FEET_PER_METER)
-        info = ["Name: {}".format(data['Info']['Name']),
-                "City: {}".format(data['Info']['State']),
-                "Country: {}".format(data['Info']['Country']),
-                "Elevation: {} ft".format(elevation),
-                "Latitude: {}".format(data['Info']['Latitude']),
-                "Longitude: {}".format(data['Info']['Longitude'])]
-
-        info = '\n'.join(info)
-        output = '\n'.join(output)
-        header = "{raw}\n\nAt {time} the conditions " \
-                 "at {icao} are {fr}.".format(raw=data['Raw-Report'],
-                                              time=data['Time'],
-                                              icao=data['Station'],
-                                              fr=data['Flight-Rules'])
-
-        return header + '\n\n' + output + '\n\n' + info
+        return output
 
     # else return raw metar
     return data['Raw-Report']

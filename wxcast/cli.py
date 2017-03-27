@@ -30,9 +30,49 @@ def metar(icao, decoded):
         click.secho(str(e), fg='red')
     else:
         if decoded:
-            click.echo_via_pager(response)
+            click.echo(
+                ''.join(
+                    [click.style('At ', fg='green'),
+                     click.style(response['header']['time'], fg='blue'),
+                     click.style(' the conditions for ', fg='green'),
+                     click.style(response['header']['icao'], fg='blue'),
+                     click.style(' are ', fg='green'),
+                     click.style(response['header']['fr'], fg='blue'),
+                     '\n']
+                )
+            )
+
+            spaces = max(
+                [get_max_key(response['data']),
+                 get_max_key(response['location'])]
+            )
+            echo_key_value(response['data'], spaces=spaces)
+            click.echo('')
+            echo_key_value(response['location'], spaces=spaces)
+
         else:
-            click.secho(response, fg='white')
+            click.secho(response, fg='blue')
+
+
+def echo_key_value(data, key_color='green', spaces=None, value_color='blue'):
+    if not spaces:
+        spaces = get_max_key(data)
+
+    for key, value in data.items():
+        title = '{spaces}{key}:  '.format(
+            spaces=' ' * (spaces - len(key)),
+            key=key
+        )
+        click.echo(
+            ''.join(
+                [click.style(title, fg=key_color),
+                 click.style(value, fg=value_color)]
+            )
+        )
+
+
+def get_max_key(data):
+    return max(map(len, data))
 
 
 @click.command()
