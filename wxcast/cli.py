@@ -2,6 +2,7 @@
 
 import click
 
+from textwrap import TextWrapper
 from wxcast import api
 
 
@@ -63,10 +64,12 @@ def echo_key_value(data, key_color='green', spaces=None, value_color='blue'):
             spaces=' ' * (spaces - len(key)),
             key=key
         )
+        wrapper = TextWrapper(width=(82 - spaces),
+                              subsequent_indent=' ' * (spaces + 3))
         click.echo(
             ''.join(
                 [click.style(title, fg=key_color),
-                 click.style(value, fg=value_color)]
+                 wrapper.fill(click.style(value, fg=value_color))]
             )
         )
 
