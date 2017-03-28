@@ -46,15 +46,15 @@ def metar(icao, decoded):
                 [get_max_key(response['data']),
                  get_max_key(response['location'])]
             )
-            echo_key_value(response['data'], spaces=spaces)
+            echo_dict(response['data'], spaces=spaces)
             click.echo('')
-            echo_key_value(response['location'], spaces=spaces)
+            echo_dict(response['location'], spaces=spaces)
 
         else:
             click.secho(response, fg='blue')
 
 
-def echo_key_value(data, key_color='green', spaces=None, value_color='blue'):
+def echo_dict(data, key_color='green', spaces=None, value_color='blue'):
     if not spaces:
         spaces = get_max_key(data)
 
@@ -88,7 +88,7 @@ def text(wfo, product):
     except Exception as e:
         click.secho(str(e), fg='red')
     else:
-        click.echo_via_pager(response)
+        click.echo_via_pager(click.style(response, fg='green'))
 
 
 @click.command()
