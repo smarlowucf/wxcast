@@ -9,4 +9,4 @@ HEADERS.update(
         'User-Agent': 'wxcast app. https://github.com/smarlowucf/wxcast',
     }
 )
-NWS_API = 'https://api-v1.weather.gov'
+NWS_API = 'https://api.weather.gov'
