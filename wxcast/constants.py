@@ -3,7 +3,6 @@
 import requests
 
 
-FEET_PER_METER = 3.28084
 HEADERS = requests.utils.default_headers()
 HEADERS.update(
     {

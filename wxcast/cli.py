@@ -7,6 +7,7 @@ from wxcast import api
 
 
 @click.group()
+@click.version_option()
 def main():
     """Retrieve the latest weather information.
 
@@ -91,7 +92,7 @@ def text(wfo, product):
     except Exception as e:
         click.secho(str(e), fg='red')
     else:
-        click.echo_via_pager(click.style(response, fg='green'))
+        click.echo_via_pager(response)
 
 
 @click.command()
@@ -106,7 +107,7 @@ def products(wfo):
     except Exception as e:
         click.secho(str(e), fg='red')
     else:
-        click.echo_via_pager(response)
+        echo_dict(response)
 
 
 @click.command()

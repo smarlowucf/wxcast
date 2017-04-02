@@ -4,7 +4,7 @@ import configparser
 import os
 import requests
 
-from wxcast.constants import FEET_PER_METER, HEADERS, NWS_API
+from wxcast.constants import HEADERS, NWS_API
 from wxcast.exceptions import WxcastException
 
 try:
@@ -50,7 +50,7 @@ def retrieve_nws_product(wfo, product):
     return response['productText']
 
 
-def get_wfo_products(wfo, json=False):
+def get_wfo_products(wfo):
     try:
         site = "{api}/products/locations/{wfo}/types".format(api=NWS_API,
                                                              wfo=wfo.upper())
@@ -64,13 +64,8 @@ def get_wfo_products(wfo, json=False):
     except Exception as e:
         raise WxcastException('An error has occurred: %s' % str(e))
 
-    if json:
-        return data['features']
-
-    response = ['{}: {}'.format(d['productCode'],
-                                d['productName']) for d in data['features']]
-
-    return '\n'.join(response)
+    response = {d['productCode']: d['productName'] for d in data['features']}
+    return response
 
 
 def get_metar(icao, decoded=False):
