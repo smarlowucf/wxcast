@@ -1,4 +1,21 @@
 # -*- coding: utf-8 -*-
+#
+# wxcast: A Python API and cli to collect weather information.
+#
+# Copyright (C) 2017 Sean Marlow
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import click
 
@@ -6,9 +23,33 @@ from textwrap import TextWrapper
 from wxcast import api
 
 
+def print_license(ctx, param, value):
+    click.secho(
+        'wxcast Copyright (C) 2017 sean Marlow. (GPL-3.0+)',
+        fg='yellow'
+    )
+    click.secho(
+        '\nThis program comes with ABSOLUTELY NO WARRANTY.',
+        fg='yellow'
+    )
+    click.secho(
+        'This is free software, and you are welcome to redistribute it'
+        ' under certain conditions. See LICENSE for more information.',
+        fg='yellow'
+    )
+    ctx.exit()
+
+
 @click.group()
 @click.version_option()
-def main():
+@click.option(
+    '-l',
+    '--license',
+    is_flag=True,
+    callback=print_license,
+    help='Display license information and exit.'
+)
+def main(license):
     """Retrieve the latest weather information.
 
     Data provided by the NWS and avwx APIs.
@@ -99,7 +140,7 @@ def text(wfo, product):
 @click.argument('wfo')
 def products(wfo):
     """Retrieve the available text products for a given wfo.
- 
+
     Example: wxcast products slc
     """
     try:
