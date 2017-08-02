@@ -141,7 +141,7 @@ def get_hourly_forecast(lat=None, lon=None, location='default'):
 
 
 def get_seven_day_forecast(lat=None, lon=None, location='default', json=False):
-    if not lat or not lon:
+    if not (lat and lon):
         try:
             lat = config.get(location, 'lat')
             lon = config.get(location, 'lon')

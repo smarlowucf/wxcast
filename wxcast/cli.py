@@ -24,6 +24,8 @@ from wxcast import api
 
 
 def print_license(ctx, param, value):
+    if not value or ctx.resilient_parsing:
+        return
     click.secho(
         'wxcast Copyright (C) 2017 sean Marlow. (GPL-3.0+)',
         fg='yellow'
@@ -43,13 +45,14 @@ def print_license(ctx, param, value):
 @click.group()
 @click.version_option()
 @click.option(
-    '-l',
     '--license',
+    expose_value=False,
+    is_eager=True,
     is_flag=True,
     callback=print_license,
     help='Display license information and exit.'
 )
-def main(license):
+def main():
     """Retrieve the latest weather information.
 
     Data provided by the NWS and avwx APIs.
