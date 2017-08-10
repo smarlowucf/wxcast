@@ -94,6 +94,16 @@ def metar(icao, decoded):
             )
             echo_dict(response['data'], spaces=spaces)
             click.echo('')
+
+            # try to convert elevation to ft and meters
+            try:
+                response['location']['Elevation'] = '{}ft ({}m)'.format(
+                    int(float(response['location']['Elevation']) * 3.28084),
+                    response['location']['Elevation']
+                )
+            except:
+                pass
+
             echo_dict(response['location'], spaces=spaces)
 
         else:
@@ -109,8 +119,11 @@ def echo_dict(data, key_color='green', spaces=None, value_color='blue'):
             spaces=' ' * (spaces - len(key)),
             key=key
         )
-        wrapper = TextWrapper(width=(82 - spaces),
-                              subsequent_indent=' ' * (spaces + 3))
+        wrapper = TextWrapper(
+            width=(82 - spaces),
+            subsequent_indent=' ' * (spaces + 3)
+        )
+
         click.echo(
             ''.join(
                 [click.style(title, fg=key_color),
