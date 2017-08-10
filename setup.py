@@ -54,6 +54,7 @@ setup(
         ]
     },
     include_package_data=True,
+    package_data={'ipa': ['nws.pem']},
     install_requires=requirements,
     license="MIT license",
     zip_safe=False,
