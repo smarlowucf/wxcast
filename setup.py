@@ -27,6 +27,7 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 requirements = [
+    'certifi',
     'Click>=6.0',
     'requests',
 ]
@@ -53,8 +54,6 @@ setup(
             'wxcast=wxcast.cli:main'
         ]
     },
-    include_package_data=True,
-    package_data={'ipa': ['nws.pem']},
     install_requires=requirements,
     license="MIT license",
     zip_safe=False,

@@ -33,13 +33,14 @@ except FileNotFoundError:
 
 
 def retrieve_nws_product(wfo, product):
-    site = "{api}/products" \
-           "/types/{product}" \
-           "/locations/{wfo}".format(api=NWS_API, wfo=wfo.upper(),
-                                     product=product.upper())
+    site = "{api}/products/types/{product}/locations/{wfo}".format(
+        api=NWS_API,
+        wfo=wfo.upper(),
+        product=product.upper()
+    )
 
     try:
-        response = requests.get(site, headers=HEADERS, verify='nws.pem')
+        response = requests.get(site, headers=HEADERS)
 
         if response.status_code == 404:
             raise Exception(
@@ -54,13 +55,16 @@ def retrieve_nws_product(wfo, product):
                 % (product, wfo)
             )
 
-        response = requests.get(response['features'][0]['@id'],
-                                headers=HEADERS,
-                                verify='nws.pem').json()
+        response = requests.get(
+            response['features'][0]['@id'],
+            headers=HEADERS
+        ).json()
 
-    except requests.exceptions.ConnectionError:
+    except requests.exceptions.ConnectionError as e:
         raise WxcastException(
-            'Connection could not be established with the NWS website.')
+            'Connection could not be established with the NWS website: %s'
+            % str(e)
+        )
     except Exception as e:
         raise WxcastException(str(e))
 
@@ -69,15 +73,17 @@ def retrieve_nws_product(wfo, product):
 
 def get_wfo_products(wfo):
     try:
-        site = "{api}/products/locations/{wfo}/types".format(api=NWS_API,
-                                                             wfo=wfo.upper())
-        data = requests.get(site,
-                            headers=HEADERS,
-                            verify='nws.pem').json()
+        site = "{api}/products/locations/{wfo}/types".format(
+            api=NWS_API,
+            wfo=wfo.upper()
+        )
+        data = requests.get(site, headers=HEADERS).json()
 
-    except requests.exceptions.ConnectionError:
+    except requests.exceptions.ConnectionError as e:
         raise WxcastException(
-            'Connection could not be established with the avwx rest api.')
+            'Connection could not be established with the avwx rest api: %s'
+            % str(e)
+        )
     except Exception as e:
         raise WxcastException('An error has occurred: %s' % str(e))
 
@@ -87,13 +93,14 @@ def get_wfo_products(wfo):
 
 def get_metar(icao, decoded=False):
     try:
-        site = "http://avwx.rest/api/metar/" \
-               "{icao}?options=info,translate".format(icao=icao)
+        site = "http://avwx.rest/api/metar/{icao}?options=info,translate" \
+            .format(icao=icao)
         data = requests.get(site).json()
 
     except requests.exceptions.ConnectionError:
         raise WxcastException(
-            'Connection could not be established with the avwx rest api.')
+            'Connection could not be established with the avwx rest api.'
+        )
     except Exception as e:
         raise WxcastException('An error has occurred: %s' % str(e))
 
@@ -106,9 +113,11 @@ def get_metar(icao, decoded=False):
             'icao': data['Station'],
             'fr': data['Flight-Rules']
         }
-        output = {'data': data['Translations'],
-                  'header': header,
-                  'location': data['Info']}
+        output = {
+            'data': data['Translations'],
+            'header': header,
+            'location': data['Info']
+        }
 
         return output
 
@@ -124,16 +133,19 @@ def get_hourly_forecast(lat=None, lon=None, location='default'):
         except KeyError:
             raise WxcastException('Config file not found.')
 
-    site = "{api}/points" \
-           "/{lat},{lon}" \
-           "/forecast/hourly".format(api=NWS_API, lat=lat, lon=lon)
+    site = "{api}/points/{lat},{lon}/forecast/hourly".format(
+        api=NWS_API,
+        lat=lat,
+        lon=lon
+    )
 
     try:
-        data = requests.get(site, headers=HEADERS, verify='nws.pem').json()
+        data = requests.get(site, headers=HEADERS).json()
 
     except requests.exceptions.ConnectionError:
         raise WxcastException(
-            'Connection could not be established with the nws rest api.')
+            'Connection could not be established with the nws rest api.'
+        )
     except Exception as e:
         raise WxcastException('An error has occurred: %s' % str(e))
 
@@ -148,22 +160,27 @@ def get_seven_day_forecast(lat=None, lon=None, location='default', json=False):
         except KeyError:
             raise WxcastException('Config file not found.')
 
-    site = "{api}/points" \
-           "/{lat},{lon}" \
-           "/forecast".format(api=NWS_API, lat=lat, lon=lon)
+    site = "{api}/points/{lat},{lon}/forecast".format(
+        api=NWS_API,
+        lat=lat,
+        lon=lon
+    )
 
     try:
-        data = requests.get(site, headers=HEADERS, verify='nws.pem').json()
+        data = requests.get(site, headers=HEADERS).json()
 
     except requests.exceptions.ConnectionError:
         raise WxcastException(
-            'Connection could not be established with the nws rest api.')
+            'Connection could not be established with the nws rest api.'
+        )
     except Exception as e:
         raise WxcastException('An error has occurred: %s' % str(e))
 
     if json:
         return data['properties']['periods']
 
-    periods = ['%s:\n%s' % (d['name'], d['detailedForecast'])
-               for d in data['properties']['periods']]
+    periods = [
+        '%s:\n%s' % (d['name'], d['detailedForecast'])
+        for d in data['properties']['periods']
+    ]
     return '\n\n'.join(periods)
