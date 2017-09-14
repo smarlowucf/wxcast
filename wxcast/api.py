@@ -21,15 +21,8 @@ import configparser
 import os
 import requests
 
-from wxcast.constants import HEADERS, NWS_API
+from wxcast.constants import CONFIG_FILE, HEADERS, NWS_API
 from wxcast.exceptions import WxcastException
-
-try:
-    config_file = os.path.expanduser("~") + "/.wxcast"
-    config = configparser.ConfigParser()
-    config.read(config_file)
-except FileNotFoundError:
-    pass
 
 
 def retrieve_nws_product(wfo, product):
@@ -154,11 +147,19 @@ def get_hourly_forecast(lat=None, lon=None, location='default'):
 
 def get_seven_day_forecast(lat=None, lon=None, location='default', json=False):
     if not (lat and lon):
+        if not os.path.exists(CONFIG_FILE):
+            raise WxcastException('Config file: ~/.wxcast not found.')
+
+        config = configparser.ConfigParser()
+        config.read(CONFIG_FILE)
+
         try:
             lat = config.get(location, 'lat')
             lon = config.get(location, 'lon')
-        except KeyError:
-            raise WxcastException('Config file not found.')
+        except configparser.NoSectionError:
+            raise WxcastException('Location: %s not in config file ~/.wxcast' % location)
+        except configparser.NoOptionError as e:
+            raise WxcastException('Error in config file: %s' % e)
 
     site = "{api}/points/{lat},{lon}/forecast".format(
         api=NWS_API,

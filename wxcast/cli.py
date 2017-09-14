@@ -19,25 +19,19 @@
 
 import click
 
-from textwrap import TextWrapper
 from wxcast import api
+from wxcast import utils
 
 
 def print_license(ctx, param, value):
     if not value or ctx.resilient_parsing:
         return
-    click.secho(
-        'wxcast Copyright (C) 2017 sean Marlow. (GPL-3.0+)',
-        fg='yellow'
-    )
-    click.secho(
-        '\nThis program comes with ABSOLUTELY NO WARRANTY.',
-        fg='yellow'
-    )
-    click.secho(
+
+    click.echo(
+        'wxcast Copyright (C) 2017 sean Marlow. (GPL-3.0+)\n\n'
+        'This program comes with ABSOLUTELY NO WARRANTY.\n'
         'This is free software, and you are welcome to redistribute it'
-        ' under certain conditions. See LICENSE for more information.',
-        fg='yellow'
+        ' under certain conditions. See LICENSE for more information.'
     )
     ctx.exit()
 
@@ -53,7 +47,8 @@ def print_license(ctx, param, value):
     help='Display license information and exit.'
 )
 def main():
-    """Retrieve the latest weather information.
+    """
+    Retrieve the latest weather information right in your terminal.
 
     Data provided by the NWS and avwx APIs.
     """
@@ -61,42 +56,51 @@ def main():
 
 
 @click.command()
+@click.option(
+    '-d', '--decoded',
+    is_flag=True,
+    help='Decode raw metar to string format.'
+)
+@click.option(
+    '--no-color',
+    is_flag=True,
+    help='Remove ANSI color and styling from output.'
+)
 @click.argument('icao')
-@click.option('-d', '--decoded',
-              is_flag=True,
-              help='Decode raw metar to string format.')
-def metar(icao, decoded):
-    """Retrieve latest metar from airport.
+def metar(decoded, no_color, icao):
+    """
+    Retrieve latest metar given an icao code.
 
     Example: wxcast metar -d KSLC
     """
     try:
         response = api.get_metar(icao, decoded)
     except Exception as e:
-        click.secho(str(e), fg='red')
+        utils.echo_style(str(e), no_color, fg='red')
     else:
         if decoded:
             click.echo(
-                ''.join(
-                    [click.style('At ', fg='green'),
-                     click.style(response['header']['time'], fg='blue'),
-                     click.style(' the conditions for ', fg='green'),
-                     click.style(response['header']['icao'], fg='blue'),
-                     click.style(' are ', fg='green'),
-                     click.style(response['header']['fr'], fg='blue'),
-                     '\n']
-                )
+                ''.join([
+                    utils.style_string('At ', no_color, fg='green'),
+                    utils.style_string(response['header']['time'], no_color, fg='blue'),
+                    utils.style_string(' the conditions for ', no_color, fg='green'),
+                    utils.style_string(response['header']['icao'], no_color, fg='blue'),
+                    utils.style_string(' are ', no_color, fg='green'),
+                    utils.style_string(response['header']['fr'], no_color, fg='blue'),
+                    '\n'
+                ])
             )
 
-            spaces = max(
-                [get_max_key(response['data']),
-                 get_max_key(response['location'])]
-            )
-            echo_dict(response['data'], spaces=spaces)
+            spaces = max([
+                utils.get_max_key(response['data']),
+                utils.get_max_key(response['location'])
+            ])
+
+            utils.echo_dict(response['data'], no_color, spaces=spaces)
             click.echo('')
 
-            # try to convert elevation to ft and meters
             try:
+                # Try to convert elevation to ft and meters.
                 response['location']['Elevation'] = '{}ft ({}m)'.format(
                     int(float(response['location']['Elevation']) * 3.28084),
                     response['location']['Elevation']
@@ -104,79 +108,79 @@ def metar(icao, decoded):
             except:
                 pass
 
-            echo_dict(response['location'], spaces=spaces)
+            utils.echo_dict(response['location'], no_color, spaces=spaces)
 
         else:
-            click.secho(response, fg='blue')
-
-
-def echo_dict(data, key_color='green', spaces=None, value_color='blue'):
-    if not spaces:
-        spaces = get_max_key(data)
-
-    for key, value in data.items():
-        title = '{spaces}{key}:  '.format(
-            spaces=' ' * (spaces - len(key)),
-            key=key
-        )
-        wrapper = TextWrapper(
-            width=(82 - spaces),
-            subsequent_indent=' ' * (spaces + 3)
-        )
-
-        click.echo(
-            ''.join(
-                [click.style(title, fg=key_color),
-                 wrapper.fill(click.style(value, fg=value_color))]
-            )
-        )
-
-
-def get_max_key(data):
-    return max(map(len, data))
+            utils.echo_style(response, no_color, fg='blue')
 
 
 @click.command()
+@click.option(
+    '--no-color',
+    is_flag=True,
+    help='Remove ANSI color and styling from output.'
+)
 @click.argument('wfo')
 @click.argument('product')
-def text(wfo, product):
-    """Retrieve NWS text products.
+def text(no_color, wfo, product):
+    """
+    Retrieve NWS text products.
 
     Example: wxcast text slc afd
     """
     try:
         response = api.retrieve_nws_product(wfo, product)
     except Exception as e:
-        click.secho(str(e), fg='red')
+        utils.echo_style(str(e), no_color, fg='red')
     else:
         click.echo_via_pager(response)
 
 
 @click.command()
+@click.option(
+    '--no-color',
+    is_flag=True,
+    help='Remove ANSI color and styling from output.'
+)
 @click.argument('wfo')
-def products(wfo):
-    """Retrieve the available text products for a given wfo.
+def products(no_color, wfo):
+    """
+    Retrieve the available text products for a given wfo.
 
     Example: wxcast products slc
     """
     try:
         response = api.get_wfo_products(wfo)
     except Exception as e:
-        click.secho(str(e), fg='red')
+        utils.echo_style(str(e), no_color, fg='red')
     else:
-        echo_dict(response)
+        utils.echo_dict(response, no_color)
 
 
 @click.command()
-@click.option('-L', '--location', default='default',
-              help='Location from config file to use for forecast.')
-def forecast(location):
-    """Retreive current weather conditions and 7 day forecast.
-
-    Example: wxcast wx
+@click.option(
+    '-L',
+    '--location',
+    default='default',
+    help='Location from config file to use for forecast.'
+)
+@click.option(
+    '--no-color',
+    is_flag=True,
+    help='Remove ANSI color and styling from output.'
+)
+def forecast(location, no_color):
     """
-    response = api.get_seven_day_forecast(location=location)
-    click.echo_via_pager(response)
+    Retreive current weather conditions and 7 day forecast.
+
+    Example: wxcast forecast
+    """
+    try:
+        response = api.get_seven_day_forecast(location=location)
+    except Exception as e:
+        utils.echo_style(str(e), no_color, fg='red')
+    else:
+        click.echo_via_pager(response)
 
 
 main.add_command(metar)
