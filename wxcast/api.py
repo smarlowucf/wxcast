@@ -111,29 +111,29 @@ def get_metar(icao, decoded=False):
     return data['Raw-Report']
 
 
-def get_seven_day_forecast(lat=None, lon=None, location='default', json=False):
-    if not (lat and lon):
-        if not os.path.exists(CONFIG_FILE):
-            raise WxcastException('Config file: ~/.wxcast not found.')
+def get_seven_day_forecast(location='default'):
+    latlong = ''
 
+    if not os.path.exists(CONFIG_FILE):
+        raise WxcastException('Config file: ~/.wxcast not found.')
+
+    try:
         config = configparser.ConfigParser()
         config.read(CONFIG_FILE)
 
-        try:
-            lat = config.get(location, 'lat')
-            lon = config.get(location, 'lon')
-        except configparser.NoSectionError:
-            raise WxcastException(
-                f'Location: {location} not in config file ~/.wxcast'
-            )
-        except configparser.NoOptionError as e:
-            raise WxcastException(f'Error in config file: {e}')
-
-    site = f'{NWS_API}/points/{lat},{lon}/forecast'
+        latlong = config.get(location, 'latlong')
+    except configparser.NoSectionError:
+        raise WxcastException(
+            f'Location: {location} not in config file ~/.wxcast'
+        )
+    except configparser.NoOptionError as e:
+        raise WxcastException(f'Error in config file: {e}')
 
     try:
-        data = requests.get(site, headers=HEADERS).json()
-
+        data = requests.get(
+            f'{NWS_API}/points/{latlong}/forecast',
+            headers=HEADERS
+        ).json()
     except requests.exceptions.ConnectionError:
         raise WxcastException(
             'Connection could not be established with the nws rest api.'
@@ -141,11 +141,10 @@ def get_seven_day_forecast(lat=None, lon=None, location='default', json=False):
     except Exception as e:
         raise WxcastException(f'An error has occurred: {str(e)}')
 
-    if json:
-        return data['properties']['periods']
+    if 'properties' not in data:
+        raise WxcastException(
+            f'No forecast found for location: {location} '
+            f'coordinates: {latlong}'
+        )
 
-    periods = [
-        '%s:\n%s' % (d['name'], d['detailedForecast'])
-        for d in data['properties']['periods']
-    ]
-    return '\n\n'.join(periods)
+    return data['properties']['periods']

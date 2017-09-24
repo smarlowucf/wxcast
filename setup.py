@@ -23,8 +23,8 @@ from setuptools import setup
 with open('README.rst') as readme_file:
     readme = readme_file.read()
 
-with open('HISTORY.rst') as history_file:
-    history = history_file.read()
+with open('CHANGES.rst') as changes_file:
+    changes = changes_file.read()
 
 requirements = [
     'certifi',
@@ -33,14 +33,14 @@ requirements = [
 ]
 
 test_requirements = [
-    'nose',
+    'pytest',
 ]
 
 setup(
     name='wxcast',
     version='0.3.0',
-    description='An SDK and command line utilities to collect weather information.',
-    long_description=readme + '\n\n' + history,
+    description='A CLI utility for retrieving weather information.',
+    long_description=readme + '\n\n' + changes,
     author="Sean Marlow",
     author_email='sean.marlow@suse.com',
     url='https://github.com/smarlowucf/wxcast',
@@ -55,13 +55,13 @@ setup(
         ]
     },
     install_requires=requirements,
-    license="MIT license",
+    license='GPLv3+',
     zip_safe=False,
     keywords='wxcast',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3+)',
         'Natural Language :: English',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.6',

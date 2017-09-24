@@ -186,16 +186,17 @@ def products(no_color, wfo):
 )
 def forecast(location, no_color):
     """
-    Retreive current weather conditions and 7 day forecast.
+    Retrieve current 7 day forecast for given location.
 
-    Example: wxcast forecast
+    Example: wxcast forecast -L denver
     """
     try:
         response = api.get_seven_day_forecast(location=location)
     except Exception as e:
         utils.echo_style(str(e), no_color, fg='red')
     else:
-        click.echo_via_pager(response)
+        data = {d['name']: d['detailedForecast'] for d in response}
+        utils.echo_dict(data, no_color)
 
 
 main.add_command(metar)
