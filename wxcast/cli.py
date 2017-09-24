@@ -187,7 +187,3 @@ main.add_command(metar)
 main.add_command(text)
 main.add_command(products)
 main.add_command(forecast)
-
-
-if __name__ == "__main__":
-    main()

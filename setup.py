@@ -39,7 +39,7 @@ test_requirements = [
 setup(
     name='wxcast',
     version='0.3.0',
-    description="An SDK and command line utilities to collect weather information.",
+    description='An SDK and command line utilities to collect weather information.',
     long_description=readme + '\n\n' + history,
     author="Sean Marlow",
     author_email='sean.marlow@suse.com',
@@ -63,7 +63,7 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
-        "Programming Language :: Python :: 2",
+        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
