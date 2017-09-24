@@ -3,7 +3,11 @@ import click
 from textwrap import TextWrapper
 
 
-def echo_dict(data, no_color, key_color='green', spaces=None, value_color='blue'):
+def echo_dict(data,
+              no_color,
+              key_color='green',
+              spaces=None,
+              value_color='blue'):
     if not spaces:
         spaces = get_max_key(data)
 

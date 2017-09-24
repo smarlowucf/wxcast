@@ -111,29 +111,6 @@ def get_metar(icao, decoded=False):
     return data['Raw-Report']
 
 
-def get_hourly_forecast(lat=None, lon=None, location='default'):
-    if not lat or not lon:
-        try:
-            lat = config.get(location, 'lat')
-            lon = config.get(location, 'lon')
-        except KeyError:
-            raise WxcastException('Config file not found.')
-
-    site = f'{NWS_API}/points/{lat},{lon}/forecast/hourly'
-
-    try:
-        data = requests.get(site, headers=HEADERS).json()
-
-    except requests.exceptions.ConnectionError:
-        raise WxcastException(
-            'Connection could not be established with the nws rest api.'
-        )
-    except Exception as e:
-        raise WxcastException(f'An error has occurred: {str(e)}')
-
-    return data['properties']['periods']
-
-
 def get_seven_day_forecast(lat=None, lon=None, location='default', json=False):
     if not (lat and lon):
         if not os.path.exists(CONFIG_FILE):
@@ -146,7 +123,9 @@ def get_seven_day_forecast(lat=None, lon=None, location='default', json=False):
             lat = config.get(location, 'lat')
             lon = config.get(location, 'lon')
         except configparser.NoSectionError:
-            raise WxcastException(f'Location: {location} not in config file ~/.wxcast')
+            raise WxcastException(
+                f'Location: {location} not in config file ~/.wxcast'
+            )
         except configparser.NoOptionError as e:
             raise WxcastException(f'Error in config file: {e}')
 

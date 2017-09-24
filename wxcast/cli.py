@@ -50,7 +50,10 @@ def main():
     """
     Retrieve the latest weather information right in your terminal.
 
-    Data provided by the NWS and avwx APIs.
+    Data provided by NWS and AVWX.
+
+    NWS: https://forecast-v3.weather.gov/documentation \n
+    AVWX: https://avwx.rest/
     """
     pass
 
@@ -69,7 +72,7 @@ def main():
 @click.argument('icao')
 def metar(decoded, no_color, icao):
     """
-    Retrieve latest metar given an icao code.
+    Retrieve the latest METAR given an airport ICAO code.
 
     Example: wxcast metar -d KSLC
     """
@@ -81,12 +84,24 @@ def metar(decoded, no_color, icao):
         if decoded:
             click.echo(
                 ''.join([
-                    utils.style_string('At ', no_color, fg='green'),
-                    utils.style_string(response['header']['time'], no_color, fg='blue'),
-                    utils.style_string(' the conditions for ', no_color, fg='green'),
-                    utils.style_string(response['header']['icao'], no_color, fg='blue'),
-                    utils.style_string(' are ', no_color, fg='green'),
-                    utils.style_string(response['header']['fr'], no_color, fg='blue'),
+                    utils.style_string(
+                        'At ', no_color, fg='green'
+                    ),
+                    utils.style_string(
+                        response['header']['time'], no_color, fg='blue'
+                    ),
+                    utils.style_string(
+                        ' the conditions for ', no_color, fg='green'
+                    ),
+                    utils.style_string(
+                        response['header']['icao'], no_color, fg='blue'
+                    ),
+                    utils.style_string(
+                        ' are ', no_color, fg='green'
+                    ),
+                    utils.style_string(
+                        response['header']['fr'], no_color, fg='blue'
+                    ),
                     '\n'
                 ])
             )
@@ -124,7 +139,7 @@ def metar(decoded, no_color, icao):
 @click.argument('product')
 def text(no_color, wfo, product):
     """
-    Retrieve NWS text products.
+    Retrieve the NWS text product.
 
     Example: wxcast text slc afd
     """
