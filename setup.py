@@ -20,10 +20,10 @@
 
 from setuptools import setup
 
-with open('README.rst') as readme_file:
+with open('README.adoc') as readme_file:
     readme = readme_file.read()
 
-with open('CHANGES.rst') as changes_file:
+with open('CHANGES.adoc') as changes_file:
     changes = changes_file.read()
 
 requirements = [
