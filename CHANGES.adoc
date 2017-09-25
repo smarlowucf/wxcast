@@ -2,9 +2,26 @@
 
 == v1.0.0 (2017-09-24)
 
-== v0.3.0 (2017-01-14)
+* Cleanup flake8 warnings.
+* Remove config in favor of geopy to get location for seven day forecast.
+* Migrate to f'{strings}'
+* Migrate to adoc from rst.
+* Cleanup code.
+* Update readme and docs.
 
-== v0.2.0 (2017-01-14)
+
+== v0.3.0 (2017-08-09)
+
+* Remove cert and use certifi for NWS API.
+* Convert elevation to feet.
+
+== v0.2.1 (2017-08-09)
+
+* Attempt to fix cert.
+
+== v0.2.0 (2017-08-08)
+
+* Attempt to fix cert.
 
 == v0.1.0 (2017-01-14)
 
