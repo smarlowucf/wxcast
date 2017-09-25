@@ -1,5 +1,9 @@
 # Changes
 
+== v1.0.2 (2017-09-24)
+
+* Fix doc extensions in setup.
+
 == v1.0.1 (2017-09-24)
 
 * Fix manifest.
