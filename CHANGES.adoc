@@ -1,5 +1,9 @@
 # Changes
 
+== v1.0.1 (2017-09-24)
+
+* Fix manifest.
+
 == v1.0.0 (2017-09-24)
 
 * Cleanup flake8 warnings.
