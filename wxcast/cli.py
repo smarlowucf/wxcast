@@ -68,7 +68,7 @@ def main():
     help='Remove ANSI color and styling from output.'
 )
 @click.argument('location')
-def forecast(location, no_color):
+def forecast(no_color, location):
     """
     Retrieve current 7 day forecast for given location.
 
