@@ -8,6 +8,15 @@ def echo_dict(data,
               key_color='green',
               spaces=None,
               value_color='blue'):
+    """
+    Echoes a dictionary pretty-print style to terminal.
+
+    :param data: The dictionary of key:vals to print.
+    :param no_color: If true prints formatted but with no ascii color.
+    :param key_color: Color for dictionary keys.
+    :param spaces: Number of spaces to offset values. Max length of keys.
+    :param value_color: Color for values.
+    """
     if not spaces:
         spaces = get_max_key(data)
 
@@ -30,6 +39,13 @@ def echo_dict(data,
 
 
 def echo_style(message, no_color, fg='yellow'):
+    """
+    Echo string with style if no_color is False.
+
+    :param message: String to echo.
+    :param no_color: If True echo without style.
+    :param fg: String style color.
+    """
     if no_color:
         click.echo(message)
     else:
@@ -37,10 +53,24 @@ def echo_style(message, no_color, fg='yellow'):
 
 
 def get_max_key(data):
+    """
+    Get the max key length from dictionary.
+
+    :param data: Dictionary of key values.
+    :return: Max length of dictionary key as int.
+    """
     return max(map(len, data))
 
 
 def style_string(message, no_color, fg='yellow'):
+    """
+    Add color style to string if no_color is False.
+
+    :param message: String to style.
+    :param no_color: If True return string without style.
+    :param fg: The color for the string style.
+    :return: Return string conditionally style.
+    """
     if no_color:
         return message
     else:

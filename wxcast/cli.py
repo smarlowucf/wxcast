@@ -24,6 +24,9 @@ from wxcast import utils
 
 
 def print_license(ctx, param, value):
+    """
+    Eager option to print license information and exit.
+    """
     if not value or ctx.resilient_parsing:
         return
 
@@ -60,6 +63,33 @@ def main():
 
 @click.command()
 @click.option(
+    '--no-color',
+    is_flag=True,
+    help='Remove ANSI color and styling from output.'
+)
+@click.argument('location')
+def forecast(location, no_color):
+    """
+    Retrieve current 7 day forecast for given location.
+
+    Location can be a city, address or zip/postal code.
+
+    Example: wxcast forecast -L denver
+
+    :param location: Location string to get forecast for.
+    :param no_color: If True do not style string output.
+    """
+    try:
+        response = api.get_seven_day_forecast(location)
+    except Exception as e:
+        utils.echo_style(str(e), no_color, fg='red')
+    else:
+        data = {d['name']: d['detailedForecast'] for d in response}
+        utils.echo_dict(data, no_color)
+
+
+@click.command()
+@click.option(
     '-d', '--decoded',
     is_flag=True,
     help='Decode raw metar to string format.'
@@ -75,6 +105,10 @@ def metar(decoded, no_color, icao):
     Retrieve the latest METAR given an airport ICAO code.
 
     Example: wxcast metar -d KSLC
+
+    :param decoded: Flag to decode the METAR output.
+    :param no_color: If True do not style string output.
+    :param icao: The airport ICAO code to retrieve METAR for.
     """
     try:
         response = api.get_metar(icao, decoded)
@@ -136,33 +170,14 @@ def metar(decoded, no_color, icao):
     help='Remove ANSI color and styling from output.'
 )
 @click.argument('wfo')
-@click.argument('product')
-def text(no_color, wfo, product):
-    """
-    Retrieve the NWS text product.
-
-    Example: wxcast text slc afd
-    """
-    try:
-        response = api.retrieve_nws_product(wfo, product)
-    except Exception as e:
-        utils.echo_style(str(e), no_color, fg='red')
-    else:
-        click.echo_via_pager(response)
-
-
-@click.command()
-@click.option(
-    '--no-color',
-    is_flag=True,
-    help='Remove ANSI color and styling from output.'
-)
-@click.argument('wfo')
 def products(no_color, wfo):
     """
     Retrieve the available text products for a given wfo.
 
     Example: wxcast products slc
+
+    :param no_color: If True do not style string output.
+    :param wfo: The weather forecast office abbreviation (BOU).
     """
     try:
         response = api.get_wfo_products(wfo)
@@ -174,29 +189,28 @@ def products(no_color, wfo):
 
 @click.command()
 @click.option(
-    '-L',
-    '--location',
-    default='default',
-    help='Location from config file to use for forecast.'
-)
-@click.option(
     '--no-color',
     is_flag=True,
     help='Remove ANSI color and styling from output.'
 )
-def forecast(location, no_color):
+@click.argument('wfo')
+@click.argument('product')
+def text(no_color, wfo, product):
     """
-    Retrieve current 7 day forecast for given location.
+    Retrieve the NWS text product.
 
-    Example: wxcast forecast -L denver
+    Example: wxcast text slc afd
+
+    :param no_color: If True do not style string output.
+    :param wfo: The weather forecast office abbreviation (BOU).
+    :param product: The text product to retrieve.
     """
     try:
-        response = api.get_seven_day_forecast(location=location)
+        response = api.get_nws_product(wfo, product)
     except Exception as e:
         utils.echo_style(str(e), no_color, fg='red')
     else:
-        data = {d['name']: d['detailedForecast'] for d in response}
-        utils.echo_dict(data, no_color)
+        click.echo_via_pager(response)
 
 
 main.add_command(metar)

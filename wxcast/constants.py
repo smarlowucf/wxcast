@@ -21,7 +21,6 @@ import os
 import requests
 
 
-CONFIG_FILE = ''.join([os.path.expanduser('~'), '/.wxcast'])
 HEADERS = requests.utils.default_headers()
 HEADERS.update(
     {

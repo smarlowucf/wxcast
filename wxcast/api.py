@@ -17,15 +17,62 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import configparser
-import os
 import requests
 
-from wxcast.constants import CONFIG_FILE, HEADERS, NWS_API
+from geopy.geocoders import Nominatim
+
+from wxcast.constants import HEADERS, NWS_API
 from wxcast.exceptions import WxcastException
 
 
-def retrieve_nws_product(wfo, product):
+def get_metar(icao, decoded=False):
+    """
+    Retrieve METAR for ICAO.
+
+    :param icao: Airport code.
+    :param decoded: Flag to decode the METAR.
+    :return: Returns raw METAR string or dictionary with decoded info.
+    """
+    try:
+        site = f'http://avwx.rest/api/metar/{icao}?options=info,translate'
+        data = requests.get(site).json()
+
+    except requests.exceptions.ConnectionError:
+        raise WxcastException(
+            'Connection could not be established with the avwx rest api.'
+        )
+    except Exception as e:
+        raise WxcastException(f'An error has occurred: {str(e)}')
+
+    if 'Error' in data:
+        raise WxcastException(data['Error'])
+
+    if decoded:
+        header = {
+            'time': data['Time'],
+            'icao': data['Station'],
+            'fr': data['Flight-Rules']
+        }
+        output = {
+            'data': data['Translations'],
+            'header': header,
+            'location': data['Info']
+        }
+
+        return output
+
+    # else return raw metar
+    return data['Raw-Report']
+
+
+def get_nws_product(wfo, product):
+    """
+    Returns text from product for given WFO.
+
+    :param wfo: Weather forecast office abbreviation code.
+    :param product: The text product to return.
+    :return: Product text value as string.
+    """
     site = f'{NWS_API}/products/types/' \
            f'{product.upper()}/locations/{wfo.upper()}'
 
@@ -61,73 +108,16 @@ def retrieve_nws_product(wfo, product):
     return response['productText']
 
 
-def get_wfo_products(wfo):
-    try:
-        site = f'{NWS_API}/products/locations/{wfo.upper()}/types'
-        data = requests.get(site, headers=HEADERS).json()
+def get_seven_day_forecast(location):
+    """
+    Retrieve seven day forecast for the given location.
 
-    except requests.exceptions.ConnectionError as e:
-        raise WxcastException(
-            f'Connection could not be established with the avwx rest api: '
-            f'{str(e)}'
-        )
-    except Exception as e:
-        raise WxcastException(f'An error has occurred: {str(e)}')
-
-    response = {d['productCode']: d['productName'] for d in data['features']}
-    return response
-
-
-def get_metar(icao, decoded=False):
-    try:
-        site = f'http://avwx.rest/api/metar/{icao}?options=info,translate'
-        data = requests.get(site).json()
-
-    except requests.exceptions.ConnectionError:
-        raise WxcastException(
-            'Connection could not be established with the avwx rest api.'
-        )
-    except Exception as e:
-        raise WxcastException(f'An error has occurred: {str(e)}')
-
-    if 'Error' in data:
-        raise WxcastException(data['Error'])
-
-    if decoded:
-        header = {
-            'time': data['Time'],
-            'icao': data['Station'],
-            'fr': data['Flight-Rules']
-        }
-        output = {
-            'data': data['Translations'],
-            'header': header,
-            'location': data['Info']
-        }
-
-        return output
-
-    # else return raw metar
-    return data['Raw-Report']
-
-
-def get_seven_day_forecast(location='default'):
-    latlong = ''
-
-    if not os.path.exists(CONFIG_FILE):
-        raise WxcastException('Config file: ~/.wxcast not found.')
-
-    try:
-        config = configparser.ConfigParser()
-        config.read(CONFIG_FILE)
-
-        latlong = config.get(location, 'latlong')
-    except configparser.NoSectionError:
-        raise WxcastException(
-            f'Location: {location} not in config file ~/.wxcast'
-        )
-    except configparser.NoOptionError as e:
-        raise WxcastException(f'Error in config file: {e}')
+    :param location: String value of location (address, name, zip, etc).
+    :return: A dictionary with forecast split in periods.
+    """
+    geolocator = Nominatim()
+    geolocation = geolocator.geocode(location)
+    latlong = f'{geolocation.latitude},{geolocation.longitude}'
 
     try:
         data = requests.get(
@@ -148,3 +138,26 @@ def get_seven_day_forecast(location='default'):
         )
 
     return data['properties']['periods']
+
+
+def get_wfo_products(wfo):
+    """
+    Get a list of the text products available for the given WFO.
+
+    :param wfo: The weather forecast office to retrieve product list for.
+    :return: Return dictionary of text products {code: name}.
+    """
+    try:
+        site = f'{NWS_API}/products/locations/{wfo.upper()}/types'
+        data = requests.get(site, headers=HEADERS).json()
+
+    except requests.exceptions.ConnectionError as e:
+        raise WxcastException(
+            f'Connection could not be established with the avwx rest api: '
+            f'{str(e)}'
+        )
+    except Exception as e:
+        raise WxcastException(f'An error has occurred: {str(e)}')
+
+    response = {d['productCode']: d['productName'] for d in data['features']}
+    return response
