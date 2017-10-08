@@ -4,6 +4,8 @@ A CLI utility for retrieving weather information.
 
 image:https://travis-ci.org/smarlowucf/wxcast.svg?branch=master["Build Status", link="https://travis-ci.org/smarlowucf/wxcast"]
 
+image:images/metar.gif[wxcast metar]
+
 == overview
 
 Provides weather information in terminal:
