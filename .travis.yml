@@ -11,3 +11,8 @@ script:
   - pytest
   - flake8 tests/
   - flake8 wxcast/
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
