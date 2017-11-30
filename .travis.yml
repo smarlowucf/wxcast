@@ -4,6 +4,12 @@ python:
   - "3.5"
   - "3.6"
 
-install: pip install .
+install:
+  - pip install .
+  - pip install --upgrade pytest
+  - pip install flake8
 
-script: pytest
+script:
+  - pytest
+  - flake8 tests/
+  - flake8 wxcast/
