@@ -74,7 +74,7 @@ def get_nws_product(wfo, product):
     :return: Product text value as string.
     """
     site = f'{NWS_API}/products/types/' \
-           f'{product.upper()}/locations/{wfo.upper()}'
+        f'{product.upper()}/locations/{wfo.upper()}'
 
     try:
         response = requests.get(site, headers=HEADERS)

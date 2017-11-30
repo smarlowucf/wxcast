@@ -154,7 +154,7 @@ def metar(decoded, no_color, icao):
                     int(float(response['location']['Elevation']) * 3.28084),
                     response['location']['Elevation']
                 )
-            except:
+            except (KeyError, Exception):
                 pass
 
             utils.echo_dict(response['location'], no_color, spaces=spaces)
