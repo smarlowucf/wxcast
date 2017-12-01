@@ -23,9 +23,16 @@ pip install wxcast
 == Requirements
 
 * certifi
-* Click
+* Click>=6.0
 * geopy
 * requests
+
+== Test Requirements
+
+* flake8
+* pytest
+* pytest-cov
+* vcrpy
 
 == Usage
 
