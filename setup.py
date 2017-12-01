@@ -34,6 +34,7 @@ requirements = [
 ]
 
 test_requirements = [
+    'flake8',
     'pytest',
     'pytest-cov',
     'vcrpy'
@@ -57,6 +58,9 @@ setup(
         ]
     },
     install_requires=requirements,
+    extras_require={
+        'test': test_requirements,
+    },
     license='GPLv3+',
     zip_safe=False,
     keywords='wxcast',
