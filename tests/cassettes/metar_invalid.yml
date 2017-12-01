@@ -1,0 +1,29 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.13.0]
+    method: GET
+    uri: http://avwx.rest/api/metar/KFAKE?options=info,translate
+  response:
+    body: {string: '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+        <title>500 Internal Server Error</title>
+
+        <h1>Internal Server Error</h1>
+
+        <p>The server encountered an internal error and was unable to complete your
+        request.  Either the server is overloaded or there is an error in the application.</p>
+
+        '}
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      Content-Length: ['291']
+      Content-Type: [text/html]
+      Date: ['Fri, 01 Dec 2017 02:25:41 GMT']
+      Server: [Werkzeug/0.12.2 Python/3.6.2]
+    status: {code: 500, message: INTERNAL SERVER ERROR}
+version: 1

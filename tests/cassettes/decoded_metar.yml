@@ -1,0 +1,39 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.13.0]
+    method: GET
+    uri: http://avwx.rest/api/metar/KDEN?options=info,translate
+  response:
+    body: {string: "{\n  \"Altimeter\": \"3006\", \n  \"Cloud-List\": [\n    [\n \
+        \     \"FEW\", \n      \"220\"\n    ]\n  ], \n  \"Dewpoint\": \"M07\", \n\
+        \  \"Flight-Rules\": \"VFR\", \n  \"Info\": {\n    \"City\": \"Denver\", \n\
+        \    \"Country\": \"USA\", \n    \"Elevation\": \"1656\", \n    \"IATA\":\
+        \ \"DEN\", \n    \"ICAO\": \"KDEN\", \n    \"Latitude\": \"39.86165639\",\
+        \ \n    \"Longitude\": \"-104.6731775\", \n    \"Name\": \"International Airport\"\
+        , \n    \"Priority\": \"0\", \n    \"State\": \"CO\"\n  }, \n  \"Other-List\"\
+        : [], \n  \"Raw-Report\": \"KDEN 010153Z 36003KT 10SM FEW220 04/M07 A3006\
+        \ RMK AO2 SLP179 T00441067\", \n  \"Remarks\": \"RMK AO2 SLP179 T00441067\"\
+        , \n  \"Remarks-Info\": {\n    \"Dew-Decimal\": \"-6.7\", \n    \"Temp-Decimal\"\
+        : \"4.4\"\n  }, \n  \"Runway-Vis-List\": [], \n  \"Station\": \"KDEN\", \n\
+        \  \"Temperature\": \"04\", \n  \"Time\": \"010153Z\", \n  \"Translations\"\
+        : {\n    \"Altimeter\": \"30.06inHg (1018hPa)\", \n    \"Clouds\": \"Few clouds\
+        \ at 22000ft - Reported AGL\", \n    \"Dewpoint\": \"-07C (19F)\", \n    \"\
+        Other\": \"\", \n    \"Temperature\": \"04C (39F)\", \n    \"Visibility\"\
+        : \"10sm (16.1km)\", \n    \"Wind\": \"N-360 at 03kt\"\n  }, \n  \"Units\"\
+        : {\n    \"Altimeter\": \"inHg\", \n    \"Altitude\": \"ft\", \n    \"Temperature\"\
+        : \"C\", \n    \"Visibility\": \"sm\", \n    \"Wind-Speed\": \"kt\"\n  },\
+        \ \n  \"Visibility\": \"10\", \n  \"Wind-Direction\": \"360\", \n  \"Wind-Gust\"\
+        : \"\", \n  \"Wind-Speed\": \"03\", \n  \"Wind-Variable-Dir\": []\n}\n"}
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      Content-Length: ['1270']
+      Content-Type: [application/json]
+      Date: ['Fri, 01 Dec 2017 02:04:28 GMT']
+      Server: [Werkzeug/0.12.2 Python/3.6.2]
+    status: {code: 200, message: OK}
+version: 1

@@ -1,0 +1,30 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: ['wxcast app. https://github.com/smarlowucf/wxcast']
+    method: GET
+    uri: https://api.weather.gov/products/locations/FAKE/types
+  response:
+    body: {string: "{\n    \"correlationId\": \"5bcd1762-c588-46ce-a4aa-41a2f67c00ff\"\
+        ,\n    \"title\": \"Unexpected Problem\",\n    \"type\": \"https://api.weather.gov/problems/UnexpectedProblem\"\
+        ,\n    \"status\": 500,\n    \"detail\": \"An unexpected problem has occurred.\"\
+        ,\n    \"instance\": \"https://api.weather.gov/requests/5bcd1762-c588-46ce-a4aa-41a2f67c00ff\"\
+        \n}"}
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      Cache-Control: [no-cache]
+      Connection: [close]
+      Content-Type: [application/problem+json]
+      Date: ['Fri, 01 Dec 2017 02:37:51 GMT']
+      Server: [nginx]
+      Strict-Transport-Security: [max-age=31536000; includeSubDomains; preload]
+      Vary: [Accept]
+      X-Correlation-ID: [5bcd1762-c588-46ce-a4aa-41a2f67c00ff]
+      X-Request-ID: [5bcd1762-c588-46ce-a4aa-41a2f67c00ff]
+      X-Server-ID: [vm-bldr-nids-apiapp29.ncep.noaa.gov]
+    status: {code: 500, message: Internal Server Error}
+version: 1

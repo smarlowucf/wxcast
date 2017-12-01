@@ -1,0 +1,214 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: ['wxcast app. https://github.com/smarlowucf/wxcast']
+    method: GET
+    uri: https://api.weather.gov/products/types/AFD/locations/BOU
+  response:
+    body: {string: "{\n    \"@context\": [\n        \"https://raw.githubusercontent.com/geojson/geojson-ld/master/contexts/geojson-base.jsonld\"\
+        ,\n        {\n            \"@vocab\": \"https://api.weather.gov/ontology#\"\
+        \n        }\n    ],\n    \"type\": \"FeatureCollection\",\n    \"features\"\
+        : [\n        {\n            \"@id\": \"https://api.weather.gov/products/3bc5d044-3325-40e2-8bbd-3c32471473c0\"\
+        ,\n            \"id\": \"3bc5d044-3325-40e2-8bbd-3c32471473c0\",\n       \
+        \     \"wmoCollectiveId\": \"FXUS65\",\n            \"issuingOffice\": \"\
+        KBOU\",\n            \"issuanceTime\": \"2017-11-30T22:32:00+00:00\",\n  \
+        \          \"productCode\": \"AFD\",\n            \"productName\": \"Area\
+        \ Forecast Discussion\"\n        },\n        {\n            \"@id\": \"https://api.weather.gov/products/daa10221-bcd0-4222-9526-ec7d6ca8e532\"\
+        ,\n            \"id\": \"daa10221-bcd0-4222-9526-ec7d6ca8e532\",\n       \
+        \     \"wmoCollectiveId\": \"FXUS65\",\n            \"issuingOffice\": \"\
+        KBOU\",\n            \"issuanceTime\": \"2017-11-30T22:32:00+00:00\",\n  \
+        \          \"productCode\": \"AFD\",\n            \"productName\": \"Area\
+        \ Forecast Discussion\"\n        },\n        {\n            \"@id\": \"https://api.weather.gov/products/f6d69125-7eac-448a-8550-83299ccc5f8c\"\
+        ,\n            \"id\": \"f6d69125-7eac-448a-8550-83299ccc5f8c\",\n       \
+        \     \"wmoCollectiveId\": \"FXUS65\",\n            \"issuingOffice\": \"\
+        KBOU\",\n            \"issuanceTime\": \"2017-11-30T17:24:00+00:00\",\n  \
+        \          \"productCode\": \"AFD\",\n            \"productName\": \"Area\
+        \ Forecast Discussion\"\n        },\n        {\n            \"@id\": \"https://api.weather.gov/products/ea9cc13b-9d27-4c42-a726-2add96d69e10\"\
+        ,\n            \"id\": \"ea9cc13b-9d27-4c42-a726-2add96d69e10\",\n       \
+        \     \"wmoCollectiveId\": \"FXUS65\",\n            \"issuingOffice\": \"\
+        KBOU\",\n            \"issuanceTime\": \"2017-11-30T17:20:00+00:00\",\n  \
+        \          \"productCode\": \"AFD\",\n            \"productName\": \"Area\
+        \ Forecast Discussion\"\n        },\n        {\n            \"@id\": \"https://api.weather.gov/products/2e32b5ae-c028-4eb6-8932-b9f62d7ddcaf\"\
+        ,\n            \"id\": \"2e32b5ae-c028-4eb6-8932-b9f62d7ddcaf\",\n       \
+        \     \"wmoCollectiveId\": \"FXUS65\",\n            \"issuingOffice\": \"\
+        KBOU\",\n            \"issuanceTime\": \"2017-11-30T17:06:00+00:00\",\n  \
+        \          \"productCode\": \"AFD\",\n            \"productName\": \"Area\
+        \ Forecast Discussion\"\n        },\n        {\n            \"@id\": \"https://api.weather.gov/products/77b498c0-436a-4a1e-9575-32b95ca0bff4\"\
+        ,\n            \"id\": \"77b498c0-436a-4a1e-9575-32b95ca0bff4\",\n       \
+        \     \"wmoCollectiveId\": \"FXUS65\",\n            \"issuingOffice\": \"\
+        KBOU\",\n            \"issuanceTime\": \"2017-11-30T17:06:00+00:00\",\n  \
+        \          \"productCode\": \"AFD\",\n            \"productName\": \"Area\
+        \ Forecast Discussion\"\n        },\n        {\n            \"@id\": \"https://api.weather.gov/products/e09d0781-6478-44ec-b52b-ebbc76fbbdfb\"\
+        ,\n            \"id\": \"e09d0781-6478-44ec-b52b-ebbc76fbbdfb\",\n       \
+        \     \"wmoCollectiveId\": \"FXUS65\",\n            \"issuingOffice\": \"\
+        KBOU\",\n            \"issuanceTime\": \"2017-11-30T11:31:00+00:00\",\n  \
+        \          \"productCode\": \"AFD\",\n            \"productName\": \"Area\
+        \ Forecast Discussion\"\n        },\n        {\n            \"@id\": \"https://api.weather.gov/products/598c08bb-eada-40be-a8cc-2ab3dd08739a\"\
+        ,\n            \"id\": \"598c08bb-eada-40be-a8cc-2ab3dd08739a\",\n       \
+        \     \"wmoCollectiveId\": \"FXUS65\",\n            \"issuingOffice\": \"\
+        KBOU\",\n            \"issuanceTime\": \"2017-11-30T01:02:00+00:00\",\n  \
+        \          \"productCode\": \"AFD\",\n            \"productName\": \"Area\
+        \ Forecast Discussion\"\n        },\n        {\n            \"@id\": \"https://api.weather.gov/products/b1ff6085-b7e3-4b9f-bc62-bf2a0ffb1809\"\
+        ,\n            \"id\": \"b1ff6085-b7e3-4b9f-bc62-bf2a0ffb1809\",\n       \
+        \     \"wmoCollectiveId\": \"FXUS65\",\n            \"issuingOffice\": \"\
+        KBOU\",\n            \"issuanceTime\": \"2017-11-30T01:02:00+00:00\",\n  \
+        \          \"productCode\": \"AFD\",\n            \"productName\": \"Area\
+        \ Forecast Discussion\"\n        },\n        {\n            \"@id\": \"https://api.weather.gov/products/4f4af2ac-839e-48f8-9bb4-223e45b62320\"\
+        ,\n            \"id\": \"4f4af2ac-839e-48f8-9bb4-223e45b62320\",\n       \
+        \     \"wmoCollectiveId\": \"FXUS65\",\n            \"issuingOffice\": \"\
+        KBOU\",\n            \"issuanceTime\": \"2017-11-29T22:27:00+00:00\",\n  \
+        \          \"productCode\": \"AFD\",\n            \"productName\": \"Area\
+        \ Forecast Discussion\"\n        },\n        {\n            \"@id\": \"https://api.weather.gov/products/612ea2cc-d623-484c-bc94-0eecd4a87eb3\"\
+        ,\n            \"id\": \"612ea2cc-d623-484c-bc94-0eecd4a87eb3\",\n       \
+        \     \"wmoCollectiveId\": \"FXUS65\",\n            \"issuingOffice\": \"\
+        KBOU\",\n            \"issuanceTime\": \"2017-11-29T22:27:00+00:00\",\n  \
+        \          \"productCode\": \"AFD\",\n            \"productName\": \"Area\
+        \ Forecast Discussion\"\n        },\n        {\n            \"@id\": \"https://api.weather.gov/products/496c0af4-da5a-4a0e-a639-35206c3912ed\"\
+        ,\n            \"id\": \"496c0af4-da5a-4a0e-a639-35206c3912ed\",\n       \
+        \     \"wmoCollectiveId\": \"FXUS65\",\n            \"issuingOffice\": \"\
+        KBOU\",\n            \"issuanceTime\": \"2017-11-29T18:12:00+00:00\",\n  \
+        \          \"productCode\": \"AFD\",\n            \"productName\": \"Area\
+        \ Forecast Discussion\"\n        },\n        {\n            \"@id\": \"https://api.weather.gov/products/995185fa-4cd9-4966-9090-163885d53b9b\"\
+        ,\n            \"id\": \"995185fa-4cd9-4966-9090-163885d53b9b\",\n       \
+        \     \"wmoCollectiveId\": \"FXUS65\",\n            \"issuingOffice\": \"\
+        KBOU\",\n            \"issuanceTime\": \"2017-11-29T11:16:00+00:00\",\n  \
+        \          \"productCode\": \"AFD\",\n            \"productName\": \"Area\
+        \ Forecast Discussion\"\n        },\n        {\n            \"@id\": \"https://api.weather.gov/products/92704120-c903-4fea-8d7a-9a1a5823f9d8\"\
+        ,\n            \"id\": \"92704120-c903-4fea-8d7a-9a1a5823f9d8\",\n       \
+        \     \"wmoCollectiveId\": \"FXUS65\",\n            \"issuingOffice\": \"\
+        KBOU\",\n            \"issuanceTime\": \"2017-11-29T03:24:00+00:00\",\n  \
+        \          \"productCode\": \"AFD\",\n            \"productName\": \"Area\
+        \ Forecast Discussion\"\n        },\n        {\n            \"@id\": \"https://api.weather.gov/products/6d14a706-2e9f-48e9-9e22-f1d63156379d\"\
+        ,\n            \"id\": \"6d14a706-2e9f-48e9-9e22-f1d63156379d\",\n       \
+        \     \"wmoCollectiveId\": \"FXUS65\",\n            \"issuingOffice\": \"\
+        KBOU\",\n            \"issuanceTime\": \"2017-11-28T21:59:00+00:00\",\n  \
+        \          \"productCode\": \"AFD\",\n            \"productName\": \"Area\
+        \ Forecast Discussion\"\n        },\n        {\n            \"@id\": \"https://api.weather.gov/products/a8a723c1-8e47-4f6e-b83b-3e7ada4f9ad1\"\
+        ,\n            \"id\": \"a8a723c1-8e47-4f6e-b83b-3e7ada4f9ad1\",\n       \
+        \     \"wmoCollectiveId\": \"FXUS65\",\n            \"issuingOffice\": \"\
+        KBOU\",\n            \"issuanceTime\": \"2017-11-28T17:50:00+00:00\",\n  \
+        \          \"productCode\": \"AFD\",\n            \"productName\": \"Area\
+        \ Forecast Discussion\"\n        },\n        {\n            \"@id\": \"https://api.weather.gov/products/7f7169b4-0e5f-4dae-ac63-af30e60bc798\"\
+        ,\n            \"id\": \"7f7169b4-0e5f-4dae-ac63-af30e60bc798\",\n       \
+        \     \"wmoCollectiveId\": \"FXUS65\",\n            \"issuingOffice\": \"\
+        KBOU\",\n            \"issuanceTime\": \"2017-11-28T17:50:00+00:00\",\n  \
+        \          \"productCode\": \"AFD\",\n            \"productName\": \"Area\
+        \ Forecast Discussion\"\n        },\n        {\n            \"@id\": \"https://api.weather.gov/products/69659181-96fd-4e83-8f6d-b4c4e1d80d62\"\
+        ,\n            \"id\": \"69659181-96fd-4e83-8f6d-b4c4e1d80d62\",\n       \
+        \     \"wmoCollectiveId\": \"FXUS65\",\n            \"issuingOffice\": \"\
+        KBOU\",\n            \"issuanceTime\": \"2017-11-28T11:25:00+00:00\",\n  \
+        \          \"productCode\": \"AFD\",\n            \"productName\": \"Area\
+        \ Forecast Discussion\"\n        },\n        {\n            \"@id\": \"https://api.weather.gov/products/9dc60d7e-2006-4c77-be89-03ecbde54795\"\
+        ,\n            \"id\": \"9dc60d7e-2006-4c77-be89-03ecbde54795\",\n       \
+        \     \"wmoCollectiveId\": \"FXUS65\",\n            \"issuingOffice\": \"\
+        KBOU\",\n            \"issuanceTime\": \"2017-11-28T04:24:00+00:00\",\n  \
+        \          \"productCode\": \"AFD\",\n            \"productName\": \"Area\
+        \ Forecast Discussion\"\n        },\n        {\n            \"@id\": \"https://api.weather.gov/products/bbd1b441-ecb9-499e-be95-f211e5d1abad\"\
+        ,\n            \"id\": \"bbd1b441-ecb9-499e-be95-f211e5d1abad\",\n       \
+        \     \"wmoCollectiveId\": \"FXUS65\",\n            \"issuingOffice\": \"\
+        KBOU\",\n            \"issuanceTime\": \"2017-11-28T03:17:00+00:00\",\n  \
+        \          \"productCode\": \"AFD\",\n            \"productName\": \"Area\
+        \ Forecast Discussion\"\n        }\n    ]\n}"}
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      Cache-Control: ['public, max-age=900, s-maxage=120']
+      Connection: [keep-alive]
+      Content-Length: ['8142']
+      Content-Type: [application/geo+json]
+      Date: ['Fri, 01 Dec 2017 02:11:00 GMT']
+      Expires: ['Fri, 01 Dec 2017 02:26:00 GMT']
+      Server: [nginx]
+      Strict-Transport-Security: [max-age=31536000; includeSubDomains; preload]
+      Vary: [Accept]
+      X-Correlation-ID: [236874e8-3226-4428-abcb-d9c4b250f426]
+      X-Request-ID: [236874e8-3226-4428-abcb-d9c4b250f426]
+      X-Server-ID: [vm-bldr-nids-apiapp150.ncep.noaa.gov]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: ['wxcast app. https://github.com/smarlowucf/wxcast']
+    method: GET
+    uri: https://api.weather.gov/products/3bc5d044-3325-40e2-8bbd-3c32471473c0
+  response:
+    body: {string: "{\n    \"@context\": {\n        \"@vocab\": \"https://api.weather.gov/ontology#\"\
+        \n    },\n    \"@id\": \"https://api.weather.gov/products/3bc5d044-3325-40e2-8bbd-3c32471473c0\"\
+        ,\n    \"id\": \"3bc5d044-3325-40e2-8bbd-3c32471473c0\",\n    \"wmoCollectiveId\"\
+        : \"FXUS65\",\n    \"issuingOffice\": \"KBOU\",\n    \"issuanceTime\": \"\
+        2017-11-30T22:32:00+00:00\",\n    \"productCode\": \"AFD\",\n    \"productName\"\
+        : \"Area Forecast Discussion\",\n    \"productText\": \"\\n192 \\nFXUS65 KBOU\
+        \ 302232\\nAFDBOU\\n\\nArea Forecast Discussion\\nNational Weather Service\
+        \ Denver/Boulder CO\\n332 PM MST Thu Nov 30 2017\\n\\n.SHORT TERM...(This\
+        \ evening through Friday)\\nIssued at 331 PM MST Thu Nov 30 2017\\n\\nQuasi-zonal\
+        \ flow aloft and a dry airmass will pretty much \\nremain place overnight.\
+        \ Mtn top westerly winds are to begin\\nincreasing in speed this evening with\
+        \ an upstream jet maxima\\nnearing the state. A batch of mid/upper-level moisture\
+        \ accompanies\\nthis maxima. Both are timed to pass over northern Colorado\
+        \ late \\ntonight/early Tomorrow morning. Could see mtn top winds speeds of\
+        \ \\n35-45kts during this period, as well as mostly cloudy to overcast\\nskies.\
+        \ Can't rule out a few light snow showers obscuring the \\nhigher peaks for\
+        \ a few hours, but the chance for snow accumulation\\nappears quite low. \\\
+        n\\nOn the plains, gusty south-southwest winds roughly east of a \\nSterling-to-Elbert\
+        \ line have already begin to weaken, and the \\ntrend will continue into the\
+        \ early evening hours under clear to \\nmostly clear sky. After midnight,\
+        \ however, mid-level moisture \\nquickly moves in from the west which will\
+        \ fuel some mtn wave \\ncloud development over and east of the nrn Front Range.\
+        \ South of \\nthere, do not expect to see all that much cloud cover. Overnight\
+        \ \\ntemperatures should be slightly warmer than last night, esply \\nunder\
+        \ the mtn wave clouds in the breezy areas of the Front Range \\nfoothills.\
+        \ \\n\\nOn Friday, the above mentioned wave of strong upper-level winds \\\
+        nand moisture move east of the forecast area, and in its wake \\nlook for\
+        \ slightly drier air to filters in over the area on a \\nnorth-northwesterly\
+        \ low-level flow. By afternoon, winds on the \\nplains should turn northeasterly,\
+        \ but the lack of moisture should\\nonly result in some mid-level upslope\
+        \ cloudiness over and along \\nthe foothills and Palmer Divide, but no precip.\
+        \ Highs tomorrow, \\neven with the northerly breezes are progged to be a few\
+        \ degs \\nwarmer than those today. For Denver, that means a high temp 13-16\\\
+        ndegrees above the average for the 1st of December. FYI, the normal\\nhigh\
+        \ for Denver tomorrow is 45. \\n\\n\\n.LONG TERM...(Friday night through Thursday)\\\
+        nIssued at 331 PM MST Thu Nov 30 2017\\n\\nModel solutions continue to differ\
+        \ significantly with this system, \\nbut none have this storm producing large\
+        \ amounts of snow. Pops have \\nbeen added for Sunday through Tuesday morning\
+        \ over the mountains and \\nrain will change to snow Monday near the northern\
+        \ border and move \\nsouth. The ECMWF and GFS show the a front moving in on\
+        \ Monday.\\n\\nThe QG Omega fields have weak downward vertical velocity for\
+        \ the CWA \\nthrough Saturday, then increasing upward energy is progged Saturday\
+        \ \\nnight into the extended periods. There is nothing significant to the\
+        \ \\nlow level winds, mainly just normal diurnal patterns. The normal \\ndrainage\
+        \ winds Saturday night look to be enhanced a bit concerning \\nspeeds, more\
+        \ so over the eastern plains. Moisture is pretty sparse \\nFriday through\
+        \ Saturday, with some increasing in the upper level \\nSaturday night. There\
+        \ is no measurable precipitation on the QPF \\nfields through Saturday night.\\\
+        n\\nHigh temperatures will be near 60 degrees F on the plains and \\n40-50\
+        \ degrees F through the weekend. Temperatures will drop about\\n20 degrees\
+        \ Monday and remain low through Wednesday.\\n\\n&&\\n\\n.AVIATION...(For the\
+        \ 18Z TAFS through 18Z Friday afternoon)\\nIssued at 331 PM MST Thu Nov 30\
+        \ 2017\\n\\nVFR conditions for the next 24 hours. Light east-northeast winds\\\
+        nwill gradually transition to a light southerly drainage wind \\nafter dark.\
+        \ On Friday, light drainage flow is expected to become\\nlight and variable\
+        \ by mid to late morning, only to become light\\nnortheasterly by the afternoon.\
+        \ \\n\\n&&\\n\\n.BOU WATCHES/WARNINGS/ADVISORIES...\\nNone.\\n&&\\n\\n$$\\\
+        n\\nSHORT TERM...Baker\\nLONG TERM...Sullivan\\nAVIATION...Baker\\n\\n\"\n\
+        }"}
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      Cache-Control: ['max-age=120, public, s-maxage=120']
+      Connection: [keep-alive]
+      Content-Length: ['4270']
+      Content-Type: [application/ld+json]
+      Date: ['Fri, 01 Dec 2017 02:11:00 GMT']
+      Server: [nginx]
+      Strict-Transport-Security: [max-age=31536000; includeSubDomains; preload]
+      Vary: [Accept]
+      X-Correlation-ID: [73aaccd3-550c-49fa-a39b-363f4bff6793]
+      X-Request-ID: [73aaccd3-550c-49fa-a39b-363f4bff6793]
+      X-Server-ID: [vm-bldr-nids-apiapp6.ncep.noaa.gov]
+    status: {code: 200, message: OK}
+version: 1

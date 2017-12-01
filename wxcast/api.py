@@ -36,13 +36,12 @@ def get_metar(icao, decoded=False):
     try:
         site = f'http://avwx.rest/api/metar/{icao}?options=info,translate'
         data = requests.get(site).json()
-
     except requests.exceptions.ConnectionError:
         raise WxcastException(
             'Connection could not be established with the avwx rest api.'
         )
-    except Exception as e:
-        raise WxcastException(f'An error has occurred: {str(e)}')
+    except Exception:
+        raise WxcastException(f'Invalid ICAO: {icao}, metar not found.')
 
     if 'Error' in data:
         raise WxcastException(data['Error'])
@@ -96,7 +95,6 @@ def get_nws_product(wfo, product):
             response['features'][0]['@id'],
             headers=HEADERS
         ).json()
-
     except requests.exceptions.ConnectionError as e:
         raise WxcastException(
             f'Connection could not be established with the NWS website: '
@@ -117,6 +115,12 @@ def get_seven_day_forecast(location):
     """
     geolocator = Nominatim()
     geolocation = geolocator.geocode(location)
+
+    if not geolocation:
+        raise WxcastException(
+            f'Location not found: {location}.'
+        )
+
     latlong = f'{geolocation.latitude},{geolocation.longitude}'
 
     try:
@@ -129,7 +133,7 @@ def get_seven_day_forecast(location):
             'Connection could not be established with the nws rest api.'
         )
     except Exception as e:
-        raise WxcastException(f'An error has occurred: {str(e)}')
+        raise WxcastException(f'Could not retrieve forecast for {location}')
 
     if 'properties' not in data:
         raise WxcastException(
@@ -150,14 +154,15 @@ def get_wfo_products(wfo):
     try:
         site = f'{NWS_API}/products/locations/{wfo.upper()}/types'
         data = requests.get(site, headers=HEADERS).json()
-
     except requests.exceptions.ConnectionError as e:
         raise WxcastException(
             f'Connection could not be established with the avwx rest api: '
             f'{str(e)}'
         )
-    except Exception as e:
-        raise WxcastException(f'An error has occurred: {str(e)}')
+    except Exception:
+        raise WxcastException(f'Could not retrieve products for WFO: {wfo}.')
 
-    response = {d['productCode']: d['productName'] for d in data['features']}
-    return response
+    if 'features' not in data:
+        raise WxcastException(f'Could not retrieve products for WFO: {wfo}.')
+
+    return {d['productCode']: d['productName'] for d in data['features']}

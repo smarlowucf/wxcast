@@ -8,7 +8,7 @@ install:
   - pip install flake8
 
 script:
-  - pytest
+  - pytest --cov=wxcast
   - flake8 tests/
   - flake8 wxcast/
 

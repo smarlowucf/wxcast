@@ -35,6 +35,8 @@ requirements = [
 
 test_requirements = [
     'pytest',
+    'pytest-cov',
+    'vcrpy'
 ]
 
 setup(
