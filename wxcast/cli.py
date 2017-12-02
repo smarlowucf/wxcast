@@ -51,7 +51,7 @@ def print_license(ctx, param, value):
 )
 def main():
     """
-    Retrieve the latest weather information right in your terminal.
+    Retrieve the latest weather information in your terminal.
 
     Data provided by NWS and AVWX.
 
@@ -74,7 +74,9 @@ def forecast(no_color, location):
 
     Location can be a city, address or zip/postal code.
 
-    Example: wxcast forecast -L denver
+    Examples:
+        wxcast forecast denver
+        wxcast forecast "denver, co"
 
     :param location: Location string to get forecast for.
     :param no_color: If True do not style string output.
