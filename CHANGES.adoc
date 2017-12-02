@@ -1,5 +1,13 @@
 # Changes
 
+== v1.1.0 (2017-12-01)
+
+* Update readme.
+* Cleanup exception handling.
+* Add unit and integration tests with vcrpy.
+* Cleanup flake8 warnings.
+* Add config for travis integration testing.
+
 == v1.0.6 (2017-09-24)
 
 * Remove docs directory.
