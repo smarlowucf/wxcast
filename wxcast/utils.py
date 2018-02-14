@@ -30,12 +30,15 @@ def echo_dict(data,
             subsequent_indent=' ' * (spaces + 3)
         )
 
-        click.echo(
-            ''.join([
-                style_string(title, no_color, fg=key_color),
-                wrapper.fill(style_string(value, no_color, fg=value_color))
-            ])
-        )
+        if isinstance(value, dict):
+            echo_dict(value, no_color, key_color, spaces, value_color)
+        else:
+            click.echo(
+                ''.join([
+                    style_string(title, no_color, fg=key_color),
+                    wrapper.fill(style_string(value, no_color, fg=value_color))
+                ])
+            )
 
 
 def echo_style(message, no_color, fg='yellow'):

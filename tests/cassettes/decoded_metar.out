@@ -1,12 +1,17 @@
-At 010153Z the conditions for KDEN are VFR
+At 140253Z the conditions for KDEN are VFR
 
-  Altimeter:  30.06inHg (1018hPa)
-     Clouds:  Few clouds at 22000ft - Reported AGL
-   Dewpoint:  -07C (19F)
+  Altimeter:  30.09inHg (1019hPa)
+     Clouds:  Few clouds at 10000ft - Reported AGL
+   Dewpoint:  -04C (25F)
       Other:  
-Temperature:  04C (39F)
+      51009:  3-hour pressure difference: +/- 0.9 mb - Increasing, then
+              steady
+        AO2:  Automated with precipitation sensor
+     SLP191:  Sea level pressure: 1019.1 hPa
+  T00281044:  Temperature 2.8°C and dewpoint -4.4°C
+Temperature:  03C (37F)
  Visibility:  10sm (16.1km)
-       Wind:  N-360 at 03kt
+       Wind:  S-170 at 13kt
 
        City:  Denver
     Country:  USA
