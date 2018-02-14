@@ -36,7 +36,9 @@ def get_metar(icao, decoded=False):
     try:
         site = f'http://avwx.rest/api/metar/{icao}?options=info,translate'
         data = requests.get(site).json()
-        assert 'Error' not in data
+
+        if 'Error' in data:
+            raise Exception()
     except requests.exceptions.ConnectionError:
         raise WxcastException(
             'Connection could not be established with the avwx rest api.'
@@ -75,10 +77,12 @@ def get_nws_product(wfo, product):
 
     try:
         response = requests.get(site, headers=HEADERS)
-        assert response.status_code != 404
+        if response.status_code == 404:
+            raise Exception()
 
         response = response.json()
-        assert response.get('features', None)
+        if not response.get('features', None):
+            raise Exception()
 
         response = requests.get(
             response['features'][0]['@id'],
@@ -120,7 +124,8 @@ def get_seven_day_forecast(location):
             f'{NWS_API}/points/{latlong}/forecast',
             headers=HEADERS
         ).json()
-        assert 'properties' in data
+        if 'properties' not in data:
+            raise Exception()
     except requests.exceptions.ConnectionError:
         raise WxcastException(
             'Connection could not be established with the nws rest api.'
@@ -144,7 +149,9 @@ def get_wfo_products(wfo):
     try:
         site = f'{NWS_API}/products/locations/{wfo.upper()}/types'
         data = requests.get(site, headers=HEADERS).json()
-        assert 'features' in data
+
+        if 'features' not in data:
+            raise Exception()
     except requests.exceptions.ConnectionError as e:
         raise WxcastException(
             f'Connection could not be established with the avwx rest api: '
