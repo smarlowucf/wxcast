@@ -1,7 +1,7 @@
-include CHANGES.adoc
-include CONTRIBUTING.adoc
+include CHANGES.md
+include CONTRIBUTING.md
 include LICENSE
-include README.adoc
+include README.md
 
 recursive-include tests *
 recursive-exclude * __pycache__
