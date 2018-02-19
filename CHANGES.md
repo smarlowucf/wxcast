@@ -1,3 +1,7 @@
+# v1.2.1 (2018-02-19)
+
+- Convert docs to md for PyPI compatibility.
+
 # v1.2.0 (2018-02-18)
 
 -   Remove asserts.
