@@ -6,7 +6,7 @@ interactions:
       Host: [nominatim.openstreetmap.org]
       User-Agent: [Python-urllib/3.6]
     method: GET
-    uri: https://nominatim.openstreetmap.org/search?q=denver%2C+co&format=json
+    uri: https://nominatim.openstreetmap.org/search?q=denver%2C+co&format=json&limit=1
   response:
     body: {string: "[{\"place_id\":\"179488660\",\"licence\":\"Data \xA9 OpenStreetMap\
         \ contributors, ODbL 1.0. http:\\/\\/www.openstreetmap.org\\/copyright\",\"\

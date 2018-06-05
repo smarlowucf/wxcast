@@ -6,7 +6,7 @@ interactions:
       Host: [nominatim.openstreetmap.org]
       User-Agent: [Python-urllib/3.6]
     method: GET
-    uri: https://nominatim.openstreetmap.org/search?q=Fake%2C+FK&format=json
+    uri: https://nominatim.openstreetmap.org/search?q=Fake%2C+FK&format=json&limit=1
   response:
     body: {string: '[]'}
     headers:

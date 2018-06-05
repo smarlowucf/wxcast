@@ -4,7 +4,7 @@ A CLI utility for retrieving weather information.
 
 [![Build Status](https://travis-ci.org/smarlowucf/wxcast.svg?branch=master)](https://travis-ci.org/smarlowucf/wxcast)
 
-![wxcast metar](images/metar.gif)
+![wxcast metar](https://raw.githubusercontent.com/smarlowucf/wxcast/master/images/metar.gif)
 
 ## Overview
 
