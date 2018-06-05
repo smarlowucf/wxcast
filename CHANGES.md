@@ -1,3 +1,12 @@
+# v1.2.3 (2018-06-04)
+
+- Fix tests for geopy changes.
+- Make readme gif url absolute for use in pypi.
+
+# v1.2.2 (2018-06-04)
+
+- Add long description content type to setup.
+
 # v1.2.1 (2018-02-19)
 
 - Convert docs to md for PyPI compatibility.
@@ -64,4 +73,3 @@
 # v0.1.0 (2017-01-14)
 
 -   First release on PyPI.
-
