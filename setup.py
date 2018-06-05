@@ -45,6 +45,7 @@ setup(
     version='1.2.1',
     description='A CLI utility for retrieving weather information.',
     long_description=readme + '\n\n' + changes,
+    long_description_content_type="text/markdown",
     author="Sean Marlow",
     url='https://github.com/smarlowucf/wxcast',
     packages=[
