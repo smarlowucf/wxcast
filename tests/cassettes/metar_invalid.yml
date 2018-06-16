@@ -5,25 +5,19 @@ interactions:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      User-Agent: [python-requests/2.13.0]
+      User-Agent: [python-requests/2.18.4]
     method: GET
     uri: http://avwx.rest/api/metar/KFAKE?options=info,translate
   response:
-    body: {string: '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
-
-        <title>500 Internal Server Error</title>
-
-        <h1>Internal Server Error</h1>
-
-        <p>The server encountered an internal error and was unable to complete your
-        request.  Either the server is overloaded or there is an error in the application.</p>
-
-        '}
+    body: {string: "{\n  \"Error\": \"KFAKE is not a valid ICAO station ident\", \n\
+        \  \"Help\": \"ICAO station ID or coord pair. Ex: KJFK or \\\"12.34,-12.34\\\
+        \"\", \n  \"Param\": \"station\"\n}\n"}
     headers:
       Access-Control-Allow-Origin: ['*']
-      Content-Length: ['291']
-      Content-Type: [text/html]
-      Date: ['Fri, 01 Dec 2017 02:25:41 GMT']
-      Server: [Werkzeug/0.12.2 Python/3.6.2]
-    status: {code: 500, message: INTERNAL SERVER ERROR}
+      Content-Length: ['154']
+      Content-Type: [application/json]
+      Date: ['Sat, 16 Jun 2018 03:04:11 GMT']
+      Server: [gunicorn/19.8.1]
+      X-Robots-Tag: [noindex]
+    status: {code: 400, message: BAD REQUEST}
 version: 1

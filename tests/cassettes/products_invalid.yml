@@ -9,22 +9,25 @@ interactions:
     method: GET
     uri: https://api.weather.gov/products/locations/FAKE/types
   response:
-    body: {string: "{\n    \"correlationId\": \"5bcd1762-c588-46ce-a4aa-41a2f67c00ff\"\
+    body: {string: "{\n    \"correlationId\": \"5df2f8df-5664-447d-8749-3ca9c52fa1a9\"\
         ,\n    \"title\": \"Unexpected Problem\",\n    \"type\": \"https://api.weather.gov/problems/UnexpectedProblem\"\
         ,\n    \"status\": 500,\n    \"detail\": \"An unexpected problem has occurred.\"\
-        ,\n    \"instance\": \"https://api.weather.gov/requests/5bcd1762-c588-46ce-a4aa-41a2f67c00ff\"\
+        ,\n    \"instance\": \"https://api.weather.gov/requests/5df2f8df-5664-447d-8749-3ca9c52fa1a9\"\
         \n}"}
     headers:
       Access-Control-Allow-Origin: ['*']
-      Cache-Control: [no-cache]
-      Connection: [close]
+      Cache-Control: ['private, must-revalidate']
+      Connection: [keep-alive]
+      Content-Length: ['325']
       Content-Type: [application/problem+json]
-      Date: ['Fri, 01 Dec 2017 02:37:51 GMT']
-      Server: [nginx]
-      Strict-Transport-Security: [max-age=31536000; includeSubDomains; preload]
+      Date: ['Sat, 16 Jun 2018 03:09:21 GMT']
+      Expires: ['-1']
+      Pragma: [no-cache]
+      Server: [nginx/1.12.2]
+      Strict-Transport-Security: [max-age=31536000 ; includeSubDomains ; preload]
       Vary: [Accept]
-      X-Correlation-ID: [5bcd1762-c588-46ce-a4aa-41a2f67c00ff]
-      X-Request-ID: [5bcd1762-c588-46ce-a4aa-41a2f67c00ff]
-      X-Server-ID: [vm-bldr-nids-apiapp29.ncep.noaa.gov]
+      X-Correlation-ID: [5df2f8df-5664-447d-8749-3ca9c52fa1a9]
+      X-Request-ID: [5df2f8df-5664-447d-8749-3ca9c52fa1a9]
+      X-Server-ID: [vm-lnx-nids-apiapp7.ncep.noaa.gov]
     status: {code: 500, message: Internal Server Error}
 version: 1

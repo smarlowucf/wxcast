@@ -3,18 +3,89 @@ interactions:
     body: null
     headers:
       Connection: [close]
-      Host: [nominatim.openstreetmap.org]
-      User-Agent: [Python-urllib/3.6]
+      Host: [geocode.arcgis.com]
+      User-Agent: ['wxcast app. https://github.com/smarlowucf/wxcast']
     method: GET
-    uri: https://nominatim.openstreetmap.org/search?q=Fake%2C+FK&format=json&limit=1
+    uri: https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?singleLine=Fake%2C+FK&f=json&maxLocations=1
   response:
-    body: {string: '[]'}
+    body: {string: '{"spatialReference":{"wkid":4326,"latestWkid":4326},"candidates":[{"address":"Fake,
+        Yunnan","location":{"x":103.31328000000008,"y":24.309450000000027},"score":86.670000000000002,"attributes":{},"extent":{"xmin":103.30328000000007,"ymin":24.299450000000025,"xmax":103.32328000000008,"ymax":24.319450000000028}}]}'}
     headers:
-      Access-Control-Allow-Methods: ['OPTIONS,GET']
-      Access-Control-Allow-Origin: ['*']
+      Cache-Control: [max-age=300]
       Connection: [close]
-      Content-Type: [application/json; charset=UTF-8]
-      Date: ['Fri, 01 Dec 2017 02:35:33 GMT']
-      Server: [Apache/2.4.18 (Ubuntu)]
-    status: {code: 200, message: OK}
+      Content-Length: ['311']
+      Content-Type: [text/plain;charset=UTF-8]
+      Date: ['Sat, 16 Jun 2018 03:06:52 GMT']
+      ETag: [e506c91f]
+      Server: ['']
+      Vary: ['Origin,Accept-Encoding']
+      X-Cached: [MISS]
+    status: {code: 200, message: ''}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: ['wxcast app. https://github.com/smarlowucf/wxcast']
+    method: GET
+    uri: https://api.weather.gov/points/24.309450000000027,103.31328000000008/forecast
+  response:
+    body: {string: "{\n    \"correlationId\": \"c7cf4a4e-acfd-4405-bbab-d6d51b5e2713\"\
+        ,\n    \"title\": \"Adjusting Precision Of Point Coordinate\",\n    \"type\"\
+        : \"https://api.weather.gov/problems/AdjustPointPrecision\",\n    \"status\"\
+        : 301,\n    \"detail\": \"The precision of latitude/longitude points is limited\
+        \ to 4 decimal digits for efficiency. The location attribute contains your\
+        \ request mapped to the nearest supported point. If your client supports it,\
+        \ you will be redirected.\",\n    \"instance\": \"https://api.weather.gov/requests/c7cf4a4e-acfd-4405-bbab-d6d51b5e2713\"\
+        \n}"}
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      Cache-Control: ['private, must-revalidate, max-age=600']
+      Connection: [keep-alive]
+      Content-Length: ['539']
+      Content-Type: [application/problem+json]
+      Date: ['Sat, 16 Jun 2018 03:06:53 GMT']
+      Expires: ['Sat, 16 Jun 2018 03:16:53 GMT']
+      Location: ['/points/24.3095,103.3133/forecast']
+      Pragma: [no-cache]
+      Server: [nginx/1.10.2]
+      Strict-Transport-Security: [max-age=31536000 ; includeSubDomains ; preload]
+      Vary: [Accept]
+      X-Correlation-ID: [c7cf4a4e-acfd-4405-bbab-d6d51b5e2713]
+      X-Request-ID: [c7cf4a4e-acfd-4405-bbab-d6d51b5e2713]
+      X-Server-ID: [vm-lnx-nids-apiapp19.ncep.noaa.gov]
+    status: {code: 301, message: Moved Permanently}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: ['wxcast app. https://github.com/smarlowucf/wxcast']
+    method: GET
+    uri: https://api.weather.gov/points/24.3095,103.3133/forecast
+  response:
+    body: {string: "{\n    \"correlationId\": \"296c2a6c-c876-4cef-b52d-776085339d18\"\
+        ,\n    \"title\": \"Data Unavailable For Requested Point\",\n    \"type\"\
+        : \"https://api.weather.gov/problems/InvalidPoint\",\n    \"status\": 404,\n\
+        \    \"detail\": \"Unable to provide data for requested point 24.3095,103.3133\"\
+        ,\n    \"instance\": \"https://api.weather.gov/requests/296c2a6c-c876-4cef-b52d-776085339d18\"\
+        \n}"}
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      Cache-Control: ['private, must-revalidate, max-age=600']
+      Connection: [keep-alive]
+      Content-Length: ['362']
+      Content-Type: [application/problem+json]
+      Date: ['Sat, 16 Jun 2018 03:06:53 GMT']
+      Expires: ['Sat, 16 Jun 2018 03:16:53 GMT']
+      Pragma: [no-cache]
+      Server: [nginx/1.12.2]
+      Strict-Transport-Security: [max-age=31536000 ; includeSubDomains ; preload]
+      Vary: [Accept]
+      X-Correlation-ID: [296c2a6c-c876-4cef-b52d-776085339d18]
+      X-Request-ID: [296c2a6c-c876-4cef-b52d-776085339d18]
+      X-Server-ID: [vm-lnx-nids-apiapp8.ncep.noaa.gov]
+    status: {code: 404, message: Not Found}
 version: 1

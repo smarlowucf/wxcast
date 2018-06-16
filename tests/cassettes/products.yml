@@ -9,62 +9,34 @@ interactions:
     method: GET
     uri: https://api.weather.gov/products/locations/BOU/types
   response:
-    body: {string: "{\n    \"@context\": [\n        \"https://raw.githubusercontent.com/geojson/geojson-ld/master/contexts/geojson-base.jsonld\"\
-        ,\n        {\n            \"@vocab\": \"https://api.weather.gov/ontology#\"\
-        \n        }\n    ],\n    \"type\": \"FeatureCollection\",\n    \"features\"\
-        : [\n        {\n            \"productCode\": \"AFD\",\n            \"productName\"\
-        : \"Area Forecast Discussion\"\n        },\n        {\n            \"productCode\"\
-        : \"FDI\",\n            \"productName\": \"Fire Danger Indices\"\n       \
-        \ },\n        {\n            \"productCode\": \"FWF\",\n            \"productName\"\
-        : \"Routine Fire Wx Fcst (With/Without 6-10 Day Outlook)\"\n        },\n \
-        \       {\n            \"productCode\": \"FWL\",\n            \"productName\"\
-        : \"Land Management Forecasts\"\n        },\n        {\n            \"productCode\"\
-        : \"FWM\",\n            \"productName\": \"Miscellaneous Fire Weather Product\"\
-        \n        },\n        {\n            \"productCode\": \"FWN\",\n         \
-        \   \"productName\": \"Fire Weather Notification\"\n        },\n        {\n\
-        \            \"productCode\": \"FWO\",\n            \"productName\": \"Fire\
-        \ Weather Observation\"\n        },\n        {\n            \"productCode\"\
-        : \"FWS\",\n            \"productName\": \"Suppression Forecast\"\n      \
-        \  },\n        {\n            \"productCode\": \"HML\",\n            \"productName\"\
-        : \"AHPS XML\"\n        },\n        {\n            \"productCode\": \"HRR\"\
-        ,\n            \"productName\": \"Weather Roundup\"\n        },\n        {\n\
-        \            \"productCode\": \"HWO\",\n            \"productName\": \"Hazardous\
-        \ Weather Outlook\"\n        },\n        {\n            \"productCode\": \"\
-        OPU\",\n            \"productName\": \"Other Public Products\"\n        },\n\
-        \        {\n            \"productCode\": \"OSO\",\n            \"productName\"\
-        : \"Other Surface Observations\"\n        },\n        {\n            \"productCode\"\
-        : \"PFM\",\n            \"productName\": \"Point Forecast Matrices\"\n   \
-        \     },\n        {\n            \"productCode\": \"PNS\",\n            \"\
-        productName\": \"Public Information Statement\"\n        },\n        {\n \
-        \           \"productCode\": \"RR2\",\n            \"productName\": \"Hydro-Met\
-        \ Data Report Part 2\"\n        },\n        {\n            \"productCode\"\
-        : \"RR3\",\n            \"productName\": \"Hydro-Met Data Report Part 3\"\n\
-        \        },\n        {\n            \"productCode\": \"RRS\",\n          \
-        \  \"productName\": \"HADS Data\"\n        },\n        {\n            \"productCode\"\
-        : \"RTP\",\n            \"productName\": \"Regional Max/Min Temp and Precipitation\
-        \ Table\"\n        },\n        {\n            \"productCode\": \"SRG\",\n\
-        \            \"productName\": \"Soaring Guidance\"\n        },\n        {\n\
-        \            \"productCode\": \"STQ\",\n            \"productName\": \"Spot\
-        \ Forecast Request\"\n        },\n        {\n            \"productCode\":\
-        \ \"SYN\",\n            \"productName\": \"Regional Weather Synopsis\"\n \
-        \       },\n        {\n            \"productCode\": \"TVL\",\n           \
-        \ \"productName\": \"Travelers Forecast\"\n        },\n        {\n       \
-        \     \"productCode\": \"VFT\",\n            \"productName\": \"Terminal Aerodrome\
-        \ Forecast (TAF) Verification\"\n        },\n        {\n            \"productCode\"\
-        : \"ZFP\",\n            \"productName\": \"Zone Forecast Product\"\n     \
-        \   }\n    ]\n}"}
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAK2W30/bMBDH3/dXWN0LSEA3kCbB0yqyUCTSZknUbkx7uCZHai3xZY7T0SH+911S
+        GiptkplLH6LKse/jy33vx8Mbwb/Bx5SUwXszuBAP3cpmdUUpLHhtsDSmqi+GQ6jkyS8Es0R9ktNq
+        yKeooHz9dtCdejx6MpdrqJZ88Ftv7Nlst6PSlDWpuaQMW/sj3xsc/XPHBMrNDo0gfNKYQm2EJ+u0
+        qWtJatCfejx6IexyFFpgl1SWpMSoQG2kykWoyVBKhQPMu0osME9Tky+NuFZ3pEsw7JSIDRgsURkH
+        4qfYtxD9gigTIRkGSCjEtDG88sOB5XvXNpbUKDxQOWr2MJMp1i6cuc2niBoOFYqON78XfsoyOZhL
+        sxy2D34rPhy/f8dXWW/9PXS6yI3lIjegMhGAgrwLYK9ZN7cDCy3gRMCiAIXU1E/Ob/KzFW270wk7
+        eUlUt6AJGXkn0065TrTp/9Cmixr1yh0WW2BxU1Uau9rSx84BNA5sQhmNw1h84W0OxqPIYnz7tTgt
+        VNZULgxrWMbwG3TW6q6PjXMhmcY22rQjxI2+gxR3VeCSWKFvS6yQ5E7yckIb7Vi7wolNcmGzKGT6
+        ag0g8ue2YomZ8AvIxRy04gbnAolObfJYZ5qOA+RuDQZEhBVpI0Lgx6kT8MwdeOYEPHcHnjsBbUIZ
+        j7y4Y7lYT2xTT4Q5S4/ngQDuh4FUIsGyEm07CzkLZCXNRpsJLAp0uEEcWmtvxRy+wLae7JMFcXRl
+        oxHodrq7amQGKnVyKflsdYl2ykiEPxt06ifxzFbyY1wh98lkyRUfdW24luyR3/HMGqwN71Vi9dU2
+        cPTa7HFrRVUtXQpyMrO15kTDCnn4r/eZAGa+bfJPUJeydWqE/EJTic9KOUhG/qGYod5ntLr1bTl/
+        S2oH+vfI2P37/ubxDz6liu8oDgAA
     headers:
       Access-Control-Allow-Origin: ['*']
       Cache-Control: ['max-age=120, public, s-maxage=120']
       Connection: [keep-alive]
-      Content-Length: ['3013']
-      Content-Type: [application/geo+json]
-      Date: ['Fri, 01 Dec 2017 02:08:25 GMT']
-      Server: [nginx]
-      Strict-Transport-Security: [max-age=31536000; includeSubDomains; preload]
-      Vary: [Accept]
-      X-Correlation-ID: [5baa7265-1cd3-4cc9-952f-ecc3b7831f7c]
-      X-Request-ID: [5baa7265-1cd3-4cc9-952f-ecc3b7831f7c]
-      X-Server-ID: [vm-bldr-nids-apiapp236.ncep.noaa.gov]
+      Content-Encoding: [gzip]
+      Content-Length: ['705']
+      Content-Type: [application/ld+json]
+      Date: ['Sat, 16 Jun 2018 03:02:30 GMT']
+      Server: [nginx/1.10.2]
+      Strict-Transport-Security: [max-age=31536000 ; includeSubDomains ; preload]
+      Vary: [Accept-Encoding, Accept]
+      X-Correlation-ID: [3d14886b-eb7d-4469-97c6-9222f2c69edc]
+      X-Request-ID: [3d14886b-eb7d-4469-97c6-9222f2c69edc]
+      X-Server-ID: [vm-lnx-nids-apiapp34.ncep.noaa.gov]
     status: {code: 200, message: OK}
 version: 1

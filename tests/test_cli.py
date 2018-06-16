@@ -26,6 +26,7 @@ def test_forecast():
     with open('tests/cassettes/forecast.out', 'r') as f:
         out = f.read()
 
+    print(result.output)
     assert out == result.output
 
 

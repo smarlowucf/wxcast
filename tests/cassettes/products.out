@@ -1,4 +1,7 @@
 AFD:  Area Forecast Discussion
+CAP:  Common Alerting Protocol
+DGT:  Drought Information Statement
+ESF:  Flood Potential Outlook
 FDI:  Fire Danger Indices
 FWF:  Routine Fire Wx Fcst (With/Without 6-10 Day Outlook)
 FWL:  Land Management Forecasts
@@ -9,16 +12,20 @@ FWS:  Suppression Forecast
 HML:  AHPS XML
 HRR:  Weather Roundup
 HWO:  Hazardous Weather Outlook
-OPU:  Other Public Products
 OSO:  Other Surface Observations
 PFM:  Point Forecast Matrices
 PNS:  Public Information Statement
+RFW:  Red Flag Warning
 RR2:  Hydro-Met Data Report Part 2
 RR3:  Hydro-Met Data Report Part 3
+RR9:  Hydro-Met Data Report Part 9
 RRS:  HADS Data
 RTP:  Regional Max/Min Temp and Precipitation Table
+SPS:  Special Weather Statement
 SRG:  Soaring Guidance
 STQ:  Spot Forecast Request
+SVR:  Severe Thunderstorm Warning
+SVS:  Severe Weather Statement
 SYN:  Regional Weather Synopsis
 TVL:  Travelers Forecast
 VFT:  Terminal Aerodrome Forecast (TAF) Verification

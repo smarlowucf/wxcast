@@ -3,47 +3,24 @@ interactions:
     body: null
     headers:
       Connection: [close]
-      Host: [nominatim.openstreetmap.org]
-      User-Agent: [Python-urllib/3.6]
+      Host: [geocode.arcgis.com]
+      User-Agent: ['wxcast app. https://github.com/smarlowucf/wxcast']
     method: GET
-    uri: https://nominatim.openstreetmap.org/search?q=denver%2C+co&format=json&limit=1
+    uri: https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?singleLine=denver%2C+co&f=json&maxLocations=1
   response:
-    body: {string: "[{\"place_id\":\"179488660\",\"licence\":\"Data \xA9 OpenStreetMap\
-        \ contributors, ODbL 1.0. http:\\/\\/www.openstreetmap.org\\/copyright\",\"\
-        osm_type\":\"relation\",\"osm_id\":\"253750\",\"boundingbox\":[\"39.6143154\"\
-        ,\"39.9142087\",\"-105.1098845\",\"-104.5996889\"],\"lat\":\"39.7391536\"\
-        ,\"lon\":\"-104.9847034\",\"display_name\":\"Denver, Denver County, Colorado,\
-        \ United States of America\",\"class\":\"place\",\"type\":\"city\",\"importance\"\
-        :0.36372865827807,\"icon\":\"https:\\/\\/nominatim.openstreetmap.org\\/images\\\
-        /mapicons\\/poi_place_city.p.20.png\"},{\"place_id\":\"179890478\",\"licence\"\
-        :\"Data \xA9 OpenStreetMap contributors, ODbL 1.0. http:\\/\\/www.openstreetmap.org\\\
-        /copyright\",\"osm_type\":\"relation\",\"osm_id\":\"1411339\",\"boundingbox\"\
-        :[\"39.6143154\",\"39.9142087\",\"-105.1098845\",\"-104.5996889\"],\"lat\"\
-        :\"39.7348381\",\"lon\":\"-104.9653271\",\"display_name\":\"Denver County,\
-        \ Colorado, United States of America\",\"class\":\"boundary\",\"type\":\"\
-        administrative\",\"importance\":0.36372865827807,\"icon\":\"https:\\/\\/nominatim.openstreetmap.org\\\
-        /images\\/mapicons\\/poi_boundary_administrative.p.20.png\"},{\"place_id\"\
-        :\"64055013\",\"licence\":\"Data \xA9 OpenStreetMap contributors, ODbL 1.0.\
-        \ http:\\/\\/www.openstreetmap.org\\/copyright\",\"osm_type\":\"way\",\"osm_id\"\
-        :\"7690716\",\"boundingbox\":[\"38.67294\",\"38.6737758\",\"-104.7033917\"\
-        ,\"-104.702767\"],\"lat\":\"38.67294\",\"lon\":\"-104.702767\",\"display_name\"\
-        :\"Denver, Fountain, El Paso County, Colorado, 8017, United States of America\"\
-        ,\"class\":\"highway\",\"type\":\"service\",\"importance\":0.21875},{\"place_id\"\
-        :\"17917360\",\"licence\":\"Data \xA9 OpenStreetMap contributors, ODbL 1.0.\
-        \ http:\\/\\/www.openstreetmap.org\\/copyright\",\"osm_type\":\"node\",\"\
-        osm_id\":\"1649869372\",\"boundingbox\":[\"5.3427494\",\"5.3428494\",\"-72.3960269\"\
-        ,\"-72.3959269\"],\"lat\":\"5.3427994\",\"lon\":\"-72.3959769\",\"display_name\"\
-        :\"Denver, Calle 16, Yopal, Casanare, 850001, Colombia\",\"class\":\"tourism\"\
-        ,\"type\":\"hotel\",\"importance\":0.201,\"icon\":\"https:\\/\\/nominatim.openstreetmap.org\\\
-        /images\\/mapicons\\/accommodation_hotel2.p.20.png\"}]"}
+    body: {string: '{"spatialReference":{"wkid":4326,"latestWkid":4326},"candidates":[{"address":"Denver,
+        Colorado","location":{"x":-104.99201999999997,"y":39.740010000000041},"score":100,"attributes":{},"extent":{"xmin":-105.19001999999996,"ymin":39.54201000000004,"xmax":-104.79401999999997,"ymax":39.938010000000041}}]}'}
     headers:
-      Access-Control-Allow-Methods: ['OPTIONS,GET']
-      Access-Control-Allow-Origin: ['*']
+      Cache-Control: [max-age=300]
       Connection: [close]
-      Content-Type: [application/json; charset=UTF-8]
-      Date: ['Fri, 01 Dec 2017 01:52:56 GMT']
-      Server: [Apache/2.4.18 (Ubuntu)]
-    status: {code: 200, message: OK}
+      Content-Length: ['302']
+      Content-Type: [text/plain;charset=UTF-8]
+      Date: ['Sat, 16 Jun 2018 03:08:12 GMT']
+      ETag: [a4052209]
+      Server: ['']
+      Vary: ['Origin,Accept-Encoding']
+      X-Cached: [MISS]
+    status: {code: 200, message: ''}
 - request:
     body: null
     headers:
@@ -52,30 +29,32 @@ interactions:
       Connection: [keep-alive]
       User-Agent: ['wxcast app. https://github.com/smarlowucf/wxcast']
     method: GET
-    uri: https://api.weather.gov/points/39.7391536,-104.9847034/forecast
+    uri: https://api.weather.gov/points/39.74001000000004,-104.99201999999997/forecast
   response:
-    body: {string: "{\n    \"location\": \"/points/39.7392,-104.9847/forecast\",\n\
-        \    \"correlationId\": \"3512e6a5-7345-406b-b0e7-823fbcc4e370\",\n    \"\
-        title\": \"Adjusting Precision Of Point Coordinate\",\n    \"type\": \"https://api.weather.gov/problems/AdjustPointPrecision\"\
-        ,\n    \"status\": 301,\n    \"detail\": \"The precision of latitude/longitude\
-        \ points is limited to 4 decimal digits for efficiency. The location attribute\
-        \ contains your request mapped to the nearest supported point. If your client\
-        \ supports it, you will be redirected.\",\n    \"instance\": \"https://api.weather.gov/requests/3512e6a5-7345-406b-b0e7-823fbcc4e370\"\
+    body: {string: "{\n    \"correlationId\": \"c77132c7-ea2d-4461-9bbf-5c0c39635314\"\
+        ,\n    \"title\": \"Adjusting Precision Of Point Coordinate\",\n    \"type\"\
+        : \"https://api.weather.gov/problems/AdjustPointPrecision\",\n    \"status\"\
+        : 301,\n    \"detail\": \"The precision of latitude/longitude points is limited\
+        \ to 4 decimal digits for efficiency. The location attribute contains your\
+        \ request mapped to the nearest supported point. If your client supports it,\
+        \ you will be redirected.\",\n    \"instance\": \"https://api.weather.gov/requests/c77132c7-ea2d-4461-9bbf-5c0c39635314\"\
         \n}"}
     headers:
       Access-Control-Allow-Origin: ['*']
-      Cache-Control: [max-age=600]
-      Connection: [close]
+      Cache-Control: ['private, must-revalidate, max-age=600']
+      Connection: [keep-alive]
+      Content-Length: ['539']
       Content-Type: [application/problem+json]
-      Date: ['Fri, 01 Dec 2017 01:52:56 GMT']
-      Expires: ['Fri, 01 Dec 2017 02:02:56 GMT']
-      Location: ['/points/39.7392,-104.9847/forecast']
-      Server: [nginx]
-      Strict-Transport-Security: [max-age=31536000; includeSubDomains; preload]
+      Date: ['Sat, 16 Jun 2018 03:08:13 GMT']
+      Expires: ['Sat, 16 Jun 2018 03:18:13 GMT']
+      Location: ['/points/39.74,-104.992/forecast']
+      Pragma: [no-cache]
+      Server: [nginx/1.12.2]
+      Strict-Transport-Security: [max-age=31536000 ; includeSubDomains ; preload]
       Vary: [Accept]
-      X-Correlation-ID: [3512e6a5-7345-406b-b0e7-823fbcc4e370]
-      X-Request-ID: [3512e6a5-7345-406b-b0e7-823fbcc4e370]
-      X-Server-ID: [vm-bldr-nids-apiapp31.ncep.noaa.gov]
+      X-Correlation-ID: [c77132c7-ea2d-4461-9bbf-5c0c39635314]
+      X-Request-ID: [c77132c7-ea2d-4461-9bbf-5c0c39635314]
+      X-Server-ID: [vm-lnx-nids-apiapp25.ncep.noaa.gov]
     status: {code: 301, message: Moved Permanently}
 - request:
     body: null
@@ -85,161 +64,85 @@ interactions:
       Connection: [keep-alive]
       User-Agent: ['wxcast app. https://github.com/smarlowucf/wxcast']
     method: GET
-    uri: https://api.weather.gov/points/39.7392,-104.9847/forecast
+    uri: https://api.weather.gov/points/39.74,-104.992/forecast
   response:
-    body: {string: "{\n    \"@context\": [\n        \"https://raw.githubusercontent.com/geojson/geojson-ld/master/contexts/geojson-base.jsonld\"\
-        ,\n        {\n            \"wx\": \"https://api.weather.gov/ontology#\",\n\
-        \            \"geo\": \"http://www.opengis.net/ont/geosparql#\",\n       \
-        \     \"unit\": \"http://codes.wmo.int/common/unit/\",\n            \"@vocab\"\
-        : \"https://api.weather.gov/ontology#\"\n        }\n    ],\n    \"type\":\
-        \ \"Feature\",\n    \"geometry\": {\n        \"type\": \"Point\",\n      \
-        \  \"coordinates\": [\n            -104.9847,\n            39.7392\n     \
-        \   ]\n    },\n    \"properties\": {\n        \"updated\": \"2017-11-30T23:09:54+00:00\"\
-        ,\n        \"units\": \"us\",\n        \"forecastGenerator\": \"BaselineForecastGenerator\"\
-        ,\n        \"generatedAt\": \"2017-12-01T01:53:03+00:00\",\n        \"periods\"\
-        : [\n            {\n                \"number\": 1,\n                \"name\"\
-        : \"Tonight\",\n                \"startTime\": \"2017-11-30T18:00:00-07:00\"\
-        ,\n                \"endTime\": \"2017-12-01T06:00:00-07:00\",\n         \
-        \       \"isDaytime\": false,\n                \"temperature\": 34,\n    \
-        \            \"temperatureUnit\": \"F\",\n                \"temperatureTrend\"\
-        : null,\n                \"windSpeed\": \"6 mph\",\n                \"windDirection\"\
-        : \"WSW\",\n                \"icon\": \"https://api.weather.gov/icons/land/night/few?size=medium\"\
-        ,\n                \"shortForecast\": \"Mostly Clear\",\n                \"\
-        detailedForecast\": \"Mostly clear, with a low around 34. West southwest wind\
-        \ around 6 mph.\"\n            },\n            {\n                \"number\"\
-        : 2,\n                \"name\": \"Friday\",\n                \"startTime\"\
-        : \"2017-12-01T06:00:00-07:00\",\n                \"endTime\": \"2017-12-01T18:00:00-07:00\"\
-        ,\n                \"isDaytime\": true,\n                \"temperature\":\
-        \ 62,\n                \"temperatureUnit\": \"F\",\n                \"temperatureTrend\"\
-        : \"falling\",\n                \"windSpeed\": \"6 mph\",\n              \
-        \  \"windDirection\": \"NNW\",\n                \"icon\": \"https://api.weather.gov/icons/land/day/sct?size=medium\"\
-        ,\n                \"shortForecast\": \"Mostly Sunny\",\n                \"\
-        detailedForecast\": \"Mostly sunny. High near 62, with temperatures falling\
-        \ to around 52 in the afternoon. North northwest wind around 6 mph.\"\n  \
-        \          },\n            {\n                \"number\": 3,\n           \
-        \     \"name\": \"Friday Night\",\n                \"startTime\": \"2017-12-01T18:00:00-07:00\"\
-        ,\n                \"endTime\": \"2017-12-02T06:00:00-07:00\",\n         \
-        \       \"isDaytime\": false,\n                \"temperature\": 33,\n    \
-        \            \"temperatureUnit\": \"F\",\n                \"temperatureTrend\"\
-        : null,\n                \"windSpeed\": \"3 mph\",\n                \"windDirection\"\
-        : \"S\",\n                \"icon\": \"https://api.weather.gov/icons/land/night/few?size=medium\"\
-        ,\n                \"shortForecast\": \"Mostly Clear\",\n                \"\
-        detailedForecast\": \"Mostly clear, with a low around 33. South wind around\
-        \ 3 mph.\"\n            },\n            {\n                \"number\": 4,\n\
-        \                \"name\": \"Saturday\",\n                \"startTime\": \"\
-        2017-12-02T06:00:00-07:00\",\n                \"endTime\": \"2017-12-02T18:00:00-07:00\"\
-        ,\n                \"isDaytime\": true,\n                \"temperature\":\
-        \ 61,\n                \"temperatureUnit\": \"F\",\n                \"temperatureTrend\"\
-        : null,\n                \"windSpeed\": \"3 mph\",\n                \"windDirection\"\
-        : \"SSE\",\n                \"icon\": \"https://api.weather.gov/icons/land/day/few?size=medium\"\
-        ,\n                \"shortForecast\": \"Sunny\",\n                \"detailedForecast\"\
-        : \"Sunny, with a high near 61. South southeast wind around 3 mph.\"\n   \
-        \         },\n            {\n                \"number\": 5,\n            \
-        \    \"name\": \"Saturday Night\",\n                \"startTime\": \"2017-12-02T18:00:00-07:00\"\
-        ,\n                \"endTime\": \"2017-12-03T06:00:00-07:00\",\n         \
-        \       \"isDaytime\": false,\n                \"temperature\": 35,\n    \
-        \            \"temperatureUnit\": \"F\",\n                \"temperatureTrend\"\
-        : null,\n                \"windSpeed\": \"3 mph\",\n                \"windDirection\"\
-        : \"SSW\",\n                \"icon\": \"https://api.weather.gov/icons/land/night/few?size=medium\"\
-        ,\n                \"shortForecast\": \"Mostly Clear\",\n                \"\
-        detailedForecast\": \"Mostly clear, with a low around 35. South southwest\
-        \ wind around 3 mph.\"\n            },\n            {\n                \"\
-        number\": 6,\n                \"name\": \"Sunday\",\n                \"startTime\"\
-        : \"2017-12-03T06:00:00-07:00\",\n                \"endTime\": \"2017-12-03T18:00:00-07:00\"\
-        ,\n                \"isDaytime\": true,\n                \"temperature\":\
-        \ 64,\n                \"temperatureUnit\": \"F\",\n                \"temperatureTrend\"\
-        : null,\n                \"windSpeed\": \"5 mph\",\n                \"windDirection\"\
-        : \"SW\",\n                \"icon\": \"https://api.weather.gov/icons/land/day/sct?size=medium\"\
-        ,\n                \"shortForecast\": \"Mostly Sunny\",\n                \"\
-        detailedForecast\": \"Mostly sunny, with a high near 64.\"\n            },\n\
-        \            {\n                \"number\": 7,\n                \"name\":\
-        \ \"Sunday Night\",\n                \"startTime\": \"2017-12-03T18:00:00-07:00\"\
-        ,\n                \"endTime\": \"2017-12-04T06:00:00-07:00\",\n         \
-        \       \"isDaytime\": false,\n                \"temperature\": 31,\n    \
-        \            \"temperatureUnit\": \"F\",\n                \"temperatureTrend\"\
-        : null,\n                \"windSpeed\": \"3 mph\",\n                \"windDirection\"\
-        : \"WSW\",\n                \"icon\": \"https://api.weather.gov/icons/land/night/bkn?size=medium\"\
-        ,\n                \"shortForecast\": \"Mostly Cloudy\",\n               \
-        \ \"detailedForecast\": \"Mostly cloudy, with a low around 31.\"\n       \
-        \     },\n            {\n                \"number\": 8,\n                \"\
-        name\": \"Monday\",\n                \"startTime\": \"2017-12-04T06:00:00-07:00\"\
-        ,\n                \"endTime\": \"2017-12-04T18:00:00-07:00\",\n         \
-        \       \"isDaytime\": true,\n                \"temperature\": 42,\n     \
-        \           \"temperatureUnit\": \"F\",\n                \"temperatureTrend\"\
-        : null,\n                \"windSpeed\": \"3 to 8 mph\",\n                \"\
-        windDirection\": \"NNW\",\n                \"icon\": \"https://api.weather.gov/icons/land/day/snow,20?size=medium\"\
-        ,\n                \"shortForecast\": \"Slight Chance Light Snow\",\n    \
-        \            \"detailedForecast\": \"A slight chance of snow after 11am. Partly\
-        \ sunny, with a high near 42. Chance of precipitation is 20%.\"\n        \
-        \    },\n            {\n                \"number\": 9,\n                \"\
-        name\": \"Monday Night\",\n                \"startTime\": \"2017-12-04T18:00:00-07:00\"\
-        ,\n                \"endTime\": \"2017-12-05T06:00:00-07:00\",\n         \
-        \       \"isDaytime\": false,\n                \"temperature\": 19,\n    \
-        \            \"temperatureUnit\": \"F\",\n                \"temperatureTrend\"\
-        : null,\n                \"windSpeed\": \"3 to 8 mph\",\n                \"\
-        windDirection\": \"NW\",\n                \"icon\": \"https://api.weather.gov/icons/land/night/snow,20?size=medium\"\
-        ,\n                \"shortForecast\": \"Slight Chance Light Snow\",\n    \
-        \            \"detailedForecast\": \"A slight chance of snow before 5am. Mostly\
-        \ cloudy, with a low around 19. Chance of precipitation is 20%.\"\n      \
-        \      },\n            {\n                \"number\": 10,\n              \
-        \  \"name\": \"Tuesday\",\n                \"startTime\": \"2017-12-05T06:00:00-07:00\"\
-        ,\n                \"endTime\": \"2017-12-05T18:00:00-07:00\",\n         \
-        \       \"isDaytime\": true,\n                \"temperature\": 39,\n     \
-        \           \"temperatureUnit\": \"F\",\n                \"temperatureTrend\"\
-        : null,\n                \"windSpeed\": \"3 mph\",\n                \"windDirection\"\
-        : \"W\",\n                \"icon\": \"https://api.weather.gov/icons/land/day/sct?size=medium\"\
-        ,\n                \"shortForecast\": \"Mostly Sunny\",\n                \"\
-        detailedForecast\": \"Mostly sunny, with a high near 39.\"\n            },\n\
-        \            {\n                \"number\": 11,\n                \"name\"\
-        : \"Tuesday Night\",\n                \"startTime\": \"2017-12-05T18:00:00-07:00\"\
-        ,\n                \"endTime\": \"2017-12-06T06:00:00-07:00\",\n         \
-        \       \"isDaytime\": false,\n                \"temperature\": 23,\n    \
-        \            \"temperatureUnit\": \"F\",\n                \"temperatureTrend\"\
-        : null,\n                \"windSpeed\": \"3 mph\",\n                \"windDirection\"\
-        : \"SW\",\n                \"icon\": \"https://api.weather.gov/icons/land/night/few?size=medium\"\
-        ,\n                \"shortForecast\": \"Mostly Clear\",\n                \"\
-        detailedForecast\": \"Mostly clear, with a low around 23.\"\n            },\n\
-        \            {\n                \"number\": 12,\n                \"name\"\
-        : \"Wednesday\",\n                \"startTime\": \"2017-12-06T06:00:00-07:00\"\
-        ,\n                \"endTime\": \"2017-12-06T18:00:00-07:00\",\n         \
-        \       \"isDaytime\": true,\n                \"temperature\": 41,\n     \
-        \           \"temperatureUnit\": \"F\",\n                \"temperatureTrend\"\
-        : null,\n                \"windSpeed\": \"5 mph\",\n                \"windDirection\"\
-        : \"WNW\",\n                \"icon\": \"https://api.weather.gov/icons/land/day/sct?size=medium\"\
-        ,\n                \"shortForecast\": \"Mostly Sunny\",\n                \"\
-        detailedForecast\": \"Mostly sunny, with a high near 41.\"\n            },\n\
-        \            {\n                \"number\": 13,\n                \"name\"\
-        : \"Wednesday Night\",\n                \"startTime\": \"2017-12-06T18:00:00-07:00\"\
-        ,\n                \"endTime\": \"2017-12-07T06:00:00-07:00\",\n         \
-        \       \"isDaytime\": false,\n                \"temperature\": 25,\n    \
-        \            \"temperatureUnit\": \"F\",\n                \"temperatureTrend\"\
-        : null,\n                \"windSpeed\": \"5 mph\",\n                \"windDirection\"\
-        : \"W\",\n                \"icon\": \"https://api.weather.gov/icons/land/night/sct?size=medium\"\
-        ,\n                \"shortForecast\": \"Partly Cloudy\",\n               \
-        \ \"detailedForecast\": \"Partly cloudy, with a low around 25.\"\n       \
-        \     },\n            {\n                \"number\": 14,\n               \
-        \ \"name\": \"Thursday\",\n                \"startTime\": \"2017-12-07T06:00:00-07:00\"\
-        ,\n                \"endTime\": \"2017-12-07T18:00:00-07:00\",\n         \
-        \       \"isDaytime\": true,\n                \"temperature\": 47,\n     \
-        \           \"temperatureUnit\": \"F\",\n                \"temperatureTrend\"\
-        : null,\n                \"windSpeed\": \"7 mph\",\n                \"windDirection\"\
-        : \"WNW\",\n                \"icon\": \"https://api.weather.gov/icons/land/day/sct?size=medium\"\
-        ,\n                \"shortForecast\": \"Mostly Sunny\",\n                \"\
-        detailedForecast\": \"Mostly sunny, with a high near 47.\"\n            }\n\
-        \        ]\n    }\n}"}
+    body: {string: "{\n    \"correlationId\": \"a415bbbf-668b-4d90-ae56-4db0b7adfe69\"\
+        ,\n    \"title\": \"Redirect\",\n    \"type\": \"https://api.weather.gov/problems/GridpointRedirect\"\
+        ,\n    \"status\": 301,\n    \"detail\": \"The requested data can be found\
+        \ here: /gridpoints/BOU/62,61/forecast\",\n    \"instance\": \"https://api.weather.gov/requests/a415bbbf-668b-4d90-ae56-4db0b7adfe69\"\
+        \n}"}
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      Cache-Control: ['private, must-revalidate, max-age=600']
+      Connection: [keep-alive]
+      Content-Length: ['348']
+      Content-Type: [application/problem+json]
+      Date: ['Sat, 16 Jun 2018 03:08:13 GMT']
+      Expires: ['Sat, 16 Jun 2018 03:18:13 GMT']
+      Location: ['/gridpoints/BOU/62,61/forecast']
+      Pragma: [no-cache]
+      Server: [nginx/1.12.2]
+      Strict-Transport-Security: [max-age=31536000 ; includeSubDomains ; preload]
+      Vary: [Accept]
+      X-Correlation-ID: [a415bbbf-668b-4d90-ae56-4db0b7adfe69]
+      X-Request-ID: [a415bbbf-668b-4d90-ae56-4db0b7adfe69]
+      X-Server-ID: [vm-lnx-nids-apiapp16.ncep.noaa.gov]
+    status: {code: 301, message: Moved Permanently}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: ['wxcast app. https://github.com/smarlowucf/wxcast']
+    method: GET
+    uri: https://api.weather.gov/gridpoints/BOU/62,61/forecast
+  response:
+    body:
+      string: !!binary |
+        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
     headers:
       Access-Control-Allow-Origin: ['*']
       Cache-Control: ['public, max-age=600, s-maxage=120']
       Connection: [keep-alive]
-      Content-Length: ['10189']
+      Content-Encoding: [gzip]
+      Content-Length: ['1631']
       Content-Type: [application/geo+json]
-      Date: ['Fri, 01 Dec 2017 01:53:04 GMT']
-      Expires: ['Fri, 01 Dec 2017 02:03:04 GMT']
-      Server: [nginx]
-      Strict-Transport-Security: [max-age=31536000; includeSubDomains; preload]
-      Vary: [Accept]
-      X-Correlation-ID: [63136956-3478-4467-89fd-11d2c4ad5e9c]
-      X-Request-ID: [63136956-3478-4467-89fd-11d2c4ad5e9c]
-      X-Server-ID: [vm-bldr-nids-apiapp79.ncep.noaa.gov]
+      Date: ['Sat, 16 Jun 2018 03:08:13 GMT']
+      Expires: ['Sat, 16 Jun 2018 03:18:13 GMT']
+      Server: [nginx/1.12.2]
+      Strict-Transport-Security: [max-age=31536000 ; includeSubDomains ; preload]
+      Vary: [Accept-Encoding, Accept]
+      X-Correlation-ID: [6e4a053a-1fbf-4696-9816-f3e86386d15a]
+      X-Request-ID: [6e4a053a-1fbf-4696-9816-f3e86386d15a]
+      X-Server-ID: [vm-lnx-nids-apiapp19.ncep.noaa.gov]
     status: {code: 200, message: OK}
 version: 1
