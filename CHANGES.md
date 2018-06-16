@@ -1,3 +1,7 @@
+# v1.3.1 (2018-06-15)
+
+- Fix tag location.
+
 # v1.3.0 (2018-06-15)
 
 - Switch to ArcGIS for geocoding.
