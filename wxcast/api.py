@@ -19,7 +19,7 @@
 
 import requests
 
-from geopy.geocoders import Nominatim
+from geopy.geocoders import ArcGIS
 
 from wxcast.constants import HEADERS, NWS_API
 from wxcast.exceptions import WxcastException
@@ -34,17 +34,20 @@ def get_metar(icao, decoded=False):
     :return: Returns raw METAR string or dictionary with decoded info.
     """
     try:
+        icao = icao.upper()
         site = f'http://avwx.rest/api/metar/{icao}?options=info,translate'
         data = requests.get(site).json()
 
         if 'Error' in data:
-            raise Exception()
+            raise Exception(data['Error'])
     except requests.exceptions.ConnectionError:
         raise WxcastException(
             'Connection could not be established with the avwx rest api.'
         )
-    except Exception:
-        raise WxcastException(f'Invalid ICAO: {icao}, metar not found.')
+    except Exception as error:
+        raise WxcastException(
+            f'Could not retrieve metar for {icao}: {error}'
+        )
 
     if decoded:
         header = {
@@ -78,14 +81,16 @@ def get_nws_product(wfo, product):
     try:
         response = requests.get(site, headers=HEADERS)
         if response.status_code == 404:
-            raise Exception()
+            raise Exception(
+                'Unable to establish connection with NWS api.'
+            )
 
         response = response.json()
-        if not response.get('features', None):
-            raise Exception()
+        if not response.get('@graph'):
+            raise Exception('WFO and product combination not found.')
 
         response = requests.get(
-            response['features'][0]['@id'],
+            response['@graph'][0]['@id'],
             headers=HEADERS
         ).json()
     except requests.exceptions.ConnectionError as e:
@@ -93,10 +98,10 @@ def get_nws_product(wfo, product):
             f'Connection could not be established with the NWS website: '
             f'{str(e)}'
         )
-    except Exception:
+    except Exception as error:
         raise WxcastException(
             f'No wx data found attempting to retrieve '
-            f'{product} issued by {wfo}.'
+            f'{product} issued by {wfo}: {error}'
         )
 
     return response['productText']
@@ -109,7 +114,9 @@ def get_seven_day_forecast(location):
     :param location: String value of location (address, name, zip, etc).
     :return: A dictionary with forecast split in periods.
     """
-    geolocator = Nominatim()
+    geolocator = ArcGIS(
+        user_agent='wxcast app. https://github.com/smarlowucf/wxcast'
+    )
     geolocation = geolocator.geocode(location)
 
     if not geolocation:
@@ -150,14 +157,16 @@ def get_wfo_products(wfo):
         site = f'{NWS_API}/products/locations/{wfo.upper()}/types'
         data = requests.get(site, headers=HEADERS).json()
 
-        if 'features' not in data:
-            raise Exception()
+        if not data.get('@graph'):
+            raise Exception('Invalid WFO code.')
     except requests.exceptions.ConnectionError as e:
         raise WxcastException(
             f'Connection could not be established with the avwx rest api: '
             f'{str(e)}'
         )
-    except Exception:
-        raise WxcastException(f'Could not retrieve products for WFO: {wfo}.')
+    except Exception as error:
+        raise WxcastException(
+            f'Could not retrieve products for WFO {wfo}: {error}'
+        )
 
-    return {d['productCode']: d['productName'] for d in data['features']}
+    return {d['productCode']: d['productName'] for d in data['@graph']}
