@@ -1,3 +1,9 @@
+# v1.3.0 (2018-06-15)
+
+- Switch to ArcGIS for geocoding.
+- Cleanup exception messages.
+- Fix metar and products API.
+
 # v1.2.3 (2018-06-04)
 
 - Fix tests for geopy changes.
