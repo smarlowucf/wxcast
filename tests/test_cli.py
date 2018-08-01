@@ -124,3 +124,15 @@ def test_text_afd_invalid():
         out = f.read()
 
     assert out == result.output
+
+
+@vcr.use_cassette('tests/cassettes/offices.yml')
+def test_offices():
+    runner = CliRunner()
+    result = runner.invoke(main, ['offices'])
+    assert result.exit_code == 0
+
+    with open('tests/cassettes/offices.out', 'r') as f:
+        out = f.read()
+
+    assert out == result.output

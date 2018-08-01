@@ -103,3 +103,30 @@ If there are spaces in the location it must be surrounded by quotes.
 
     >>> wxcast forecast "325 Broadway Boulder, CO"
     ...
+
+## Weather Forecast Offices (WFO List)
+
+Provides information about NWS forecast offices.
+
+    >>> wxcast offices
+    ABQ:  Albuquerque, NM
+    ABR:  Aberdeen, SD
+    AER:  Anchorage East
+    AFC:  Anchorage, AK
+    AFG:  Fairbanks, AK
+    AJK:  Juneau, AK
+    AKQ:  Wakefield, VA
+    ALU:  Anchorage West
+    ALY:  Albany, NY
+    AMA:  Amarillo, TX
+    APX:  Gaylord, MI
+    ARX:  La Crosse, WI
+    BGM:  Binghamton, NY
+    BIS:  Bismarck, ND
+    BMX:  NWS Birmingham, Alabama
+    BOI:  Boise, ID
+    BOU:  Denver/Boulder, CO
+    BOX:  Boston / Norton, MA
+    BRO:  Brownsville/Rio Grande Valley, TX
+    BTV:  Burlington, VT
+    ...
