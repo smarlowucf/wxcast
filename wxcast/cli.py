@@ -171,6 +171,28 @@ def metar(decoded, no_color, icao):
     is_flag=True,
     help='Remove ANSI color and styling from output.'
 )
+def offices(no_color):
+    """
+    Retrieve the available weather forecast offices (WFO).
+
+    Example: wxcast offices
+
+    :param no_color: If True do not style string output.
+    """
+    try:
+        response = api.get_wfo_list()
+    except Exception as e:
+        utils.echo_style(str(e), no_color, fg='red')
+    else:
+        utils.echo_dict(response, no_color)
+
+
+@click.command()
+@click.option(
+    '--no-color',
+    is_flag=True,
+    help='Remove ANSI color and styling from output.'
+)
 @click.argument('wfo')
 def products(no_color, wfo):
     """
@@ -217,5 +239,6 @@ def text(no_color, wfo, product):
 
 main.add_command(metar)
 main.add_command(text)
+main.add_command(offices)
 main.add_command(products)
 main.add_command(forecast)

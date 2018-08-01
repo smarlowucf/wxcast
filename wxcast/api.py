@@ -146,6 +146,33 @@ def get_seven_day_forecast(location):
     return data['properties']['periods']
 
 
+def get_wfo_list():
+    """
+    Get a list of the available weather forecast offices (wfo).
+
+    :return: Return dictionary of wfo {code: name}.
+    """
+    try:
+        site = f'{NWS_API}/products/locations/'
+        data = requests.get(site, headers=HEADERS).json()
+    except requests.exceptions.ConnectionError as e:
+        raise WxcastException(
+            f'Connection could not be established with the avwx rest api: '
+            f'{str(e)}'
+        )
+    except Exception as error:
+        raise WxcastException(
+            f'Could not retrieve list of WFOs: {error}'
+        )
+
+    wfo_list = {}
+    for code, name in data['locations'].items():
+        if code and name:
+            wfo_list[code] = name
+
+    return wfo_list
+
+
 def get_wfo_products(wfo):
     """
     Get a list of the text products available for the given WFO.
@@ -161,7 +188,7 @@ def get_wfo_products(wfo):
             raise Exception('Invalid WFO code.')
     except requests.exceptions.ConnectionError as e:
         raise WxcastException(
-            f'Connection could not be established with the avwx rest api: '
+            f'Connection could not be established with the nws rest api: '
             f'{str(e)}'
         )
     except Exception as error:
