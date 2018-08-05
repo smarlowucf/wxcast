@@ -32,9 +32,7 @@ Provides weather information in terminal:
 -   pytest-cov
 -   vcrpy
 
-## Docs
-
-- [Usage](docs/usage.md)
+## [Docs](https://smarlowucf.github.io/wxcast/)
 
 ## Issues/Enhancements
 
