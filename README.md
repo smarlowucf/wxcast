@@ -42,11 +42,13 @@ Please submit issues and requests to
 ## Contributing
 
 Contributions to **wxcast** are welcome and encouraged. See
-[CONTRIBUTING](CONTRIBUTING.md) for info on getting started.
+[CONTRIBUTING](https://github.com/smarlowucf/wxcast/blob/master/CONTRIBUTING.md)
+for info on getting started.
 
 ## License
 
 Copyright (c) 2017 Sean Marlow.
 
-Distributed under the terms of GPL-3.0+ license, see [LICENSE](LICENSE)
+Distributed under the terms of GPL-3.0+ license, see
+[LICENSE](https://github.com/smarlowucf/wxcast/blob/master/LICENSE)
 for details.
