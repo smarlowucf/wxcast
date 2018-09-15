@@ -22,7 +22,7 @@ interactions:
         \ 51009\", \n  \"Remarks\": \"RMK AO2 SLP191 T00281044 51009\", \n  \"Remarks-Info\"\
         : {\n    \"Dew-Decimal\": \"-4.4\", \n    \"Temp-Decimal\": \"2.8\"\n  },\
         \ \n  \"Runway-Vis-List\": [], \n  \"Station\": \"KDEN\", \n  \"Temperature\"\
-        : \"03\", \n  \"Time\": \"140253Z\", \n  \"Translations\": {\n    \"Altimeter\"\
+        : \"03\", \n  \"Time\": \"140253Z\", \n  \"Translate\": {\n    \"Altimeter\"\
         : \"30.09inHg (1019hPa)\", \n    \"Clouds\": \"Few clouds at 10000ft - Reported\
         \ AGL\", \n    \"Dewpoint\": \"-04C (25F)\", \n    \"Other\": \"\", \n   \
         \ \"Remarks\": {\n      \"51009\": \"3-hour pressure difference: +/- 0.9 mb\
