@@ -47,8 +47,8 @@ for info on getting started.
 
 ## License
 
-Copyright (c) 2017 Sean Marlow.
+Copyright (c) 2018 Sean Marlow.
 
-Distributed under the terms of GPL-3.0+ license, see
+Distributed under the terms of MIT license, see
 [LICENSE](https://github.com/smarlowucf/wxcast/blob/master/LICENSE)
 for details.
