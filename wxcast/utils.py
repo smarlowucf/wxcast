@@ -60,7 +60,11 @@ def echo_dict(data,
             click.echo(
                 ''.join([
                     style_string(title, no_color, fg=key_color),
-                    wrapper.fill(style_string(str(value), no_color, fg=value_color))
+                    wrapper.fill(
+                        style_string(
+                            str(value), no_color, fg=value_color
+                        )
+                    )
                 ])
             )
 
