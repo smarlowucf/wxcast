@@ -24,6 +24,7 @@
 
 import requests
 
+from collections import OrderedDict
 from geopy.geocoders import ArcGIS
 
 from wxcast.constants import HEADERS, NWS_API
@@ -42,7 +43,9 @@ def get_metar(icao, decoded=False):
         icao = icao.upper()
         site = 'http://avwx.rest/api/metar/' \
                '{icao}?options=info,translate'.format(icao=icao)
-        data = requests.get(site).json()
+        data = requests.get(site).json(
+            object_pairs_hook=OrderedDict
+        )
 
         if 'Error' in data:
             raise Exception(data['Error'])
@@ -104,7 +107,7 @@ def get_nws_product(wfo, product):
         response = requests.get(
             response['@graph'][0]['@id'],
             headers=HEADERS
-        ).json()
+        ).json(object_pairs_hook=OrderedDict)
     except requests.exceptions.ConnectionError as e:
         raise WxcastException(
             'Connection could not be established with the NWS website: '
@@ -152,7 +155,7 @@ def get_seven_day_forecast(location):
                 latlong=latlong
             ),
             headers=HEADERS
-        ).json()
+        ).json(object_pairs_hook=OrderedDict)
         if 'properties' not in data:
             raise Exception()
     except requests.exceptions.ConnectionError:
@@ -179,7 +182,9 @@ def get_wfo_list():
     """
     try:
         site = '{NWS_API}/products/locations/'.format(NWS_API=NWS_API)
-        data = requests.get(site, headers=HEADERS).json()
+        data = requests.get(site, headers=HEADERS).json(
+            object_pairs_hook=OrderedDict
+        )
     except requests.exceptions.ConnectionError as e:
         raise WxcastException(
             'Connection could not be established with the avwx rest api: '
@@ -190,7 +195,7 @@ def get_wfo_list():
             'Could not retrieve list of WFOs: {error}'.format(error=error)
         )
 
-    wfo_list = {}
+    wfo_list = OrderedDict()
     for code, name in data['locations'].items():
         if code and name:
             wfo_list[code] = name
@@ -210,7 +215,9 @@ def get_wfo_products(wfo):
             NWS_API=NWS_API,
             wfo=wfo.upper()
         )
-        data = requests.get(site, headers=HEADERS).json()
+        data = requests.get(site, headers=HEADERS).json(
+            object_pairs_hook=OrderedDict
+        )
 
         if not data.get('@graph'):
             raise Exception('Invalid WFO code.')
@@ -227,4 +234,6 @@ def get_wfo_products(wfo):
             )
         )
 
-    return {d['productCode']: d['productName'] for d in data['@graph']}
+    return OrderedDict(
+        (d['productCode'], d['productName']) for d in data['@graph']
+    )

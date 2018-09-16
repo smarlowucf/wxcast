@@ -1,8 +1,12 @@
 from wxcast.utils import echo_dict, echo_style, get_max_key, style_string
 
+from collections import OrderedDict
+
 
 def test_echo_dict(capsys):
-    data = {'Test': 'Data', 'Is': 'Great'}
+    data = OrderedDict()
+    data['Test'] = 'Data'
+    data['Is'] = 'Great'
     echo_dict(data, False)
 
     out, err = capsys.readouterr()
