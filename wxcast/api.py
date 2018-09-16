@@ -40,7 +40,8 @@ def get_metar(icao, decoded=False):
     """
     try:
         icao = icao.upper()
-        site = f'http://avwx.rest/api/metar/{icao}?options=info,translate'
+        site = 'http://avwx.rest/api/metar/' \
+               '{icao}?options=info,translate'.format(icao=icao)
         data = requests.get(site).json()
 
         if 'Error' in data:
@@ -51,7 +52,10 @@ def get_metar(icao, decoded=False):
         )
     except Exception as error:
         raise WxcastException(
-            f'Could not retrieve metar for {icao}: {error}'
+            'Could not retrieve metar for {icao}: {error}'.format(
+                icao=icao,
+                error=error
+            )
         )
 
     if decoded:
@@ -80,8 +84,11 @@ def get_nws_product(wfo, product):
     :param product: The text product to return.
     :return: Product text value as string.
     """
-    site = f'{NWS_API}/products/types/' \
-        f'{product.upper()}/locations/{wfo.upper()}'
+    site = '{NWS_API}/products/types/{product}/locations/{wfo}'.format(
+        NWS_API=NWS_API,
+        product=product.upper(),
+        wfo=wfo.upper()
+    )
 
     try:
         response = requests.get(site, headers=HEADERS)
@@ -100,13 +107,17 @@ def get_nws_product(wfo, product):
         ).json()
     except requests.exceptions.ConnectionError as e:
         raise WxcastException(
-            f'Connection could not be established with the NWS website: '
-            f'{str(e)}'
+            'Connection could not be established with the NWS website: '
+            '{error}'.format(error=str(e))
         )
     except Exception as error:
         raise WxcastException(
-            f'No wx data found attempting to retrieve '
-            f'{product} issued by {wfo}: {error}'
+            'No wx data found attempting to retrieve '
+            '{product} issued by {wfo}: {error}'.format(
+                product=product,
+                wfo=wfo,
+                error=error
+            )
         )
 
     return response['productText']
@@ -126,14 +137,20 @@ def get_seven_day_forecast(location):
 
     if not geolocation:
         raise WxcastException(
-            f'Location not found: {location}.'
+            'Location not found: {location}.'.format(location=location)
         )
 
-    latlong = f'{geolocation.latitude},{geolocation.longitude}'
+    latlong = '{lat},{lon}'.format(
+        lat=geolocation.latitude,
+        lon=geolocation.longitude
+    )
 
     try:
         data = requests.get(
-            f'{NWS_API}/points/{latlong}/forecast',
+            '{NWS_API}/points/{latlong}/forecast'.format(
+                NWS_API=NWS_API,
+                latlong=latlong
+            ),
             headers=HEADERS
         ).json()
         if 'properties' not in data:
@@ -144,8 +161,11 @@ def get_seven_day_forecast(location):
         )
     except Exception as e:
         raise WxcastException(
-            f'No forecast found for location: {location} '
-            f'coordinates: {latlong}'
+            'No forecast found for location: {location} '
+            'coordinates: {latlong}'.format(
+                location=location,
+                latlong=latlong
+            )
         )
 
     return data['properties']['periods']
@@ -158,16 +178,16 @@ def get_wfo_list():
     :return: Return dictionary of wfo {code: name}.
     """
     try:
-        site = f'{NWS_API}/products/locations/'
+        site = '{NWS_API}/products/locations/'.format(NWS_API=NWS_API)
         data = requests.get(site, headers=HEADERS).json()
     except requests.exceptions.ConnectionError as e:
         raise WxcastException(
-            f'Connection could not be established with the avwx rest api: '
-            f'{str(e)}'
+            'Connection could not be established with the avwx rest api: '
+            '{error}'.format(error=str(e))
         )
     except Exception as error:
         raise WxcastException(
-            f'Could not retrieve list of WFOs: {error}'
+            'Could not retrieve list of WFOs: {error}'.format(error=error)
         )
 
     wfo_list = {}
@@ -186,19 +206,25 @@ def get_wfo_products(wfo):
     :return: Return dictionary of text products {code: name}.
     """
     try:
-        site = f'{NWS_API}/products/locations/{wfo.upper()}/types'
+        site = '{NWS_API}/products/locations/{wfo}/types'.format(
+            NWS_API=NWS_API,
+            wfo=wfo.upper()
+        )
         data = requests.get(site, headers=HEADERS).json()
 
         if not data.get('@graph'):
             raise Exception('Invalid WFO code.')
     except requests.exceptions.ConnectionError as e:
         raise WxcastException(
-            f'Connection could not be established with the nws rest api: '
-            f'{str(e)}'
+            'Connection could not be established with the nws rest api: '
+            '{error}'.format(error=str(e))
         )
     except Exception as error:
         raise WxcastException(
-            f'Could not retrieve products for WFO {wfo}: {error}'
+            'Could not retrieve products for WFO {wfo}: {error}'.format(
+                wfo=wfo,
+                error=error
+            )
         )
 
     return {d['productCode']: d['productName'] for d in data['@graph']}
