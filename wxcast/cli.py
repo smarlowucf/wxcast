@@ -24,6 +24,8 @@
 
 import click
 
+from collections import OrderedDict
+
 from wxcast import api
 from wxcast import utils
 
@@ -89,7 +91,9 @@ def forecast(no_color, location):
     except Exception as e:
         utils.echo_style(str(e), no_color, fg='red')
     else:
-        data = {d['name']: d['detailedForecast'] for d in response}
+        data = OrderedDict(
+            (d['name'], d['detailedForecast']) for d in response
+        )
         utils.echo_dict(data, no_color)
 
 
