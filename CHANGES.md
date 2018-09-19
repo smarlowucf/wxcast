@@ -1,3 +1,10 @@
+# v1.4.0 (2018-09-18)
+
+- Move docs to GitHub Pages.
+- Add endpoint to retrieve the list of WFOs.
+- Migrate license back to MIT.
+- Remove f'strings and use ordered dict to support py3.4 and 3.5.
+
 # v1.3.1 (2018-06-15)
 
 - Fix tag location.
