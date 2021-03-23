@@ -36,6 +36,7 @@ requirements = [
     'Click>=6.0',
     'geopy',
     'requests',
+    'metar'
 ]
 
 test_requirements = [
@@ -77,10 +78,10 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9'
     ],
     test_suite='tests',
     tests_require=test_requirements

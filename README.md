@@ -11,7 +11,7 @@ A CLI utility for retrieving weather information.
 Provides weather information in terminal:
 
 -   Weather text information from NWS API.
--   METAR info from AVWX API.
+-   METAR info from NWS API.
 -   Seven day forecasts based on location using geopy and NWS API.
 
 ## Installation

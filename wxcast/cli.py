@@ -131,43 +131,27 @@ def metar(decoded, no_color, icao):
                         'At ', no_color, fg='green'
                     ),
                     utils.style_string(
-                        response['header']['time'], no_color, fg='blue'
+                        response['time'], no_color, fg='blue'
                     ),
                     utils.style_string(
-                        ' the conditions for ', no_color, fg='green'
-                    ),
-                    utils.style_string(
-                        response['header']['icao'], no_color, fg='blue'
-                    ),
-                    utils.style_string(
-                        ' are ', no_color, fg='green'
-                    ),
-                    utils.style_string(
-                        response['header']['fr'], no_color, fg='blue'
+                        ' the conditions are:', no_color, fg='green'
                     ),
                     '\n'
                 ])
             )
 
-            spaces = max([
-                utils.get_max_key(response['data']),
-                utils.get_max_key(response['location'])
-            ])
-
-            utils.echo_dict(response['data'], no_color, spaces=spaces)
-            click.echo('')
+            spaces = utils.get_max_key(response)
 
             try:
                 # Try to convert elevation to ft and meters.
-                response['location']['Elevation'] = '{}ft ({}m)'.format(
-                    int(float(response['location']['Elevation']) * 3.28084),
-                    response['location']['Elevation']
+                response['elevation'] = '{}ft ({}m)'.format(
+                    int(float(response['elevation']) * 3.28084),
+                    response['elevation']
                 )
             except (KeyError, Exception):
                 pass
 
-            utils.echo_dict(response['location'], no_color, spaces=spaces)
-
+            utils.echo_dict(response, no_color, spaces=spaces)
         else:
             utils.echo_style(response, no_color, fg='blue')
 
