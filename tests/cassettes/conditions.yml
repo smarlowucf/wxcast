@@ -1,0 +1,77 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.25.1
+    method: GET
+    uri: https://api.weather.gov/stations/KDFW/observations/latest
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA81XW2/bNhR+z68QtD1s2CJTku/AsHQOmhZxmqwOWiBDUNDSic2FIhWSsuwV+e8l
+        pdiRbEt2c9nGB4MWz+U7Vx5+PbD0so8CzhTMld23/sq+ZF+nSsWy32hMgP8tOXO4mCz3hzRcbR94
+        HfOHhvavKwFfV7tcyQyEJJxpJbbruAXC7Didm4OlThwTJwWspiCcCZ81tA5O+WTxwzqbLHLJYAoR
+        zoCu02m0S0pNmKapw2NgEyIdBsqIN/bIGIs7uqEjYUQVmAMegnTSiDtEswU8ijhrGJoNpUczHuDx
+        k+zSaCJQYqGZy37MBZPQSJX9E+ADzkVIGFYg14TkpGoRgyHWEvvprRoSBQJTu0R5v6Y9IGqRK8Bh
+        KEDKoTaEmo/r7ldab4nyI0xMkNfoQqIpWQA7zDlektUZIvt/JpgpolWTGXzCNIF6a8aABWGTCt1P
+        FjvLSOoNmu0WYzJnoFNqh6QVWZ1rDHWtshsuIMBSnd/ckMpofLe0E0HCY6zwc+XFyZiS4IqzZyML
+        eMJUVfFUSzko765zqXYeg6oaNjWgU142To/ffm7wsQQxe/jiIc89RP6h17x0e/2W30foF4T070MU
+        7SWUt1peIpbB3V79K+ILrhtPIQ+0tY8toNjCzTrsdRzko8Jyy77yPafbK63V8fVBwbd2LHTLFIpk
+        Sgqwjl7NPeVwpfP++SP3KBdbpAQK+dlG3Fe16na96vLL9v3oMScKWWU/mLG3pUVgikSgD6PYcO9l
+        tMDpmW6meJLhMvIsr+n2Wv6V5boI9U7c7uml5aLRmTUaXLoesv44/eC1kOX5DdS13ni9jmd9PDu1
+        3px71mh4gdrIukSerxOh07V+LIHTl/cxyECQeGngGZeKLqwB5UlYbPk2Ceo9YM5lg2IWNkK8aIxv
+        2e+S/AO/RRCSJCpKivVdAUx9zplN1l6XMEU61fKSqIyl5zulvF5P7M3QhjAZrN9Md0l2sQ30TSw4
+        NaR3Qf/T9hwIIY2z2qvE1HE65VrqvjamlLDwmOg+vCPxXbQHEgHw5SfMJhR+fi6mUQwQ1uBpO61W
+        yVO74N1GX6aHG2Pj98I6SWRN+HzfaZYC2HlBVKPtqMZYZM2eBBdmfqpNeV367ebOQF7g53hJAh7C
+        DOh+aNAro5kRScaEki2XeSGXUG8njGgvFIPtKCI8v3xsSUM98njNdzwRshoUSyh9kdo3graDIuz/
+        B0r39YDEJL8JDSaD6HmA9ovc1fbIbeDxX8BFL4uo/V8jEkCzN8+7JCJhbaX5epZ023oO6TRbXqe5
+        R9fW6RlAaVqthlfTtgdTQum/kNc1MKZ6VHnPQpjXTCSe0255qNtr6dVxXdd/bVCBGdGGeAFic/Lf
+        8vQZY7n9aVUyw2+319pptQGRvUF4v8lr48g8yAyXHldrn25PRt1pe6+HWk/XVU/Fh0fSwf03nIa8
+        jE0TAAA=
+    headers:
+      Access-Control-Allow-Headers:
+      - Feature-Flags
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, max-age=288, s-maxage=300
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '1088'
+      Content-Type:
+      - application/geo+json
+      Date:
+      - Wed, 24 Mar 2021 21:05:42 GMT
+      Expires:
+      - Wed, 24 Mar 2021 21:10:30 GMT
+      Last-Modified:
+      - Wed, 24 Mar 2021 19:53:00 GMT
+      Server:
+      - nginx/1.16.1
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains ; preload
+      Vary:
+      - Accept-Encoding
+      - Accept,Feature-Flags,Accept-Language
+      X-Correlation-ID:
+      - 226f0cd4
+      X-Edge-Request-ID:
+      - abd955
+      X-Request-ID:
+      - d6fc9cf4-a76b-4f8a-b3b2-bd88166be8b9
+      X-Server-ID:
+      - vm-lnx-nids-apiapp7.ncep.noaa.gov
+    status:
+      code: 200
+      message: OK
+version: 1

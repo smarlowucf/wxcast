@@ -96,7 +96,7 @@ def metar_to_dict(metar_obj, temp_unit='C', pressure_unit='MB'):
     return data
 
 
-def get_metar(station_id, decoded=False):
+def get_metar(station_id, temp_unit='C', decoded=False):
     """
     Retrieve METAR for ICAO.
 
@@ -130,7 +130,7 @@ def get_metar(station_id, decoded=False):
 
     if decoded:
         data_obj = Metar.Metar(raw_metar)
-        json_data = metar_to_dict(data_obj)
+        json_data = metar_to_dict(data_obj, temp_unit=temp_unit)
         json_data['elevation'] = data['properties']['elevation']['value']
         return json_data
 

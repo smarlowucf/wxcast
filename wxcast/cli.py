@@ -108,8 +108,16 @@ def forecast(no_color, location):
     is_flag=True,
     help='Remove ANSI color and styling from output.'
 )
+@click.option(
+    '-t',
+    '--temp-unit',
+    default='C',
+    type=click.Choice(['C', 'F']),
+    help='Unit of measurement for temperature values. '
+         'Default: (C).'
+)
 @click.argument('icao')
-def metar(decoded, no_color, icao):
+def metar(decoded, no_color, temp_unit, icao):
     """
     Retrieve the latest METAR given an airport ICAO code.
 
@@ -120,7 +128,7 @@ def metar(decoded, no_color, icao):
     :param icao: The airport ICAO code to retrieve METAR for.
     """
     try:
-        response = api.get_metar(icao, decoded)
+        response = api.get_metar(icao, temp_unit, decoded)
     except Exception as e:
         utils.echo_style(str(e), no_color, fg='red')
     else:
@@ -154,6 +162,44 @@ def metar(decoded, no_color, icao):
             utils.echo_dict(response, no_color, spaces=spaces)
         else:
             utils.echo_style(response, no_color, fg='blue')
+
+
+@click.command()
+@click.option(
+    '--no-color',
+    is_flag=True,
+    help='Remove ANSI color and styling from output.'
+)
+@click.option(
+    '-t',
+    '--temp-unit',
+    default='C',
+    type=click.Choice(['C', 'F']),
+    help='Unit of measurement for temperature values. '
+         'Default: (C).'
+)
+@click.argument('station_id')
+def conditions(no_color, temp_unit, station_id):
+    """
+    Retrieve the latest conditions given a weather station id.
+
+    Example: wxcast conditions KDTW
+
+    :param no_color: If True do not style string output.
+    :param station_id: The weather station id to retrieve conditions for.
+    """
+    try:
+        response = api.get_metar(station_id, temp_unit, decoded=True)
+    except Exception as e:
+        utils.echo_style(str(e), no_color, fg='red')
+    else:
+        response.pop('station', None)
+        response.pop('type', None)
+        response.pop('station', None)
+        response.pop('sea level pressure', None)
+        response.pop('remarks', None)
+        response.pop('elevation', None)
+        utils.echo_dict(response, no_color)
 
 
 @click.command()
@@ -317,3 +363,4 @@ main.add_command(forecast)
 main.add_command(office)
 main.add_command(stations)
 main.add_command(station)
+main.add_command(conditions)

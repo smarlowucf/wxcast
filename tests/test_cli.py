@@ -205,3 +205,15 @@ def test_stations_invalid():
         out = f.read()
 
     assert out == result.output
+
+
+@vcr.use_cassette('tests/cassettes/conditions.yml')
+def test_conditions():
+    runner = CliRunner()
+    result = runner.invoke(main, ['conditions', '-t', 'F', 'KDFW'])
+    assert result.exit_code == 0
+
+    with open('tests/cassettes/conditions.out', 'r') as f:
+        out = f.read()
+
+    assert out == result.output
