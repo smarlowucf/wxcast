@@ -105,10 +105,7 @@ def get_metar(station_id, decoded=False):
     :return: Returns raw METAR string or dictionary with decoded info.
     """
     try:
-        site = '{api}/stations/{station_id}/observations/latest'.format(
-            api=NWS_API,
-            station_id=station_id
-        )
+        site = f'{NWS_API}/stations/{station_id}/observations/latest'
         data = requests.get(site).json()
 
         if data.get('status', 200) == 404:
@@ -128,10 +125,7 @@ def get_metar(station_id, decoded=False):
         )
     except Exception as error:
         raise WxcastException(
-            'Could not retrieve metar for {station_id}: {error}'.format(
-                station_id=station_id,
-                error=error
-            )
+            f'Could not retrieve metar for {station_id}: {error}'
         )
 
     if decoded:
@@ -173,19 +167,15 @@ def get_nws_product(wfo, product):
             response['@graph'][0]['@id'],
             headers=HEADERS
         ).json(object_pairs_hook=OrderedDict)
-    except requests.exceptions.ConnectionError as e:
+    except requests.exceptions.ConnectionError as error:
         raise WxcastException(
-            'Connection could not be established with the NWS website: '
-            '{error}'.format(error=str(e))
+            f'Connection could not be established with the NWS website: '
+            f'{str(error)}'
         )
     except Exception as error:
         raise WxcastException(
-            'No wx data found attempting to retrieve '
-            '{product} issued by {wfo}: {error}'.format(
-                product=product,
-                wfo=wfo,
-                error=error
-            )
+            f'No wx data found attempting to retrieve '
+            f'{product} issued by {wfo}: {error}'
         )
 
     return response['productText']
@@ -205,7 +195,7 @@ def get_seven_day_forecast(location):
 
     if not geolocation:
         raise WxcastException(
-            'Location not found: {location}.'.format(location=location)
+            f'Location not found: {location}.'
         )
 
     latlong = '{lat},{lon}'.format(
@@ -215,10 +205,7 @@ def get_seven_day_forecast(location):
 
     try:
         data = requests.get(
-            '{NWS_API}/points/{latlong}/forecast'.format(
-                NWS_API=NWS_API,
-                latlong=latlong
-            ),
+            f'{NWS_API}/points/{latlong}/forecast',
             headers=HEADERS
         ).json(object_pairs_hook=OrderedDict)
         if 'properties' not in data:
@@ -229,11 +216,8 @@ def get_seven_day_forecast(location):
         )
     except Exception:
         raise WxcastException(
-            'No forecast found for location: {location} '
-            'coordinates: {latlong}'.format(
-                location=location,
-                latlong=latlong
-            )
+            f'No forecast found for location: {location} '
+            f'coordinates: {latlong}'
         )
 
     return data['properties']['periods']
@@ -246,18 +230,18 @@ def get_wfo_list():
     :return: Return dictionary of wfo {code: name}.
     """
     try:
-        site = '{NWS_API}/products/locations/'.format(NWS_API=NWS_API)
+        site = f'{NWS_API}/products/locations/'
         data = requests.get(site, headers=HEADERS).json(
             object_pairs_hook=OrderedDict
         )
-    except requests.exceptions.ConnectionError as e:
+    except requests.exceptions.ConnectionError as error:
         raise WxcastException(
-            'Connection could not be established with the avwx rest api: '
-            '{error}'.format(error=str(e))
+            f'Connection could not be established with the avwx rest api: '
+            f'{str(error)}'
         )
     except Exception as error:
         raise WxcastException(
-            'Could not retrieve list of WFOs: {error}'.format(error=error)
+            f'Could not retrieve list of WFOs: {error}'
         )
 
     wfo_list = OrderedDict()
@@ -276,27 +260,21 @@ def get_wfo_products(wfo):
     :return: Return dictionary of text products {code: name}.
     """
     try:
-        site = '{NWS_API}/products/locations/{wfo}/types'.format(
-            NWS_API=NWS_API,
-            wfo=wfo.upper()
-        )
+        site = f'{NWS_API}/products/locations/{wfo.upper()}/types'
         data = requests.get(site, headers=HEADERS).json(
             object_pairs_hook=OrderedDict
         )
 
         if not data.get('@graph'):
             raise Exception('Invalid WFO code.')
-    except requests.exceptions.ConnectionError as e:
+    except requests.exceptions.ConnectionError as error:
         raise WxcastException(
-            'Connection could not be established with the nws rest api: '
-            '{error}'.format(error=str(e))
+            f'Connection could not be established with the nws rest api: '
+            f'{str(error)}'
         )
     except Exception as error:
         raise WxcastException(
-            'Could not retrieve products for WFO {wfo}: {error}'.format(
-                wfo=wfo,
-                error=error
-            )
+            f'Could not retrieve products for WFO {wfo}: {error}'
         )
 
     return OrderedDict(

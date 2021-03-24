@@ -101,5 +101,8 @@ Session.vim
 ### PyCharm ###
 .idea/
 
+### VS Code ###
+.vscode/
+
 ### pip ###
 pip-selfcheck.json
