@@ -110,7 +110,7 @@ def get_metar(station_id, decoded=False):
             station_id=station_id
         )
         data = requests.get(site).json()
-        
+
         if data.get('status', 200) == 404:
             raise Exception(
                 f'{station_id} is not a valid station id.'
