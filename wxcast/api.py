@@ -89,7 +89,7 @@ def metar_to_dict(metar_obj, temp_unit='C', pressure_unit='MB'):
     if metar_obj._remarks:
         data['remarks'] = metar_obj.remarks(', ')
     if metar_obj._unparsed_remarks:
-        data['remarks'] = data['remarks'] + ', '.join(
+        data['remarks'] = data.get('remarks', '') + ', '.join(
             metar_obj._unparsed_remarks
         )
 

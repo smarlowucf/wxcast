@@ -20,17 +20,18 @@ Provides weather information in terminal:
 
 ## Requirements
 
--   certifi
--   Click&gt;=6.0
--   geopy
--   requests
+- certifi
+- Click&gt;=6.0
+- geopy
+- requests
+- metar
 
 ## Test Requirements
 
--   flake8
--   pytest
--   pytest-cov
--   vcrpy
+- flake8
+- pytest
+- pytest-cov
+- vcrpy
 
 ## [Docs](https://smarlowucf.github.io/wxcast/)
 
@@ -47,7 +48,7 @@ for info on getting started.
 
 ## License
 
-Copyright (c) 2018 Sean Marlow.
+Copyright (c) 2021 Sean Marlow.
 
 Distributed under the terms of MIT license, see
 [LICENSE](https://github.com/smarlowucf/wxcast/blob/master/LICENSE)
