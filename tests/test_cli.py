@@ -133,3 +133,75 @@ def test_offices():
         out = f.read()
 
     assert out == result.output
+
+
+@vcr.use_cassette('tests/cassettes/office.yml')
+def test_office():
+    runner = CliRunner()
+    result = runner.invoke(main, ['office', 'OHX'])
+    assert result.exit_code == 0
+
+    with open('tests/cassettes/office.out', 'r') as f:
+        out = f.read()
+
+    assert out == result.output
+
+
+@vcr.use_cassette('tests/cassettes/office_invalid.yml')
+def test_office_invalid():
+    runner = CliRunner()
+    result = runner.invoke(main, ['office', 'fake'])
+    assert result.exit_code == 0
+
+    with open('tests/cassettes/office_invalid.out', 'r') as f:
+        out = f.read()
+
+    assert out == result.output
+
+
+@vcr.use_cassette('tests/cassettes/station.yml')
+def test_station():
+    runner = CliRunner()
+    result = runner.invoke(main, ['station', 'KBNA'])
+    assert result.exit_code == 0
+
+    with open('tests/cassettes/station.out', 'r') as f:
+        out = f.read()
+
+    assert out == result.output
+
+
+@vcr.use_cassette('tests/cassettes/station_invalid.yml')
+def test_station_invalid():
+    runner = CliRunner()
+    result = runner.invoke(main, ['station', 'KFAKE'])
+    assert result.exit_code == 0
+
+    with open('tests/cassettes/station_invalid.out', 'r') as f:
+        out = f.read()
+
+    assert out == result.output
+
+
+@vcr.use_cassette('tests/cassettes/stations.yml')
+def test_stations():
+    runner = CliRunner()
+    result = runner.invoke(main, ['stations', 'OHX'])
+    assert result.exit_code == 0
+
+    with open('tests/cassettes/stations.out', 'r') as f:
+        out = f.read()
+
+    assert out == result.output
+
+
+@vcr.use_cassette('tests/cassettes/stations_invalid.yml')
+def test_stations_invalid():
+    runner = CliRunner()
+    result = runner.invoke(main, ['stations', 'fake'])
+    assert result.exit_code == 0
+
+    with open('tests/cassettes/stations_invalid.out', 'r') as f:
+        out = f.read()
+
+    assert out == result.output

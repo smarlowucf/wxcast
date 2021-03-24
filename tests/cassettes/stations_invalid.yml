@@ -1,0 +1,57 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - wxcast app. https://github.com/smarlowucf/wxcast
+    method: GET
+    uri: https://api.weather.gov/offices/FAKE
+  response:
+    body:
+      string: "{\n    \"correlationId\": \"2632f3ca\",\n    \"title\": \"Office Does
+        Not Exist\",\n    \"type\": \"https://api.weather.gov/problems/InvalidOffice\",\n
+        \   \"status\": 404,\n    \"detail\": \"Office FAKE does not exist\",\n    \"instance\":
+        \"https://api.weather.gov/requests/2632f3ca\"\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Feature-Flags
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - private, must-revalidate, max-age=86377
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '259'
+      Content-Type:
+      - application/problem+json
+      Date:
+      - Wed, 24 Mar 2021 20:16:55 GMT
+      Expires:
+      - Thu, 25 Mar 2021 20:16:32 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx/1.16.1
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains ; preload
+      Vary:
+      - Accept,Feature-Flags,Accept-Language
+      X-Correlation-ID:
+      - 2632f3ca
+      X-Edge-Request-ID:
+      - f695db9
+      X-Request-ID:
+      - ebefffdf-ab49-4d01-8621-b725491c1218
+      X-Server-ID:
+      - vm-lnx-nids-apiapp3.ncep.noaa.gov
+    status:
+      code: 404
+      message: Not Found
+version: 1

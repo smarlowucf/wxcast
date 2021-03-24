@@ -204,8 +204,10 @@ def get_seven_day_forecast(location):
     )
 
     try:
+        point_data = get_point_info(latlong)
         data = requests.get(
-            f'{NWS_API}/points/{latlong}/forecast',
+            f'{NWS_API}/gridpoints/{point_data["wfo"]}/'
+            f'{point_data["x"]},{point_data["y"]}/forecast',
             headers=HEADERS
         ).json(object_pairs_hook=OrderedDict)
         if 'properties' not in data:
@@ -221,6 +223,38 @@ def get_seven_day_forecast(location):
         )
 
     return data['properties']['periods']
+
+
+def get_point_info(location):
+    """
+    Retrieve point forecast info for the given location.
+
+    :param location: String value of coordinates (lat/lon).
+    :return: A dictionary with info on a point forecast location.
+    """
+    try:
+        data = requests.get(
+            f'{NWS_API}/points/{location}',
+            headers=HEADERS
+        ).json(object_pairs_hook=OrderedDict)
+        if 'properties' not in data:
+            raise Exception()
+    except requests.exceptions.ConnectionError:
+        raise WxcastException(
+            'Connection could not be established with the nws rest api.'
+        )
+    except Exception:
+        raise WxcastException(
+            f'No point found for coordinates: {location}.'
+        )
+
+    point_data = {
+        'wfo': data['properties']['gridId'],
+        'x': data['properties']['gridX'],
+        'y': data['properties']['gridY']
+    }
+
+    return point_data
 
 
 def get_wfo_list():
@@ -280,3 +314,110 @@ def get_wfo_products(wfo):
     return OrderedDict(
         (d['productCode'], d['productName']) for d in data['@graph']
     )
+
+
+def get_wfo_info(wfo):
+    """
+    Get information for the given WFO.
+
+    :param wfo: The weather forecast office to retrieve info for.
+    :return: Return dictionary of text info {code: name}.
+    """
+    try:
+        site = f'{NWS_API}/offices/{wfo.upper()}'
+        data = requests.get(site, headers=HEADERS).json(
+            object_pairs_hook=OrderedDict
+        )
+
+        if not data.get('@id'):
+            raise Exception('Invalid WFO code.')
+    except requests.exceptions.ConnectionError as error:
+        raise WxcastException(
+            f'Connection could not be established with the nws rest api: '
+            f'{str(error)}'
+        )
+    except Exception as error:
+        raise WxcastException(
+            f'Could not retrieve info for WFO {wfo}: {error}'
+        )
+
+    wfo_data = {
+        'name': data['name'],
+        'telephone': data['telephone'],
+        'fax number': data['faxNumber'],
+        'email': data['email'],
+        'address': f'{data["address"]["streetAddress"]}, '
+                   f'{data["address"]["addressLocality"]}, '
+                   f'{data["address"]["addressRegion"]} '
+                   f'{data["address"]["postalCode"]}'
+    }
+
+    return wfo_data
+
+
+def get_stations_for_wfo(wfo):
+    """
+    Get a list of weather stations for the given WFO.
+
+    :param wfo: The weather forecast office to retrieve station list for.
+    :return: Return dictionary of text info {code: name}.
+    """
+    try:
+        site = f'{NWS_API}/offices/{wfo.upper()}'
+        data = requests.get(site, headers=HEADERS).json(
+            object_pairs_hook=OrderedDict
+        )
+
+        if not data.get('@id'):
+            raise Exception('Invalid WFO code.')
+    except requests.exceptions.ConnectionError as error:
+        raise WxcastException(
+            f'Connection could not be established with the nws rest api: '
+            f'{str(error)}'
+        )
+    except Exception as error:
+        raise WxcastException(
+            f'Could not retrieve weather stations for WFO {wfo}: {error}'
+        )
+
+    stations = [
+        station.rsplit('/', maxsplit=1)[-1] for
+        station in data['approvedObservationStations']
+    ]
+
+    return stations
+
+
+def get_station_info(station_id):
+    """
+    Get information for a given weather station.
+
+    :param station_id: The weather station id to retrieve info for.
+    :return: Return dictionary of text info {code: name}.
+    """
+    try:
+        site = f'{NWS_API}/stations/{station_id.upper()}'
+        data = requests.get(site, headers=HEADERS).json(
+            object_pairs_hook=OrderedDict
+        )
+
+        if not data.get('@context'):
+            raise Exception('Invalid station id.')
+    except requests.exceptions.ConnectionError as error:
+        raise WxcastException(
+            f'Connection could not be established with the nws rest api: '
+            f'{str(error)}'
+        )
+    except Exception as error:
+        raise WxcastException(
+            f'Could not retrieve info for weather station {station_id}: '
+            f'{error}'
+        )
+
+    station_data = {
+        'name': data['properties']['name'],
+        'time zone': data['properties']['timeZone'],
+        'elevation': data['properties']['elevation']['value']
+    }
+
+    return station_data

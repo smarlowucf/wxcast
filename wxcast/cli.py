@@ -228,8 +228,92 @@ def text(no_color, wfo, product):
         click.echo_via_pager(response)
 
 
+@click.command()
+@click.option(
+    '--no-color',
+    is_flag=True,
+    help='Remove ANSI color and styling from output.'
+)
+@click.argument('wfo')
+def office(no_color, wfo):
+    """
+    Retrieve information for a given wfo.
+
+    Example: wxcast info slc
+
+    :param no_color: If True do not style string output.
+    :param wfo: The weather forecast office abbreviation (BOU).
+    """
+    try:
+        response = api.get_wfo_info(wfo)
+    except Exception as e:
+        utils.echo_style(str(e), no_color, fg='red')
+    else:
+        utils.echo_dict(response, no_color)
+
+
+@click.command()
+@click.option(
+    '--no-color',
+    is_flag=True,
+    help='Remove ANSI color and styling from output.'
+)
+@click.argument('wfo')
+def stations(no_color, wfo):
+    """
+    Retrieve a list of stations for a given wfo.
+
+    Example: wxcast info slc
+
+    :param no_color: If True do not style string output.
+    :param wfo: The weather forecast office abbreviation (BOU).
+    """
+    try:
+        response = api.get_stations_for_wfo(wfo)
+    except Exception as e:
+        utils.echo_style(str(e), no_color, fg='red')
+    else:
+        utils.echo_style('\n'.join(response), no_color)
+
+
+@click.command()
+@click.option(
+    '--no-color',
+    is_flag=True,
+    help='Remove ANSI color and styling from output.'
+)
+@click.argument('station_id')
+def station(no_color, station_id):
+    """
+    Retrieve info for a weather station.
+
+    Example: wxcast station kbna
+
+    :param no_color: If True do not style string output.
+    :param station_id: The weather station id.
+    """
+    try:
+        response = api.get_station_info(station_id)
+    except Exception as e:
+        utils.echo_style(str(e), no_color, fg='red')
+    else:
+        try:
+            # Try to convert elevation to ft and meters.
+            response['elevation'] = '{}ft ({}m)'.format(
+                int(float(response['elevation']) * 3.28084),
+                response['elevation']
+            )
+        except (KeyError, Exception):
+            pass
+
+        utils.echo_dict(response, no_color)
+
+
 main.add_command(metar)
 main.add_command(text)
 main.add_command(offices)
 main.add_command(products)
 main.add_command(forecast)
+main.add_command(office)
+main.add_command(stations)
+main.add_command(station)

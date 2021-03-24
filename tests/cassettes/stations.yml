@@ -1,0 +1,72 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - wxcast app. https://github.com/smarlowucf/wxcast
+    method: GET
+    uri: https://api.weather.gov/offices/OHX
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA52Z3VPaQBTF3/0rGJ4VWEK+fBKxlVbBCrZUO31YYIFMIZvZjXzo+L83CWQhts5w
+        j4/J/rL33nM2OQ6vJ6Xkr3wxkmEs1nH5vPSaXdleXQqlAxkmV8uswsqnh7fkiA/TG7M4jvR5tapH
+        M7HgFamm1XK27u109+x4E4l05bVMnhcuRBjfqSkPgxcepw/PlwXjw8fxKKisBI9nQlWmclmVk0kw
+        Erp61/6ZE1vg4ELIF9lGXa5ny2A+F6elh25+k4/HSmj9rsO8tm9Sx3ze3K05aFTHSoi4aeCyXauV
+        BtvCSv04a6HUk3x8CO32uk1mNA/iTVbmfFxqB6M/Um3+s7Inprs5m4Kz21FWVkuOsyItl1lecbix
+        mItoJsPsvsPsM9dunHlJjXnbE77uPi+GQpkFDStdYOULEtGCeXpTqzM5WydDHy64joW6CCXn6ezz
+        lToZb1MfirRarYoizdZGi9VBU1rllyOu3ut/hOj9Xjt/QDKtSIY6GM5FSz6HcSDSin7tR/bRs16S
+        IenqKGU21Yduq2ZGQMOYDWF1hmEuhFnYbhbWm4UV2cCKbGC6NXwIs7GROFhvHohhI/Gw3jxMbh8S
+        gNWgkTAGYlBvjGG91SEBmAXJzbDTzbDTzbDTzRrgbpgANoZhp5s5mAAOVqSL7eZiAmBvLoa9ghj2
+        CmKev01Pv/8NE5+lEqMk9zylDCVRTHZgssFTrUZopwg6KEiYRBH0UJBgxwLIaihI8FYBrBNelEWw
+        gYKoAeqoASgJsQiiBqijBrBQA1DibBGsoyDqHAt1jo0awEYNYKMGoHw1C6CDGoDywS2CqAEc1AAO
+        agBKOiiCqHMoCaEIopZzUcu5qOU81HI+agAfNYBvf5xOAiXoySSB6KnEQBRXGYhiDANRTGEgiiFy
+        iJRADER59+QQKXkYiOIcAyHiktKGgRBxSSnDQIi4pHRhIERcUqowEOIIUprIIVKSMBAiLilBGAgR
+        l5QcDISIS0oMBkLEJSUFAyHHnZQQcoiUDgwE7YR4jxQlDIR4jxQhcshHbETKHAZCbOQj4vqIuL5b
+        TDU8ipRcivHdUAu1zH4C2v2MdmS40bvV1ZvLbvOYgvZAq00ELgfXNKDd/0EsiQp0+rc04KrbJZZ0
+        Qy3p/pFYUus7Deh1iDo0mked9D3Q73wiNn11TwR6LRpwfTugAQ9Ue/d7l0Tg8QtRuC6x6Y5/1Ed7
+        D3wdEO3NOvn/WSdvfwGF7PW9/yAAAA==
+    headers:
+      Access-Control-Allow-Headers:
+      - Feature-Flags
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, max-age=86118, s-maxage=120
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '934'
+      Content-Type:
+      - application/ld+json
+      Date:
+      - Wed, 24 Mar 2021 20:10:38 GMT
+      Expires:
+      - Thu, 25 Mar 2021 20:05:56 GMT
+      Server:
+      - nginx/1.16.1
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains ; preload
+      Vary:
+      - Accept-Encoding
+      - Accept,Feature-Flags,Accept-Language
+      X-Correlation-ID:
+      - 2dedde48
+      X-Edge-Request-ID:
+      - 7de350ff
+      X-Request-ID:
+      - 5925bd71-b006-400c-b4b1-823f5e1e8771
+      X-Server-ID:
+      - vm-lnx-nids-apiapp7.ncep.noaa.gov
+    status:
+      code: 200
+      message: OK
+version: 1

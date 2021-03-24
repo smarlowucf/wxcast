@@ -1,0 +1,67 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - wxcast app. https://github.com/smarlowucf/wxcast
+    method: GET
+    uri: https://api.weather.gov/stations/KBNA
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6VVXW+bMBR9z6+I2GtrwrqmCU/JUq2qVqX70iZ16oMDN8Qb2Mw2kKzqf981BApk
+        ELX1Q+TY555zP83DYIjLmnmCa9hqyx3+zE/y043WsXJtOwDxSwlOhAzK/WnoV9u9LTF/Qt86qQge
+        ql0hkoJUTHAUsRzi1ID5dbY1F6UmjRnJgOoNSBKI1EYNEYpg96ZtpupWyttARHNH2zj0tkQiMMsy
+        ImLgAVOEgzb0Jh4VU/knPNBIONM1Y0/4oEgWCcLQzBNRJLhtMAeis1R4dPWiuNCbCLTcoXEzjwUx
+        8w2rcq9ALISQPuNUg2qRFFC9i8GAkdHNfusbpkHS0GogH1vqHtO7QoD6vgSlbjCQ0By2069Rt4H8
+        AoEpcgvnM0RyD46Ec1nC+gJR7ueEcs1QmqXwnYYJ9EezAioZDzq0X0yb5pD+gNLjNKZzFthSR5gq
+        WF9qDLpXbC0keFTp2/WadVbj2WxXkvmXVNPX8sXJKmTeneCv9swTCdddw9PNMmju7gtWq6hB1wyb
+        GcCWV/bH98v5vjxWqfEBgYksq/b/sa7AnwS+KLUCYxhPs11/m806nYzJeDJ1LkbletdMwtmYOM5k
+        Mq0O7we1VFmxxBdQapZT15yZPT/aZlqzrXu7UiDTHPi1wNeREEJxd1CfaqaciUOm4/PzabW6pybf
+        u9FTKWvNYO3dvfYBR3vNQBqDtuucRjnRkqpNysIQTobVdniNnzfJcxYaDudMxkI2iqRZBPueteYR
+        SOZRe7HB30DUYeWw9CX3L9Iou0Ta35Z3o7cXzYbY9/URigKHBIvRWYNgzST8KOClz0ecQYPSkaJ/
+        Bo//AAja2aM3CAAA
+    headers:
+      Access-Control-Allow-Headers:
+      - Feature-Flags
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, max-age=86211, s-maxage=120
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '639'
+      Content-Type:
+      - application/geo+json
+      Date:
+      - Wed, 24 Mar 2021 20:10:38 GMT
+      Expires:
+      - Thu, 25 Mar 2021 20:07:29 GMT
+      Server:
+      - nginx/1.16.1
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains ; preload
+      Vary:
+      - Accept-Encoding
+      - Accept,Feature-Flags,Accept-Language
+      X-Correlation-ID:
+      - 34d6691d
+      X-Edge-Request-ID:
+      - 7de34c0b
+      X-Request-ID:
+      - 44f40e9e-4f34-41a3-a03a-5f87299e2ae0
+      X-Server-ID:
+      - vm-lnx-nids-apiapp6.ncep.noaa.gov
+    status:
+      code: 200
+      message: OK
+version: 1

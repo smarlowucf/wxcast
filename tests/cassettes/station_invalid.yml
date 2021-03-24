@@ -1,0 +1,57 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - wxcast app. https://github.com/smarlowucf/wxcast
+    method: GET
+    uri: https://api.weather.gov/stations/KFAKE
+  response:
+    body:
+      string: "{\n    \"correlationId\": \"2dfa643d\",\n    \"title\": \"Unexpected
+        Problem\",\n    \"type\": \"https://api.weather.gov/problems/UnexpectedProblem\",\n
+        \   \"status\": 500,\n    \"detail\": \"An unexpected problem has occurred.\",\n
+        \   \"instance\": \"https://api.weather.gov/requests/2dfa643d\"\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - Feature-Flags
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - private, must-revalidate, max-age=86381
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '269'
+      Content-Type:
+      - application/problem+json
+      Date:
+      - Wed, 24 Mar 2021 20:14:33 GMT
+      Expires:
+      - Thu, 25 Mar 2021 20:14:14 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx/1.16.1
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains ; preload
+      Vary:
+      - Accept,Feature-Flags,Accept-Language
+      X-Correlation-ID:
+      - 2dfa643d
+      X-Edge-Request-ID:
+      - a219ca
+      X-Request-ID:
+      - 12f849d1-4b42-4882-97b6-46cd8b3aa7ca
+      X-Server-ID:
+      - vm-lnx-nids-apiapp6.ncep.noaa.gov
+    status:
+      code: 500
+      message: Internal Server Error
+version: 1

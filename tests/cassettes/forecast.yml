@@ -2,147 +2,264 @@ interactions:
 - request:
     body: null
     headers:
-      Connection: [close]
-      Host: [geocode.arcgis.com]
-      User-Agent: ['wxcast app. https://github.com/smarlowucf/wxcast']
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - wxcast app. https://github.com/smarlowucf/wxcast
     method: GET
     uri: https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?singleLine=denver%2C+co&f=json&maxLocations=1
   response:
-    body: {string: '{"spatialReference":{"wkid":4326,"latestWkid":4326},"candidates":[{"address":"Denver,
-        Colorado","location":{"x":-104.99201999999997,"y":39.740010000000041},"score":100,"attributes":{},"extent":{"xmin":-105.19001999999996,"ymin":39.54201000000004,"xmax":-104.79401999999997,"ymax":39.938010000000041}}]}'}
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAF2OzY4CIRCEX8X0GScgzCJc1yfwsgfjAYc2IY6wYfBnM5l3t4e4f9apU5X6ukYY
+        Pl0Jrt/iETPGDsGOcDsFD1bJ1RuD3hUcysePMzHoXPTBzz7Y3QjO+4wD3bDBeMXMFu+pT9n5BFRP
+        HfFTnLF3sEvBVWPMigvzlGbwBVaaRivOBX9KCfozdCnTHjIZuFJyOFzqz5EyvBeMpVLPIVZw2wjT
+        /gfXiNit1L9suWZUct9r9Nq8lOaISkbJP4PUNO2nB1QwfmQvAQAA
     headers:
-      Cache-Control: [max-age=300]
-      Connection: [close]
-      Content-Length: ['302']
-      Content-Type: [text/plain;charset=UTF-8]
-      Date: ['Sat, 16 Jun 2018 03:08:12 GMT']
-      ETag: [a4052209]
-      Server: ['']
-      Vary: ['Origin,Accept-Encoding']
-      X-Cached: [MISS]
-    status: {code: 200, message: ''}
+      Cache-Control:
+      - max-age=300
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '210'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Wed, 24 Mar 2021 20:11:33 GMT
+      ETag:
+      - 1ba2caad
+      Server:
+      - ''
+      Strict-Transport-Security:
+      - max-age=63072000
+      Vary:
+      - Origin,Accept-Encoding
+      X-Cached:
+      - MISS
+      X-Content-Type-Options:
+      - nosniff
+      X-XSS-Protection:
+      - 1; mode=block
+      x-esri-ftiles-cache-compress:
+      - 'true'
+    status:
+      code: 200
+      message: ''
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: ['wxcast app. https://github.com/smarlowucf/wxcast']
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - wxcast app. https://github.com/smarlowucf/wxcast
     method: GET
-    uri: https://api.weather.gov/points/39.74001000000004,-104.99201999999997/forecast
+    uri: https://api.weather.gov/points/39.74001000000004,-104.99201999999997
   response:
-    body: {string: "{\n    \"correlationId\": \"c77132c7-ea2d-4461-9bbf-5c0c39635314\"\
-        ,\n    \"title\": \"Adjusting Precision Of Point Coordinate\",\n    \"type\"\
-        : \"https://api.weather.gov/problems/AdjustPointPrecision\",\n    \"status\"\
-        : 301,\n    \"detail\": \"The precision of latitude/longitude points is limited\
-        \ to 4 decimal digits for efficiency. The location attribute contains your\
-        \ request mapped to the nearest supported point. If your client supports it,\
-        \ you will be redirected.\",\n    \"instance\": \"https://api.weather.gov/requests/c77132c7-ea2d-4461-9bbf-5c0c39635314\"\
-        \n}"}
+    body:
+      string: "{\n    \"correlationId\": \"2629f1a7\",\n    \"title\": \"Adjusting
+        Precision Of Point Coordinate\",\n    \"type\": \"https://api.weather.gov/problems/AdjustPointPrecision\",\n
+        \   \"status\": 301,\n    \"detail\": \"The precision of latitude/longitude
+        points is limited to 4 decimal digits for efficiency. The location attribute
+        contains your request mapped to the nearest supported point. If your client
+        supports it, you will be redirected.\",\n    \"instance\": \"https://api.weather.gov/requests/2629f1a7\"\n}"
     headers:
-      Access-Control-Allow-Origin: ['*']
-      Cache-Control: ['private, must-revalidate, max-age=600']
-      Connection: [keep-alive]
-      Content-Length: ['539']
-      Content-Type: [application/problem+json]
-      Date: ['Sat, 16 Jun 2018 03:08:13 GMT']
-      Expires: ['Sat, 16 Jun 2018 03:18:13 GMT']
-      Location: ['/points/39.74,-104.992/forecast']
-      Pragma: [no-cache]
-      Server: [nginx/1.12.2]
-      Strict-Transport-Security: [max-age=31536000 ; includeSubDomains ; preload]
-      Vary: [Accept]
-      X-Correlation-ID: [c77132c7-ea2d-4461-9bbf-5c0c39635314]
-      X-Request-ID: [c77132c7-ea2d-4461-9bbf-5c0c39635314]
-      X-Server-ID: [vm-lnx-nids-apiapp25.ncep.noaa.gov]
-    status: {code: 301, message: Moved Permanently}
+      Access-Control-Allow-Headers:
+      - Feature-Flags
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - private, must-revalidate, max-age=86319
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '483'
+      Content-Type:
+      - application/problem+json
+      Date:
+      - Wed, 24 Mar 2021 20:11:33 GMT
+      Expires:
+      - Thu, 25 Mar 2021 20:10:12 GMT
+      Location:
+      - /points/39.74,-104.992
+      Pragma:
+      - no-cache
+      Server:
+      - nginx/1.16.1
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains ; preload
+      Vary:
+      - Accept,Feature-Flags,Accept-Language
+      X-Correlation-ID:
+      - 2629f1a7
+      X-Edge-Request-ID:
+      - 7de84559
+      X-Request-ID:
+      - 9ad1c5e9-ef77-4004-8ed4-688294c340d3
+      X-Server-ID:
+      - vm-lnx-nids-apiapp1.ncep.noaa.gov
+    status:
+      code: 301
+      message: Moved Permanently
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: ['wxcast app. https://github.com/smarlowucf/wxcast']
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - wxcast app. https://github.com/smarlowucf/wxcast
     method: GET
-    uri: https://api.weather.gov/points/39.74,-104.992/forecast
+    uri: https://api.weather.gov/points/39.74,-104.992
   response:
-    body: {string: "{\n    \"correlationId\": \"a415bbbf-668b-4d90-ae56-4db0b7adfe69\"\
-        ,\n    \"title\": \"Redirect\",\n    \"type\": \"https://api.weather.gov/problems/GridpointRedirect\"\
-        ,\n    \"status\": 301,\n    \"detail\": \"The requested data can be found\
-        \ here: /gridpoints/BOU/62,61/forecast\",\n    \"instance\": \"https://api.weather.gov/requests/a415bbbf-668b-4d90-ae56-4db0b7adfe69\"\
-        \n}"}
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6VW21LbMBB95ysY9xV8CSGQPNGGQjtlJr1f6DAdxd44am3JlRSblMm/d2XHju3Y
+        DgS9YKSz5+xKe8nDwSEu48LlTMG9MkaHP9OddHeuVCRHluUD/y05M7nw8+/jwCs+17am/ifwjKOC
+        4KH4ykRiEJJyhiKGYzolYHqc3OuDXJNE1EyAqDkI0+exhRo84P7yRd1Mlq2kO4eQpI7WcehtjkRg
+        kiQmj4D5VJoMlKbX8ciIiL/BlsaCUVUydrkH0kxCblI0c3kYcmZpzJboRcxdMt0rLvQmBCWWaFy9
+        x4yYeppVjq6BjzkXHmVEgayRZFC1jECDkXGU/FE3VIEggVFBrmrqLlXLTIB4ngApbzCQQG/Wr1+h
+        bgX5EXz9yDWcRxHJXNgRzmUO6wpEjj4sCFMUpWkMX0mwgO5opkAEZX6L9t60cQrpDijeTaMzZ4wp
+        tYOpgHVdjUZ3is24AJdINZnNaOtrPJntWlDvkijyXL5oMQ2oe8vZsz1z+YKptuJpZzmoft1lrEb2
+        Bm01HHHsA9I6GZpn/aNjx+6bw2Fv/UxGrnWFBguRv15zeRfg95qx9NAYzqbGyz1ar1yxegOpN3Zp
+        9Yrju4PSjRmRwEYoFE2ZS75c7B909ZaT+9F2PInOFePV5Et5dys529tmipBWjcDHPHzrNTDrg++4
+        P+jVNn/oTafBhy51bbiOH3UsJB04VmHYQPaGL0Sw3JvSmmf2DcylynsSd5mLTyWIGLseZ59U+kc+
+        2VWZG5Z4BQRpK9WzQ2WDv/aToLk4Ng/UOQPbimWTZB1Fky/M3FPTHvQGTn+4TaGXzvBT+9wZ5uts
+        C3bX3dSaC2zj5nrWvvZ8SNBZ0RRLMWfHk6bjzvGaIvJhNXBOB6Z93ncc2zlzTmy73xx2eSyl36PQ
+        2AKuGlzpGrYVT9CBx0p74AsA+UuJ+jBNvWjr4Q31sp4trcn9D8/lpvDGk1u7b1c78Xqw7KDIcEgw
+        tk8q1TajAr5l8Ec6gwbakV7VEUVDyAlehiCoS6xLYHElfwxBPCLWVa2R764+X2c3uDpY/QdNwKR6
+        /gsAAA==
     headers:
-      Access-Control-Allow-Origin: ['*']
-      Cache-Control: ['private, must-revalidate, max-age=600']
-      Connection: [keep-alive]
-      Content-Length: ['348']
-      Content-Type: [application/problem+json]
-      Date: ['Sat, 16 Jun 2018 03:08:13 GMT']
-      Expires: ['Sat, 16 Jun 2018 03:18:13 GMT']
-      Location: ['/gridpoints/BOU/62,61/forecast']
-      Pragma: [no-cache]
-      Server: [nginx/1.12.2]
-      Strict-Transport-Security: [max-age=31536000 ; includeSubDomains ; preload]
-      Vary: [Accept]
-      X-Correlation-ID: [a415bbbf-668b-4d90-ae56-4db0b7adfe69]
-      X-Request-ID: [a415bbbf-668b-4d90-ae56-4db0b7adfe69]
-      X-Server-ID: [vm-lnx-nids-apiapp16.ncep.noaa.gov]
-    status: {code: 301, message: Moved Permanently}
+      Access-Control-Allow-Headers:
+      - Feature-Flags
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, max-age=86326, s-maxage=120
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '802'
+      Content-Type:
+      - application/geo+json
+      Date:
+      - Wed, 24 Mar 2021 20:11:33 GMT
+      Expires:
+      - Thu, 25 Mar 2021 20:10:19 GMT
+      Server:
+      - nginx/1.16.1
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains ; preload
+      Vary:
+      - Accept-Encoding
+      - Accept,Feature-Flags,Accept-Language
+      X-Correlation-ID:
+      - 2629b047
+      X-Edge-Request-ID:
+      - 7de846c6
+      X-Request-ID:
+      - 58be4d69-e8e2-4833-a355-3124e1d3939a
+      X-Server-ID:
+      - vm-lnx-nids-apiapp12.ncep.noaa.gov
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: ['wxcast app. https://github.com/smarlowucf/wxcast']
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - wxcast app. https://github.com/smarlowucf/wxcast
     method: GET
     uri: https://api.weather.gov/gridpoints/BOU/62,61/forecast
   response:
     body:
       string: !!binary |
-        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
+        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
     headers:
-      Access-Control-Allow-Origin: ['*']
-      Cache-Control: ['public, max-age=600, s-maxage=120']
-      Connection: [keep-alive]
-      Content-Encoding: [gzip]
-      Content-Length: ['1631']
-      Content-Type: [application/geo+json]
-      Date: ['Sat, 16 Jun 2018 03:08:13 GMT']
-      Expires: ['Sat, 16 Jun 2018 03:18:13 GMT']
-      Server: [nginx/1.12.2]
-      Strict-Transport-Security: [max-age=31536000 ; includeSubDomains ; preload]
-      Vary: [Accept-Encoding, Accept]
-      X-Correlation-ID: [6e4a053a-1fbf-4696-9816-f3e86386d15a]
-      X-Request-ID: [6e4a053a-1fbf-4696-9816-f3e86386d15a]
-      X-Server-ID: [vm-lnx-nids-apiapp19.ncep.noaa.gov]
-    status: {code: 200, message: OK}
+      Access-Control-Allow-Headers:
+      - Feature-Flags
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - public, max-age=821, s-maxage=3600
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '1636'
+      Content-Type:
+      - application/geo+json
+      Date:
+      - Wed, 24 Mar 2021 20:11:34 GMT
+      Expires:
+      - Wed, 24 Mar 2021 20:25:15 GMT
+      Last-Modified:
+      - Wed, 24 Mar 2021 18:58:26 GMT
+      Server:
+      - nginx/1.16.1
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains ; preload
+      Vary:
+      - Accept-Encoding
+      - Accept,Feature-Flags,Accept-Language
+      X-Correlation-ID:
+      - '34875071'
+      X-Edge-Request-ID:
+      - 7de86711
+      X-Request-ID:
+      - f3f9db91-74b4-463b-9332-e3a803e625a9
+      X-Server-ID:
+      - vm-lnx-nids-apiapp2.ncep.noaa.gov
+    status:
+      code: 200
+      message: OK
 version: 1
