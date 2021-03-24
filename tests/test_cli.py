@@ -6,7 +6,7 @@ from wxcast.cli import main
 
 
 def test_print_license():
-    license = 'wxcast Copyright (C) 2018 Sean Marlow. (MIT License)\n\n' \
+    license = 'wxcast Copyright (C) 2021 Sean Marlow. (MIT License)\n\n' \
         'See LICENSE for more information.\n'
 
     runner = CliRunner()

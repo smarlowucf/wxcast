@@ -1,25 +1,15 @@
-At 140253Z the conditions for KDEN are VFR
+At Tue Mar 23 22:53:00 2021 the conditions are:
 
-  Altimeter:  30.09inHg (1019hPa)
-     Clouds:  Few clouds at 10000ft - Reported AGL
-   Dewpoint:  -04C (25F)
-      Other:  
-      51009:  3-hour pressure difference: +/- 0.9 mb - Increasing, then
-              steady
-        AO2:  Automated with precipitation sensor
-     SLP191:  Sea level pressure: 1019.1 hPa
-  T00281044:  Temperature 2.8°C and dewpoint -4.4°C
-Temperature:  03C (37F)
- Visibility:  10sm (16.1km)
-       Wind:  S-170 at 13kt
-
-       City:  Denver
-    Country:  USA
-  Elevation:  5433ft (1656m)
-       IATA:  DEN
-       ICAO:  KDEN
-   Latitude:  39.86165639
-  Longitude:  -104.6731775
-       Name:  International Airport
-   Priority:  0
-      State:  CO
+           station:  KDEN
+              type:  routine report, cycle 23 (automatic report)
+              time:  Tue Mar 23 22:53:00 2021
+       temperature:  4.4 C
+         dew point:  -2.8 C
+              wind:  N at 18 knots
+        visibility:  10 miles
+          pressure:  1010.8 mb
+               sky:  a few clouds at 3300 feet, broken clouds at 6500 feet,
+                     broken clouds at 20000 feet
+sea level pressure:  1010.4 mb
+           remarks:  Automated station (type 2)$
+         elevation:  5433ft (1656m)

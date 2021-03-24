@@ -2,7 +2,7 @@
 #
 # wxcast: A Python API and cli to collect weather information.
 #
-# Copyright (c) 2018 Sean Marlow
+# Copyright (c) 2021 Sean Marlow
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ def print_license(ctx, param, value):
         return
 
     click.echo(
-        'wxcast Copyright (C) 2018 Sean Marlow. (MIT License)\n\n'
+        'wxcast Copyright (C) 2021 Sean Marlow. (MIT License)\n\n'
         'See LICENSE for more information.'
     )
     ctx.exit()

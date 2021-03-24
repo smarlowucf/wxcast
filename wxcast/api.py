@@ -2,7 +2,7 @@
 #
 # wxcast: A Python API and cli to collect weather information.
 #
-# Copyright (c) 2018 Sean Marlow
+# Copyright (c) 2021 Sean Marlow
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -61,7 +61,9 @@ def metar_to_dict(metar_obj, temp_unit='C', pressure_unit='MB'):
     if metar_obj.sky:
         data['sky'] = metar_obj.sky_conditions(', ')
     if metar_obj.press_sea_level:
-        data['sea level pressure'] = metar_obj.press_sea_level.string(pressure_unit)
+        data['sea level pressure'] = metar_obj.press_sea_level.string(
+            pressure_unit
+        )
     if metar_obj.max_temp_6hr:
         data['6 hour max temp'] = str(metar_obj.max_temp_6hr)
     if metar_obj.max_temp_6hr:
@@ -87,9 +89,12 @@ def metar_to_dict(metar_obj, temp_unit='C', pressure_unit='MB'):
     if metar_obj._remarks:
         data['remarks'] = metar_obj.remarks(', ')
     if metar_obj._unparsed_remarks:
-        data['remarks'] = data['remarks'] + ', '.join(metar_obj._unparsed_remarks)
+        data['remarks'] = data['remarks'] + ', '.join(
+            metar_obj._unparsed_remarks
+        )
 
     return data
+
 
 def get_metar(station_id, decoded=False):
     """
@@ -105,6 +110,12 @@ def get_metar(station_id, decoded=False):
             station_id=station_id
         )
         data = requests.get(site).json()
+        
+        if data.get('status', 200) == 404:
+            raise Exception(
+                f'{station_id} is not a valid station id.'
+            )
+
         raw_metar = data['properties']['rawMessage']
 
         if not raw_metar:
@@ -216,7 +227,7 @@ def get_seven_day_forecast(location):
         raise WxcastException(
             'Connection could not be established with the nws rest api.'
         )
-    except Exception as e:
+    except Exception:
         raise WxcastException(
             'No forecast found for location: {location} '
             'coordinates: {latlong}'.format(

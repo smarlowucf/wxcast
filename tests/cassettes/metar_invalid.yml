@@ -2,22 +2,55 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [python-requests/2.18.4]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.25.1
     method: GET
-    uri: http://avwx.rest/api/metar/KFAKE?options=info,translate
+    uri: https://api.weather.gov/stations/KFAKE/observations/latest
   response:
-    body: {string: "{\n  \"Error\": \"KFAKE is not a valid ICAO station ident\", \n\
-        \  \"Help\": \"ICAO station ID or coord pair. Ex: KJFK or \\\"12.34,-12.34\\\
-        \"\", \n  \"Param\": \"station\"\n}\n"}
+    body:
+      string: "{\n    \"correlationId\": \"20ed3694\",\n    \"title\": \"Not Found\",\n
+        \   \"type\": \"https://api.weather.gov/problems/NotFound\",\n    \"status\":
+        404,\n    \"detail\": \"Not Found\",\n    \"instance\": \"https://api.weather.gov/requests/20ed3694\"\n}"
     headers:
-      Access-Control-Allow-Origin: ['*']
-      Content-Length: ['154']
-      Content-Type: [application/json]
-      Date: ['Sat, 16 Jun 2018 03:04:11 GMT']
-      Server: [gunicorn/19.8.1]
-      X-Robots-Tag: [noindex]
-    status: {code: 400, message: BAD REQUEST}
+      Access-Control-Allow-Headers:
+      - Feature-Flags
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - private, must-revalidate, max-age=300
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '225'
+      Content-Type:
+      - application/problem+json
+      Date:
+      - Wed, 24 Mar 2021 00:23:23 GMT
+      Expires:
+      - Wed, 24 Mar 2021 00:28:23 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx/1.16.1
+      Strict-Transport-Security:
+      - max-age=31536000 ; includeSubDomains ; preload
+      Vary:
+      - Accept,Feature-Flags,Accept-Language
+      X-Correlation-ID:
+      - 20ed3694
+      X-Edge-Request-ID:
+      - ba25d54
+      X-Request-ID:
+      - c1955d4c-8d48-4cc3-a855-179bd394eba2
+      X-Server-ID:
+      - vm-lnx-nids-apiapp1.ncep.noaa.gov
+    status:
+      code: 404
+      message: Not Found
 version: 1
