@@ -2,7 +2,6 @@
 
 A CLI utility for retrieving weather information.
 
-![wxcast metar](https://raw.githubusercontent.com/smarlowucf/wxcast/master/images/metar.png)
 ![wxcast decoded metar](https://raw.githubusercontent.com/smarlowucf/wxcast/master/images/metar-decoded.png)
 
 ## Overview

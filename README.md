@@ -4,7 +4,7 @@ A CLI utility for retrieving weather information.
 
 [![Build Status](https://github.com/smarlowucf/wxcast/actions/workflows/test.yml/badge.svg)](https://github.com/smarlowucf/wxcast/actions/workflows/test.yml)
 
-![wxcast metar](https://raw.githubusercontent.com/smarlowucf/wxcast/master/images/metar.gif)
+![wxcast decoded metar](https://raw.githubusercontent.com/smarlowucf/wxcast/master/images/metar-decoded.png)
 
 ## Overview
 
