@@ -1,3 +1,15 @@
+# v2.0.0 (2021-03-25)
+
+- Fix metar functions.
+- Add temp unit option to metar and conditions.
+- Migrate to GitHub actions.
+- Use F strings.
+- New route, get stations for WFO.
+- New route, get station info.
+- New route, get WFO info.
+- New route, get conditions (alias to decoded metar).
+- Consolidate and update documentation.
+
 # v1.4.0 (2018-09-18)
 
 - Move docs to GitHub Pages.
