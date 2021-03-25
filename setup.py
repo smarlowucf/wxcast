@@ -48,7 +48,7 @@ test_requirements = [
 
 setup(
     name='wxcast',
-    version='1.4.0',
+    version='2.0.0',
     description='A CLI utility for retrieving weather information.',
     long_description=readme + '\n\n' + changes,
     long_description_content_type="text/markdown",
